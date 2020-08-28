@@ -119,3 +119,14 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 alias config='/usr/bin/git --git-dir=/home/efim/dotfiles --work-tree=/home/efim'
+
+# In case using not VGA out, check with /xrandr -q/
+# set dual monitors
+dual () {
+    xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto
+}
+
+# set single monitor
+single () {
+    xrandr --output DP-1-3 --off
+}

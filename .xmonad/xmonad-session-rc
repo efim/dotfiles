@@ -1,0 +1,7 @@
+#!/bin/bash
+# workaround for Ubuntu xmonad install
+# see:
+# https://unix.stackexchange.com/questions/64513/run-xmonads-startup-hook-only-on-initial-startup/342754#342754
+
+nitrogen --restore &
+compton &

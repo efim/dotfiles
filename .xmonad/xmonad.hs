@@ -240,6 +240,7 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
+-- Check ~/.xmonad/xmonad-session-rc for Ubuntu install workaround (add the commands to there also)
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "compton &"

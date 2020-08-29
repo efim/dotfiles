@@ -7,6 +7,8 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 
+import XMonad.Util.EZConfig (additionalKeysP)
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -51,6 +53,24 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
+---------- My additional keys --------
+additionalKeys :: [(String, X ())]
+additionalKeys =
+  -- APPS
+  [ ("M-<Return>", spawn myTerminal)
+    , ("C-M1-f", spawn "firefox")
+    , ("C-M1-t", spawn "telegram-desktop")
+    , ("C-M1-k p", spawn "keepass2 ~/Documents/private/enef.kdbx")
+    , ("C-M1-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
+    , ("C-M1-e", spawn "emacs")
+    -- XMonad
+    , ("M-l", spawn "gnome-screensaver-command -l")
+    , ("M-S-m d", spawn (myTerminal
+                         ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
+    , ("M-S-m s", spawn (myTerminal
+                         ++  " -- xrandr --output DP-1-3 --off"))
+  ]
+------------------------------
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -90,7 +110,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm .|. shiftMask,               xK_Return), windows W.swapMaster)
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
@@ -253,6 +273,7 @@ myStartupHook = do
 main = do
   xmproc <- spawnPipe "xmobar -x 0 /home/efim/.config/xmobar/xmobarrc"
   xmonad $ docks defaults
+    `additionalKeysP` additionalKeys
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

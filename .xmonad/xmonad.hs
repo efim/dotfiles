@@ -6,12 +6,14 @@ import System.Exit
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog
 
 import XMonad.Util.EZConfig (additionalKeysP)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import System.IO
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -64,7 +66,7 @@ additionalKeys =
     , ("C-M1-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
     , ("C-M1-e", spawn "emacs")
     -- XMonad
-    , ("M-l", spawn "gnome-screensaver-command -l")
+    , ("M-S-l", spawn "gnome-screensaver-command -l")
     , ("M-S-m d", spawn (myTerminal
                          ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
     , ("M-S-m s", spawn (myTerminal
@@ -272,16 +274,7 @@ myStartupHook = do
 --
 main = do
   xmproc <- spawnPipe "xmobar -x 0 /home/efim/.config/xmobar/xmobarrc"
-  xmonad $ docks defaults
-    `additionalKeysP` additionalKeys
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+  xmonad $ docks def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -300,9 +293,19 @@ defaults = def {
         layoutHook         = myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
+                        { ppOutput = hPutStrLn xmproc
+                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
+                        , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
+                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
+                        , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
+                        , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
+                        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
+                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                        },
         startupHook        = myStartupHook
-    }
+    } `additionalKeysP` additionalKeys
+
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String

@@ -35,7 +35,6 @@ Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkred"
                              ] 10, Run Memory ["-t","Mem: <usedratio>%"] 10
-        , Run Com "uname" ["-s","-r"] "" 36000
         , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
@@ -53,9 +52,9 @@ Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
                                        -- charged status
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
+        , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%battery% | %memory% | %multicpu% | %dynnetwork% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %ULLI% | %uname%"
+       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc>| %ULLI% "
        }

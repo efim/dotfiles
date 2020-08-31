@@ -60,17 +60,19 @@ additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
   [ ("M-<Return>", spawn myTerminal)
-    , ("C-M1-f", spawn "firefox")
-    , ("C-M1-t", spawn "telegram-desktop")
-    , ("C-M1-k p", spawn "keepass2 ~/Documents/private/enef.kdbx")
-    , ("C-M1-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
-    , ("C-M1-e", spawn "emacs")
+    , ("C-M-f", spawn "firefox")
+    , ("C-M-t", spawn "telegram-desktop")
+    , ("C-M-k p", spawn "keepass2 ~/Documents/private/enef.kdbx")
+    , ("C-M-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
+    , ("C-M-e", spawn "emacs")
     -- XMonad
     , ("M-S-l", spawn "gnome-screensaver-command -l")
     , ("M-S-m d", spawn (myTerminal
                          ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
     , ("M-S-m s", spawn (myTerminal
                          ++  " -- xrandr --output DP-1-3 --off"))
+    , ("M-S-m b", spawn (myTerminal
+                        ++ " -- bluetoothctl"))
   ]
 ------------------------------
 ------------------------------------------------------------------------

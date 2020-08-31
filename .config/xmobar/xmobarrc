@@ -53,8 +53,11 @@ Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
         , Run UnsafeStdinReader
+        , Run Kbd   [
+       
+] 
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc>| %ULLI% "
+       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc> | %kbd% | %ULLI% "
        }

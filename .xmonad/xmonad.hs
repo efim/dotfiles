@@ -65,7 +65,7 @@ additionalKeys =
     , ("C-M-k p", spawn "keepass2 ~/Documents/private/enef.kdbx")
     , ("C-M-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
     , ("C-M-e", spawn "emacs")
-    -- XMonad
+    -- System control
     , ("M-S-l", spawn "gnome-screensaver-command -l")
     , ("M-S-m d", spawn (myTerminal
                          ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
@@ -73,6 +73,8 @@ additionalKeys =
                          ++  " -- xrandr --output DP-1-3 --off"))
     , ("M-S-m b", spawn (myTerminal
                         ++ " -- bluetoothctl"))
+    , ("M-S-m a", spawn (myTerminal
+                        ++ " -- alsamixer"))
   ]
 ------------------------------
 ------------------------------------------------------------------------
@@ -268,6 +270,7 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "compton &"
+  spawnOnce "safeeyes &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

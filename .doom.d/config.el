@@ -49,8 +49,11 @@
   (setq org-agenda-files '("~/org/gtd/inbox.org"
                           "~/org/gtd/gtd.org"
                           "~/org/gtd/tickler.org"
-        "~/org/Work"))
+                          "~/org/Work"
+        "~/org/Journal");; temporarily add journal files, until I move completely to agenda and gtd setup
+        )
 
+  (setq org-todo-keywords `((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   ;; GTD: setup for [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][gtd inspired]] refile and capture
   (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                             ("~/org/gtd/someday.org" :level . 1)
@@ -63,6 +66,11 @@
                                 ("T" "Tickler" entry
                                 (file+headline "~/org/gtd/tickler.org" "Tickler")
                                 "* %i%? \n %U")))
+  (setq org-modules '(ol-bibtex org-habit))
+)
+(after! org-agenda
+  (load-file "~/.doom.d/norang-ca-org-mode.el")
+  (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view)
 )
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

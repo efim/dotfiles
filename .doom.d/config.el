@@ -46,7 +46,7 @@
 (after! org
   (setq org-capture-todo-file "gtd/inbox.org")
   ;; agenda files are roots to org agenda search
-  (setq org-agenda-files '("~/org/gtd/inbox.org"
+  (setq org-agenda-files '(;;"~/org/gtd/inbox.org"
                           "~/org/gtd/gtd.org"
                           "~/org/gtd/tickler.org"
                           "~/org/Work"

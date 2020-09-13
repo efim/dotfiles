@@ -6,3 +6,4 @@
 nitrogen --restore &
 compton &
 safeeyes &
+systemctl --user start syncthing.service

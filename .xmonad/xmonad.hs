@@ -271,6 +271,7 @@ myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "compton &"
   spawnOnce "safeeyes &"
+  spawnOnce "systemctl --user start syncthing.service"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

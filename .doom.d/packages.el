@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (unpin! org-roam company-org-roam)
+(package! frog-jump-buffer)

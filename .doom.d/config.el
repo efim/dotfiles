@@ -8,7 +8,6 @@
 ;; clients, file templates and snippets.
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
-
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -43,6 +42,11 @@
 (setq org-journal-dir "~/org/Journal/")
 (setq org-journal-file-format "%Y-%m-%d.org")
 (setq org-journal-date-format "%d.%m.%Y")
+
+(after! frog-jump-buffer
+  (map! :leader "," `frog-jump-buffer))
+;;   default is "+ivy/switch-workspace-buffer"
+(use-package! frog-jump-buffer :init)
 
 (after! org
   (setq org-capture-todo-file "gtd/inbox.org")

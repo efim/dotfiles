@@ -272,7 +272,8 @@ myStartupHook = do
   spawnOnce "compton &"
   spawnOnce "safeeyes &"
   spawnOnce "systemctl --user start syncthing.service"
-  spawnOnce  "/usr/lib/notification-daemon/notification-daemon &"
+  spawnOnce "/usr/lib/notification-daemon/notification-daemon &"
+  spawnOnce "xfce4-power-manager &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

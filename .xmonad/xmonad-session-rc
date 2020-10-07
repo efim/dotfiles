@@ -8,3 +8,4 @@ compton &
 safeeyes &
 systemctl --user start syncthing.service
 /usr/lib/notification-daemon/notification-daemon &
+xfce4-power-manager &

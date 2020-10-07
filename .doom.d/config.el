@@ -27,6 +27,11 @@
 (setq doom-font (font-spec :family "monospace" :size 16 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 17))
 
+(after! frog-jump-buffer
+  (map! :leader "," `frog-jump-buffer))
+;;   default is "+ivy/switch-workspace-buffer"
+(use-package! frog-jump-buffer :init)
+
 (after! counsel
   (define-key!
     [remap evil-show-marks]          #'counsel-evil-marks
@@ -42,11 +47,6 @@
 (setq org-journal-dir "~/org/Journal/")
 (setq org-journal-file-format "%Y-%m-%d.org")
 (setq org-journal-date-format "%d.%m.%Y")
-
-(after! frog-jump-buffer
-  (map! :leader "," `frog-jump-buffer))
-;;   default is "+ivy/switch-workspace-buffer"
-(use-package! frog-jump-buffer :init)
 
 (after! org
   (setq org-capture-todo-file "gtd/inbox.org")

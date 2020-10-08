@@ -79,7 +79,9 @@
 )
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+;; 'visual - having numbers for lines created by virtual line breaks for long lines
+;; corresponds with (setq evil-respect-visual-line-mode t) in init.el
+(setq display-line-numbers-type 'visual)
 
 
 (setq projectile-project-search-path '("~/Documents/"))

@@ -32,6 +32,8 @@
 ;;   default is "+ivy/switch-workspace-buffer"
 (use-package! frog-jump-buffer :init)
 
+(use-package! protobuf-mode :init)
+
 (after! counsel
   (define-key!
     [remap evil-show-marks]          #'counsel-evil-marks

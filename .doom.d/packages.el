@@ -51,3 +51,5 @@
 
 (unpin! org-roam company-org-roam)
 (package! frog-jump-buffer)
+
+(package! protobuf-mode)

@@ -13,6 +13,8 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import XMonad.Hooks.EwmhDesktops -- from RescueTime support
+
 import System.IO
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -274,6 +276,7 @@ myStartupHook = do
   spawnOnce "systemctl --user start syncthing.service"
   spawnOnce "/usr/lib/notification-daemon/notification-daemon &"
   spawnOnce "xfce4-power-manager &"
+  spawnOnce "rescuetime &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -282,7 +285,7 @@ myStartupHook = do
 --
 main = do
   xmproc <- spawnPipe "xmobar -x 0 /home/efim/.config/xmobar/xmobarrc"
-  xmonad $ docks def {
+  xmonad $ ewmh (docks def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -312,7 +315,7 @@ main = do
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         },
         startupHook        = myStartupHook
-    } `additionalKeysP` additionalKeys
+    } `additionalKeysP` additionalKeys)
 
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.

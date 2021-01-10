@@ -69,7 +69,7 @@ additionalKeys =
     , ("C-M-k d", spawn "keepass ~/Documents/private/dino.kdbx")
     , ("C-M-e", spawn "emacs")
     -- System control
-    , ("M-S-l", spawn "gnome-screensaver-command -l")
+    , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
     , ("M-S-m d", spawn (myTerminal
                          ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
     , ("M-S-m s", spawn (myTerminal
@@ -278,6 +278,7 @@ myStartupHook = do
   spawnOnce "/usr/lib/notification-daemon/notification-daemon &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "rescuetime &"
+  spawnOnce "xscreensaver &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

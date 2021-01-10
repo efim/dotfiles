@@ -38,6 +38,7 @@ in {
 
     xmobar
     dmenu
+    xscreensaver
   ];
 
   programs.git = {

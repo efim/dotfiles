@@ -65,8 +65,8 @@ additionalKeys =
   [ ("M-<Return>", spawn myTerminal)
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")
-    , ("C-M-k p", spawn "keepass2 ~/Documents/private/enef.kdbx")
-    , ("C-M-k d", spawn "keepass2 ~/Documents/private/dino.kdbx")
+    , ("C-M-k p", spawn "keepass ~/Documents/private/enef.kdbx")
+    , ("C-M-k d", spawn "keepass ~/Documents/private/dino.kdbx")
     , ("C-M-e", spawn "emacs")
     -- System control
     , ("M-S-l", spawn "gnome-screensaver-command -l")

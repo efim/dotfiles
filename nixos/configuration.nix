@@ -74,6 +74,8 @@
     hashedPassword = "$6$8dFV7k1Jo3C$SS59WvnUPfFiAXLwpJTG3DGzSjZTklrt5sztUuZwUCdU8NBXxrwuOKnc1hy.7o1a384jyhtf2s5OMZsztyy260";
   };
 
+  services.localtime.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [

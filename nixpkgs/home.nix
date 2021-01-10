@@ -39,6 +39,7 @@ in {
     xmobar
     dmenu
     xscreensaver
+    nitrogen
   ];
 
   programs.git = {

@@ -130,3 +130,5 @@ dual () {
 single () {
     xrandr --output DP-1-3 --off
 }
+
+eval "$(direnv hook bash)"

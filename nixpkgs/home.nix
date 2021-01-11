@@ -16,6 +16,7 @@ let
       )
     '';
   };
+  metals = with pkgs; import ./test-metals.nix { inherit stdenv lib coursier jdk jre makeWrapper; };
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -30,6 +31,10 @@ in {
   home.packages = with pkgs; [
     doom-emacs
     sqlite # for emacs org-roam
+    metals
+    ripgrep
+
+    direnv
 
     htop
     killall
@@ -63,6 +68,8 @@ in {
   };
 
   xdg.configFile."xmobar/xmobarrc".source = ../.config/xmobar/xmobarrc;
+  home.file.".bashrc".source = ../.bashrc;
+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

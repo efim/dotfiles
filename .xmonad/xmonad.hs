@@ -278,7 +278,7 @@ myStartupHook = do
   spawnOnce "/usr/lib/notification-daemon/notification-daemon &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "rescuetime &"
-  spawnOnce "xscreensaver -no-spash &"
+  spawnOnce "xscreensaver -no-splash &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

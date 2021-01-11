@@ -34,6 +34,8 @@ in {
     metals
     ripgrep
 
+    ammonite
+
     direnv
 
     htop
@@ -45,6 +47,8 @@ in {
     dmenu
     xscreensaver
     nitrogen
+
+    chromium
   ];
 
   programs.git = {

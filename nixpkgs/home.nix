@@ -28,6 +28,13 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.direnv = {
+    enable = true;
+    enableNixDirenvIntegration = true;
+  };
+
+  services.lorri.enable = true;
+
   home.packages = with pkgs; [
     doom-emacs
     sqlite # for emacs org-roam
@@ -35,8 +42,6 @@ in {
     ripgrep
 
     ammonite
-
-    direnv
 
     htop
     killall

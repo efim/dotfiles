@@ -75,10 +75,11 @@
                                 "* %i%? \n %U")))
   (setq org-modules '(ol-bibtex org-habit))
 )
-;;(after! org-agenda
-;;  (load-file "~/.doom.d/norang-ca-org-mode.el")
-;;  (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view)
-;;)
+
+(after! org-agenda
+ (load-file "~/.doom.d/norang-ca-org-mode.el")
+ (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view)
+)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 ;; 'visual - having numbers for lines created by virtual line breaks for long lines

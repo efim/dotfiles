@@ -3,19 +3,6 @@
 { config, pkgs, ... }:
 
 let
-  # taken from : https://github.com/vlaci/nix-doom-emacs
-  doom-dotfiles = builtins.path { path = ~/.config/nixpkgs/dotfiles/.doom.d; name = "doom.d"; };
-  doom-emacs = pkgs.callPackage (builtins.fetchTarball {
-    url = "https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz";
-  }) {
-    doomPrivateDir = doom-dotfiles;
-    extraConfig = ''
-      (after! org-agenda
-        (load-file "${doom-dotfiles}/norang-ca-org-mode.el")
-        (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view)      
-      )
-    '';
-  };
   metals = with pkgs; import ./test-metals.nix { inherit stdenv lib coursier jdk jre makeWrapper; };
 in {
 
@@ -39,7 +26,7 @@ in {
   services.lorri.enable = true;
 
   home.packages = with pkgs; [
-    doom-emacs
+    emacs
     sqlite # for emacs org-roam
     metals
     ripgrep
@@ -65,9 +52,11 @@ in {
     userEmail = "efim.nefedov@nordigy.ru";
   };
 
-  home.file.".emacs.d/init.el".text = ''
-       (load "default.el")
-  '';
+  home.file.".doom.d" = {
+    source = ../.doom.d;
+    recursive = true;
+    onChange = builtins.readFile ../temp-doom-script.sh;
+  };
 
   xsession = {
     enable = true;

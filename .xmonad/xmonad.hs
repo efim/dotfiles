@@ -71,9 +71,9 @@ additionalKeys =
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
     , ("M-S-m d", spawn (myTerminal
-                         ++ " -- xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto")) -- script in bashrc
+                         ++ " -- xrandr --output eDP-1 --primary --left-of DP-3 --output DP-3 --auto")) -- script in bashrc
     , ("M-S-m s", spawn (myTerminal
-                         ++  " -- xrandr --output DP-1-3 --off"))
+                         ++  " -- xrandr --output DP-3 --off"))
     , ("M-S-m b", spawn (myTerminal
                         ++ " -- bluetoothctl"))
     , ("M-S-m a", spawn (myTerminal

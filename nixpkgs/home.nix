@@ -18,8 +18,6 @@ let
   };
   metals = with pkgs; import ./test-metals.nix { inherit stdenv lib coursier jdk jre makeWrapper; };
 in {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -28,9 +26,14 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.direnv = {
-    enable = true;
-    enableNixDirenvIntegration = true;
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+
+    direnv = {
+      enable = true;
+      enableNixDirenvIntegration = true;
+    };
   };
 
   services.lorri.enable = true;
@@ -77,6 +80,7 @@ in {
   };
 
   xdg.configFile."xmobar/xmobarrc".source = ../.config/xmobar/xmobarrc;
+  # TODO also declare bash here
   home.file.".bashrc".source = ../.bashrc;
 
 

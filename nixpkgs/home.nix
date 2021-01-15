@@ -23,7 +23,8 @@ in {
     };
   };
 
-  services.lorri.enable = true;
+  # TODO also declare bash here
+  home.file.".bashrc".source = ../.bashrc;
 
   home.packages = with pkgs; [
     emacs
@@ -53,9 +54,9 @@ in {
   };
 
   home.file.".doom.d" = {
-    source = ../.doom.d;
+    source = ../emacs-doom/config;
     recursive = true;
-    onChange = builtins.readFile ../temp-doom-script.sh;
+    onChange = builtins.readFile ../emacs-doom/setup.sh;
   };
 
   xsession = {
@@ -69,8 +70,6 @@ in {
   };
 
   xdg.configFile."xmobar/xmobarrc".source = ../.config/xmobar/xmobarrc;
-  # TODO also declare bash here
-  home.file.".bashrc".source = ../.bashrc;
 
 
   # This value determines the Home Manager release that your

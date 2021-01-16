@@ -38,7 +38,16 @@ in {
     };
   };
 
-  services.syncthing.enable = true;
+  services = {
+   syncthing.enable = true;
+
+   xscreensaver.enable = true;
+   screen-locker = {
+     enable = true;
+     inactiveInterval = 5;
+     lockCmd = "${pkgs.xscreensaver}/bin/xscreensaver-command -lock"; # TODO factor out between xmonad.hs , how?
+   };
+  };
 
   # TODO also declare bash here
   home.file.".bashrc".source = ../.bashrc;
@@ -61,7 +70,7 @@ in {
 
     xmobar
     dmenu
-    xscreensaver
+    # xscreensaver # move additionally to xmonad or i don't what
     nitrogen
 
     chromium

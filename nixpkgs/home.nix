@@ -31,7 +31,14 @@ in {
       enable = true; # combine with emacs (used for eshell completions)
     };
     bash.enable = true;
+    git = {
+      enable = true;
+      userName = "efim";
+      userEmail = "efim.nefedov@nordigy.ru";
+    };
   };
+
+  services.syncthing.enable = true;
 
   # TODO also declare bash here
   home.file.".bashrc".source = ../.bashrc;
@@ -49,6 +56,9 @@ in {
     tdesktop
     discord
 
+    zip
+    unzip
+
     xmobar
     dmenu
     xscreensaver
@@ -56,12 +66,6 @@ in {
 
     chromium
   ];
-
-  programs.git = {
-    enable = true;
-    userName = "efim";
-    userEmail = "efim.nefedov@nordigy.ru";
-  };
 
   home.file.".doom.d" = {
     source = ../emacs-doom/config;

@@ -17,17 +17,26 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: [ epkgs.vterm ];
+    };
+
     direnv = {
       enable = true;
       enableNixDirenvIntegration = true;
     };
+
+    fish = {
+      enable = true; # combine with emacs (used for eshell completions)
+    };
+    bash.enable = true;
   };
 
   # TODO also declare bash here
   home.file.".bashrc".source = ../.bashrc;
 
   home.packages = with pkgs; [
-    emacs
     sqlite # for emacs org-roam
     metals
     ripgrep
@@ -38,6 +47,7 @@ in {
     killall
     keepass
     tdesktop
+    discord
 
     xmobar
     dmenu

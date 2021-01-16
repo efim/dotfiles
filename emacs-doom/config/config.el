@@ -105,5 +105,42 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+(after! eshell
+
+  ;; copied from https://github.com/hlissner/doom-emacs/blob/3f2c4b80e9adf1c7809e3fe3c299030cbcc7de33/modules/term/eshell/config.el
+        (defun +eshell--current-git-branch ()
+        ;; TODO Refactor me
+        (cl-destructuring-bind (status . output)
+        (doom-call-process "git" "symbolic-ref" "-q" "--short" "HEAD")
+        (if (equal status 0)
+                (format " [%s]" output)
+        (cl-destructuring-bind (status . output)
+                (doom-call-process "git" "describe" "--all" "--always" "HEAD")
+                (if (equal status 0)
+                (format " [%s]" output)
+                "")))))
+
+        (defun +eshell-my-prompt-fn ()
+        "Generate the prompt string for eshell. Use for `eshell-prompt-function'."
+        (require 'shrink-path)
+        (concat (if (bobp) "" "\n")
+                (let ((pwd (eshell/pwd)))
+                (propertize pwd
+                                'face '+eshell-prompt-pwd))
+                (propertize (+eshell--current-git-branch)
+                        'face '+eshell-prompt-git-branch)
+                "\n"
+                (propertize " λ" 'face (if (zerop eshell-last-command-status) 'success 'error))
+                " "))
+
+
+        (setq eshell-prompt-function #'+eshell-my-prompt-fn)
+        (setq eshell-prompt-regexp "^.* λ ")
+  )
+(after! em-term
+  (pushnew! eshell-visual-commands "ssh" "sbt"))
+
+
+
 (require `epa-file)
 (epa-file-enable)

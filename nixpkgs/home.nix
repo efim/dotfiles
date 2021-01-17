@@ -64,6 +64,7 @@ in {
     keepass
     tdesktop
     discord
+    rescuetime
 
     zip
     unzip

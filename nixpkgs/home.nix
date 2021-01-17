@@ -89,11 +89,11 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      config = ../.xmonad/xmonad.hs;
+      config = ../xmonad/xmonad.hs;
     };
   };
 
-  xdg.configFile."xmobar/xmobarrc".source = ../.config/xmobar/xmobarrc;
+  xdg.configFile."xmobar/xmobarrc".source = ../xmobar/xmobarrc;
 
 
   # This value determines the Home Manager release that your

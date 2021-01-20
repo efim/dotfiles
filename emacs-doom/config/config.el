@@ -29,7 +29,10 @@
       doom-variable-pitch-font (font-spec :family "sans" :size 17))
 
 (after! frog-jump-buffer
-  (map! :leader "," `frog-jump-buffer))
+  (map! :leader "," `frog-jump-buffer)
+
+  (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project)
+  )
 ;;   default is "+ivy/switch-workspace-buffer"
 (use-package! frog-jump-buffer :init)
 

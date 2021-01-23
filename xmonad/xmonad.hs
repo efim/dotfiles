@@ -78,7 +78,10 @@ additionalKeys =
                         ++ " -- bluetoothctl"))
     , ("M-S-m a", spawn (myTerminal
                         ++ " -- alsamixer"))
+    , ("M-S-i", spawn "xbrightness +5000")
+    , ("M-S-o", spawn "xbrightness -5000")
   ]
+
 ------------------------------
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -276,7 +279,6 @@ myStartupHook = do
   spawnOnce "safeeyes &"
   spawnOnce "systemctl --user start syncthing.service"
   spawnOnce "/usr/lib/notification-daemon/notification-daemon &"
-  spawnOnce "xfce4-power-manager &"
   spawnOnce "rescuetime &"
   spawnOnce "xscreensaver -no-splash &"
 

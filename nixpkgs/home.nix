@@ -64,15 +64,17 @@ in {
     keepass
     tdesktop
     discord
-    rescuetime
+
 
     zip
     unzip
 
     xmobar
     dmenu
-    # xscreensaver # move additionally to xmonad or i don't what
+    xbrightness
+    safeeyes
     nitrogen
+    rescuetime
 
     chromium
   ];

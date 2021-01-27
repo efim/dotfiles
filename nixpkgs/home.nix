@@ -76,6 +76,9 @@ in {
     nitrogen
     rescuetime
 
+    vlc
+    transmission-qt
+    firefox
     chromium
   ];
 

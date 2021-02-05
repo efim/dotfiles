@@ -64,7 +64,8 @@ in {
     keepass
     tdesktop
     discord
-
+    openconnect
+    shutter
 
     zip
     unzip

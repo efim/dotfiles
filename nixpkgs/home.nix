@@ -2,25 +2,19 @@
 
 { config, pkgs, ... }:
 
-let
-  metals = with pkgs; import ./test-metals.nix { inherit stdenv lib coursier jdk jre makeWrapper; };
-in {
-
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "efim";
   home.homeDirectory = "/home/efim";
+
+  imports = [ ./my-emacs.nix ];
 
   nixpkgs.config.allowUnfree = true;
 
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-
-    emacs = {
-      enable = true;
-      extraPackages = epkgs: [ epkgs.vterm ];
-    };
 
     direnv = {
       enable = true;
@@ -53,10 +47,6 @@ in {
   home.file.".bashrc".source = ../.bashrc;
 
   home.packages = with pkgs; [
-    sqlite # for emacs org-roam
-    metals
-    ripgrep
-
     ammonite
 
     htop
@@ -82,12 +72,6 @@ in {
     firefox
     chromium
   ];
-
-  home.file.".doom.d" = {
-    source = ../emacs-doom/config;
-    recursive = true;
-    onChange = builtins.readFile ../emacs-doom/setup.sh;
-  };
 
   xsession = {
     enable = true;

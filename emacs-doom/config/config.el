@@ -148,3 +148,5 @@
 
 (require `epa-file)
 (epa-file-enable)
+
+(server-start)

@@ -13,13 +13,6 @@ in {
 
   };
 
-  services.emacs.enable = true;
-
-  systemd.user.services.emacs.Unit = {
-          After = [ "graphical-session-pre.target" ];
-          PartOf = [ "graphical-session.target" ];
-  };
-
   home.packages = with pkgs; [
     sqlite # for emacs org-roam
     metals

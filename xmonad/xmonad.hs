@@ -62,13 +62,12 @@ myFocusedBorderColor = "#ff0000"
 additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
-  [ ("M-S-<Return>", spawn myTerminal)
-    , ("M-<Return>", spawn "emacsclient --create-frame -e '(eshell t)'")
+  [ ("M-<Return>", spawn myTerminal)
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")
     , ("C-M-k p", spawn "keepass ~/Documents/private/enef.kdbx")
     , ("C-M-k d", spawn "keepass ~/Documents/private/dino.kdbx")
-    , ("C-M-e", spawn "emacsclient --create-frame")
+    , ("C-M-e", spawn "emacs")
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
     , ("M-S-m d", spawn (myTerminal
@@ -89,8 +88,11 @@ additionalKeys =
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
+    -- launch a terminal
+    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+
     -- launch dmenu
-    [ ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")

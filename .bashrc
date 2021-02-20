@@ -132,5 +132,3 @@ single () {
 }
 
 eval "$(direnv hook bash)"
-
-export ALTERNATE_EDITOR=""

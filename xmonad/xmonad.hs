@@ -62,7 +62,8 @@ myFocusedBorderColor = "#ff0000"
 additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
-  [ ("M-<Return>", spawn myTerminal)
+  [ ("M-S-<Return>", spawn myTerminal)
+    , ("M-<Return>", spawn "emacs --execute '(eshell t)'")
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")
     , ("C-M-k p", spawn "keepass ~/Documents/private/enef.kdbx")
@@ -88,11 +89,8 @@ additionalKeys =
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    [ ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")

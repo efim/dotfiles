@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+source /home/efim/.nix-profile/etc/profile.d/nix.sh
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth

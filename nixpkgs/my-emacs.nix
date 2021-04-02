@@ -3,7 +3,11 @@
 with lib;
 
 let
-  metals = with pkgs; import ./test-metals.nix { inherit stdenv lib coursier jdk jre makeWrapper; };
+  metals = with pkgs; import ./test-metals.nix {
+    inherit stdenv lib coursier makeWrapper;
+    jdk = pkgs.openjdk11;
+    jre = pkgs.openjdk11;
+  };
 in {
   programs = {
     emacs = {

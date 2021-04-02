@@ -12,9 +12,6 @@
       ./hardware-configuration.nix
     ];
 
-  # at least for 'displaylink' driver - display through usb-c
-  nixpkgs.config.allowUnfree = true;
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -57,9 +54,6 @@
     enable = true;
     enableContribAndExtras = true;
   };
-  # TODO modularize unfree, for easier install on new machine?
-  services.xserver.videoDrivers = [ "displaylink" ];
-
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

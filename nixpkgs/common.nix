@@ -8,7 +8,10 @@
   home.username = "efim";
   home.homeDirectory = "/home/efim";
 
-  imports = [ ./my-emacs.nix ];
+  imports = [
+    ./my-emacs.nix
+    ./my-screen-locker.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -27,20 +30,13 @@
     bash.enable = true;
     git = {
       enable = true;
-      userName = "efim";
-      userEmail = "efim.nefedov@nordigy.ru";
+      # userName = "efim"; # TODO define in hosts ?
+      # userEmail = "efim.nefedov@nordigy.ru";
     };
   };
 
   services = {
    syncthing.enable = true;
-
-   xscreensaver.enable = true;
-   screen-locker = {
-     enable = true;
-     inactiveInterval = 5;
-     lockCmd = "${pkgs.xscreensaver}/bin/xscreensaver-command -lock"; # TODO factor out between xmonad.hs , how?
-   };
   };
 
   # TODO also declare bash here
@@ -66,6 +62,7 @@
     safeeyes
     nitrogen
     rescuetime
+    picom
 
     vlc
     transmission-qt

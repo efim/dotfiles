@@ -1,3 +1,5 @@
+# This module allows sharing xscreensaver configuration
+# between NixOS and Ubuntu managed machines with Home-Manager
 { config, pkgs, ... }:
 
 let

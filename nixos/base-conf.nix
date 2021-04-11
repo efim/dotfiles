@@ -43,16 +43,21 @@
   #   keyMap = "us";
   # };
 
-  # Enable the GNOME 3 Desktop Environment.
-  services.xserver.enable = true;
-  # Configure keymap in X11
-  services.xserver.layout = "us,ru";
-  services.xserver.xkbOptions = "grp:caps_toggle";
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
+  services = {
+    # Enable the GNOME 3 Desktop Environment.
+    xserver = {
+      enable = true;
+      # Configure keymap in X11
+      layout = "us,ru";
+      xkbOptions = "grp:caps_toggle";
+      displayManager.gdm.enable = true;
+      desktopManager.gnome3.enable = true;
+      windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+      };
+    };
+    autorandr.enable = true;
   };
 
   # Enable CUPS to print documents.

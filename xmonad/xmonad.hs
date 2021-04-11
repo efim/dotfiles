@@ -71,10 +71,12 @@ additionalKeys =
     , ("C-M-e", spawn "emacs")
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
-    , ("M-S-m d", spawn (myTerminal
-                         ++ " -- xrandr --output eDP-1 --primary --left-of DP-3 --output DP-3 --auto")) -- script in bashrc
-    , ("M-S-m s", spawn (myTerminal
-                         ++  " -- xrandr --output DP-3 --off"))
+    , ("M-S-m h", spawn (myTerminal
+                         ++ " -- autorandr horizontal &"))
+    , ("M-S-m v", spawn (myTerminal
+                         ++ " -- autorandr vertical &"))
+    , ("M-S-m c", spawn (myTerminal
+                         ++ " -- autorandr common &"))
     , ("M-S-m b", spawn (myTerminal
                         ++ " -- bluetoothctl"))
     , ("M-S-m a", spawn (myTerminal

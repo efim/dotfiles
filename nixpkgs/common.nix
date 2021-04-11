@@ -19,6 +19,11 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    # TODO maybe move into gui gogether with xmonad
+    # Enable autorandr. Profiles are specific to hosts, so they're not defined here
+    # do I need to enable this? let's go into repo and look at what this does =C
+    autorandr.enable = true;
+
     direnv = {
       enable = true;
       enableNixDirenvIntegration = true;

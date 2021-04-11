@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ../../common.nix
+    ./autorandr.nix
+  ];
   my-screen-locker.isNixManaged = true;
   programs = {
     git = {

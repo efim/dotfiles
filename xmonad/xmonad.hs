@@ -71,6 +71,8 @@ additionalKeys =
     , ("C-M-e", spawn "emacs")
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
+    , ("M-S-m d", spawn (myTerminal
+                         ++ " -- autorandr --change &")) -- automatically load first detected configuration
     , ("M-S-m h", spawn (myTerminal
                          ++ " -- autorandr horizontal &"))
     , ("M-S-m v", spawn (myTerminal

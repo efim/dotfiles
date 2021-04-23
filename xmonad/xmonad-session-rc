@@ -4,7 +4,7 @@
 # https://unix.stackexchange.com/questions/64513/run-xmonads-startup-hook-only-on-initial-startup/342754#342754
 
 nitrogen --restore &
-compton &
+picom &
 safeeyes &
 systemctl --user start syncthing.service
 /usr/lib/notification-daemon/notification-daemon &

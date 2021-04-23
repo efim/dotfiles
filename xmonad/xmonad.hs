@@ -277,7 +277,7 @@ myLogHook = return ()
 -- Check ./xmonad/xmonad-session-rc for Ubuntu install workaround (add the commands to there also)
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
-  spawnOnce "compton &"
+  spawnOnce "picom &"
   spawnOnce "safeeyes &"
   spawnOnce "systemctl --user start syncthing.service"
   spawnOnce "/usr/lib/notification-daemon/notification-daemon &"

@@ -85,82 +85,54 @@ additionalKeys =
                         ++ " -- alsamixer"))
     , ("M-S-i", spawn "xbrightness +5000")
     , ("M-S-o", spawn "xbrightness -5000")
+    -- unsorted moving most of others
+    -- launch dmenu
+    , ("M-p", spawn "dmenu_run")
+    -- close focused window
+    , ("M-S-c", kill)
+     -- Rotate through the available layout algorithms
+    , ("M-<Space>", sendMessage NextLayout)
+    -- Resize viewed windows to the correct size
+    , ("M-n", refresh)
+    -- Move focus between windows
+    , ("M-j", windows W.focusDown)
+    , ("M-k", windows W.focusUp  )
+    , ("M-m", windows W.focusMaster  )
+    -- Swap the focused window
+    -- , ("M-S-<Return>", windows W.swapMaster)
+    , ("M-S-j", windows W.swapDown  )
+    , ("M-S-k", windows W.swapUp    )
+    -- Shrink the master area
+    , ("M-h", sendMessage Shrink)
+    -- Expand the master area
+    , ("M-l", sendMessage Expand)
+    -- Push window back into tiling
+    , ("M-t", withFocused $ windows . W.sink)
+    -- Increment the number of windows in the master area
+    , ("M-,", sendMessage (IncMasterN 1))
+    -- Deincrement the number of windows in the master area
+    , ("M-.", sendMessage (IncMasterN (-1)))
+    -- Toggle the status bar gap
+    -- Use this binding with avoidStruts from Hooks.ManageDocks.
+    -- See also the statusBar function from Hooks.DynamicLog.
+    --
+    -- , ("M-b", sendMessage ToggleStruts)
+    -- Quit xmonad
+    , ("M-S-q", io (exitWith ExitSuccess))
+    -- Restart xmonad
+    , ("M-q", spawn "xmonad --recompile; xmonad --restart")
+    -- Run xmessage with a summary of the default keybindings (useful for beginners)
+    , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
   ]
 
-------------------------------
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-    -- launch dmenu
-    [ ((modm,               xK_p     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
-
-     -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), sendMessage NextLayout)
-
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
-
-    -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-
-    -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
-
-    -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
-
-    -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-
-    -- Swap the focused window and the master window
-    , ((modm .|. shiftMask,               xK_Return), windows W.swapMaster)
-
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-
-    -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-
-    -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
-
-    -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
-
-    -- Push window back into tiling
-    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
-
-    -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-
-    -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-
-    -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    [
+    -- --  Reset the layouts on the current workspace to default
+        ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     ]
     ++
 

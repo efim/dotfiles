@@ -8,6 +8,23 @@
 
   my-screen-locker.isNixManaged = true;
 
+
+  home.packages = let
+    unstableTarball =
+      fetchTarball {
+        name = "nixos-unstable-2020-04-23";
+        # Commit hash for nixos-unstable at https://github.com/NixOS/nixpkgs/tree/nixos-unstable
+        url = https://github.com/NixOS/nixpkgs/archive/d235056d6d6dcbd2999bd55fd120d831d4df6304.tar.gz;
+        # Hash obtained using `nix-prefetch-url --unpack <url>`
+        sha256 = "1n0a2wja7w58fkz57hppwhc81lzjzqf251m2xz602j86gh56g3fm";
+      };
+    unstable = import unstableTarball {
+      config = config.nixpkgs.config;
+    };
+    in [
+      unstable.nyxt
+    ];
+
   my-autorandr = {
     # laptop display
     display1 = {

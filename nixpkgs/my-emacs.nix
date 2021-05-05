@@ -19,6 +19,7 @@ in {
 
   home.packages = with pkgs; [
     sqlite # for emacs org-roam
+    gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
     metals
     ripgrep
   ];

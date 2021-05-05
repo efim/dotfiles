@@ -49,7 +49,10 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(unpin! org-roam company-org-roam)
+;; (unpin! org-roam company-org-roam)
+(package! org-roam
+  :recipe (:host github :repo "org-roam/org-roam" :branch "v2"))
+
 (package! frog-jump-buffer)
 
 (package! protobuf-mode)

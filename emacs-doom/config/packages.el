@@ -53,3 +53,5 @@
 (package! frog-jump-buffer)
 
 (package! protobuf-mode)
+
+(package! evil-lispy)

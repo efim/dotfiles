@@ -38,6 +38,11 @@
 
 (use-package! protobuf-mode :init)
 
+(use-package! evil-lispy :init)
+;; https://github.com/sp3ctum/evil-lispy
+;; make evil-lispy start in the modes you want
+(add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+
 (after! counsel
   (define-key!
     [remap evil-show-marks]          #'counsel-evil-marks

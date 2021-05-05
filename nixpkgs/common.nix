@@ -57,6 +57,7 @@
     discord
     openconnect
     shutter
+    gnucash
 
     zip
     unzip

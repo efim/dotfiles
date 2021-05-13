@@ -79,6 +79,18 @@
   :config
   (org-roam-setup))
 
+(map! (:leader (:prefix "n"
+        (:prefix-map ("r" . "roam")
+         :desc "Org Roam Capture"              "c" #'org-roam-capture
+         :desc "Find file"                     "f" #'org-roam-node-find
+         :desc "Insert"                        "i" #'org-roam-node-insert
+         :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
+         :desc "Tag"                           "t" #'org-roam-tag-add
+         :desc "Un-tag"                        "T" #'org-roam-tag-delete
+         )))
+)
+
+
 (setq org-directory "~/org/")
 (setq org-journal-dir "~/org/Journal/")
 (setq org-journal-file-format "%Y-%m-%d.org")

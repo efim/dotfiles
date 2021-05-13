@@ -38,10 +38,23 @@
 
 (use-package! protobuf-mode :init)
 
-(use-package! evil-lispy :init)
-;; https://github.com/sp3ctum/evil-lispy
-;; make evil-lispy start in the modes you want
-(add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
+(use-package! lispyville
+  :init
+  (setq lispyville-key-theme
+        '((operators normal)
+          c-w
+          (prettify insert)
+          (atom-movement t)
+          additional-movement
+          slurp/barf-lispy
+          additional
+          additional-insert
+          text-objects
+          wrap)))
+;; (use-package! evil-lispy :init)
+;; ;; https://github.com/sp3ctum/evil-lispy
+;; ;; make evil-lispy start in the modes you want
+;; (add-hook 'emacs-lisp-mode-hook #'evil-lispy-mode)
 
 (after! counsel
   (define-key!

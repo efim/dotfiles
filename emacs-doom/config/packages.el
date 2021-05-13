@@ -57,4 +57,4 @@
 
 (package! protobuf-mode)
 
-(package! evil-lispy)
+;; (package! evil-lispy)

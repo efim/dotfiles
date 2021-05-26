@@ -49,7 +49,6 @@
           slurp/barf-lispy
           additional
           additional-insert
-          text-objects
           wrap)))
 ;; (use-package! evil-lispy :init)
 ;; ;; https://github.com/sp3ctum/evil-lispy

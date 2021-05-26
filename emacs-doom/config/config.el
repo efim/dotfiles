@@ -96,6 +96,13 @@
 (setq org-journal-date-format "%d.%m.%Y")
 
 (after! org
+
+  (add-hook 'org-mode-hook
+          (lambda ()
+            (evil-local-set-key 'motion "gk" #'org-backward-element)
+            (evil-local-set-key 'motion "gj" #'org-forward-element)))
+
+
   (setq org-capture-todo-file "gtd/inbox.org")
   ;; agenda files are roots to org agenda search
   (setq org-agenda-files '(;;"~/org/gtd/inbox.org"

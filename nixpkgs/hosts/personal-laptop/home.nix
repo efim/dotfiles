@@ -23,6 +23,7 @@
     };
     in [
       unstable.nyxt
+      unstable.nodePackages.mermaid-cli
     ];
 
   my-autorandr = {

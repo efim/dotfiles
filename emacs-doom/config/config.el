@@ -38,6 +38,15 @@
 
 (use-package! protobuf-mode :init)
 
+(use-package! mermaid-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.mmd\\'" . mermaid-mode))
+  )
+
+(use-package! ob-mermaid
+  :init
+  (setq ob-mermaid-cli-path "/home/efim/.nix-profile/bin/mmdc"))
+
 (use-package! lispyville
   :init
   (setq lispyville-key-theme

@@ -58,3 +58,7 @@
 (package! protobuf-mode)
 
 ;; (package! evil-lispy)
+
+(package! mermaid-mode)
+
+(package! ob-mermaid)

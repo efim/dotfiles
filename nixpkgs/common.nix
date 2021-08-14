@@ -44,8 +44,13 @@
    syncthing.enable = true;
   };
 
-  # TODO also declare bash here
-  home.file.".bashrc".source = ../.bashrc;
+  # TODO also declare bash here -- what's the context of the todo???
+  # TODO figure out why conflicts
+  # error: The option `home.file..bashrc.source' has conflicting definition values:
+  # - In `/home/efim/.nix-defexpr/channels/home-manager/modules/programs/bash.nix': <derivation /nix/store/hc1bfndqf8n2qlpjk3kcm91y33928v52-bashrc.drv>
+  # - In `/home/efim/dotfiles/nixpkgs/common.nix': /home/efim/dotfiles/.bashrc
+  # (use '--show-trace' to show detailed location information)
+  # home.file.".bashrc".source = ../.bashrc;
 
   home.packages = with pkgs; [
     ammonite
@@ -56,7 +61,7 @@
     tdesktop
     discord
     openconnect
-    shutter
+    # shutter # error : perl5.32.1-PerlMagic-7.0.10.drv failed t/montage.t - fontconfig error; t/tiff/write.t Failed 2/10
     gnucash
 
     zip

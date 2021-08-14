@@ -14,8 +14,12 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 12;
+  # ^ from https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -47,6 +51,7 @@
     # Enable the GNOME 3 Desktop Environment.
     xserver = {
       enable = true;
+      videoDrivers = [ "nvidia" ];
       # Configure keymap in X11
       layout = "us,ru";
       xkbOptions = "grp:caps_toggle";
@@ -100,7 +105,10 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  programs.ssh.startAgent = true;
+  programs = {
+    steam.enable = true;
+    ssh.startAgent = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

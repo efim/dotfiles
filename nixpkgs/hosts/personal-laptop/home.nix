@@ -14,15 +14,15 @@
       fetchTarball {
         name = "nixos-unstable-2020-04-23";
         # Commit hash for nixos-unstable at https://github.com/NixOS/nixpkgs/tree/nixos-unstable
-        url = https://github.com/NixOS/nixpkgs/archive/d235056d6d6dcbd2999bd55fd120d831d4df6304.tar.gz;
+        url = https://github.com/NixOS/nixpkgs/archive/fd5c6aada3c38e7410f130ebf8fb01ef00257cd7.tar.gz;
         # Hash obtained using `nix-prefetch-url --unpack <url>`
-        sha256 = "1n0a2wja7w58fkz57hppwhc81lzjzqf251m2xz602j86gh56g3fm";
+        sha256 = "1aa55yca1z592ir4h499akyg2svg2fh730pxz8xkkcjdc9yq738m";
       };
     unstable = import unstableTarball {
       config = config.nixpkgs.config;
     };
     in [
-      unstable.nyxt
+      # unstable.nyxt # not really using this
       unstable.nodePackages.mermaid-cli
     ];
 

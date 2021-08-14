@@ -23,7 +23,15 @@
     };
     in [
       # unstable.nyxt # not really using this
-      unstable.nodePackages.mermaid-cli
+      # unstable.nodePackages.mermaid-cli
+      # TODO fails after home-manager flake module:
+      # error: attribute 'currentSystem' missing
+       # at /nix/store/9aq55g7bvwpxdg8wnvmdcn99ykhdnrz8-nixos-unstable-2020-04-23/pkgs/top-level/impure.nix:18:43:
+       #     17|   # (build, in GNU Autotools parlance) platform.
+       #     18|   localSystem ? { system = args.system or builtins.currentSystem; }
+       #       |                                           ^
+       #     19|
+
     ];
 
   my-autorandr = {

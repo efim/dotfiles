@@ -13,7 +13,7 @@
     ./my-screen-locker.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true; # fails after home-manager flake module
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -61,7 +61,7 @@
     tdesktop
     discord
     openconnect
-    # shutter # error : perl5.32.1-PerlMagic-7.0.10.drv failed t/montage.t - fontconfig error; t/tiff/write.t Failed 2/10
+    shutter
     gnucash
 
     zip

@@ -14,7 +14,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 12;
+  boot.loader.systemd-boot.configurationLimit = 5;
   # ^ from https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;

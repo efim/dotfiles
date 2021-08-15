@@ -52,7 +52,9 @@ in {
         };
   };
   config = {
-    programs.autorandr = {
+    # TODO - maybe keep as this level of inclusion
+    #   or import from place that is already in the 'home-manager.users.efim'
+    home-manager.users.efim.programs.autorandr = {
       profiles = {
         both = {
           config = {

@@ -5,25 +5,37 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager }@inputs:
+    let
+      # copied from github:belsoft/nixos
+      findModules = dir:
+        builtins.concatLists (builtins.attrValues (builtins.mapAttrs
+          (name: type:
+            if type == "regular" then
+              [{
+                name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
+                value = dir + "/${name}";
+              }]
+            else if (builtins.readDir (dir + "/${name}"))
+            ? "default.nix" then [{
+              inherit name;
+              value = dir + "/${name}";
+            }] else
+              findModules (dir + "/${name}")) (builtins.readDir dir)));
+    in {
+      nixosModules = builtins.listToAttrs (findModules ./modules);
 
-    nixosConfigurations.nixos-notebook = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      nixosProfiles = builtins.listToAttrs (findModules ./profiles);
 
-      modules = [
-        ./nixos/base-conf.nix
-        ({ pkgs, ... }: {
-            # Let 'nixos-version --json' know about the Git revision
-            # of this flake.
-            system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-          })
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.efim = import ./nixpkgs/hosts/personal-laptop/home.nix;
-        }
-      ];
+      nixosRoles = builtins.listToAttrs (findModules ./roles); #import ./roles;
+
+      nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          (import ./machines/chunky-notebook/base-conf.nix)
+        ];
+        specialArgs = { inherit inputs; };
     };
 
   };

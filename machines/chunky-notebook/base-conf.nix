@@ -4,17 +4,25 @@
 
 # put symlink to these files into /etc/nixos/
 
-{ config, pkgs, ... }:
+# pre-flakes nixos centralized config
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.home-manager # ? initializing home-manager flake integration ?
+      ./home.nix                                    # importing pre-flakes centralized home-manager configuration
+      ({ pkgs, ... }: {
+          # Let 'nixos-version --json' know about the Git revision
+          # of this flake.
+          system.configurationRevision = inputs.nixpkgs.lib.mkIf (inputs.self ? rev) inputs.self.rev;
+        })
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 15;
   # ^ from https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
@@ -58,6 +66,7 @@
     # Enable the GNOME 3 Desktop Environment.
     xserver = {
       enable = true;
+      # there's also `displaylink` - with manual actions
       videoDrivers = [ "nvidia" ];
       # Configure keymap in X11
       layout = "us,ru";

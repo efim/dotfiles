@@ -1,0 +1,26 @@
+* personal dotfiles
+
+* installation
+not tested yet
+** install basic nixos to the machine
+** enable flakes
+in `config.nix` add
+#+begin_src nix
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+#+end_src
+and apply the config
+** pull in repo (or possibly nix can install flake by github address too)
+and apply config with
+#+begin_src bash
+sudo nixos-rebuild switch --flake ~/dotfiles/.#chunky-notebook
+#+end_src
+
+Any "home-manager" related updates are also done with that command
+* todo
+- After migration to flake, usage of "home-manager" on non NixOS machines is not yet fixed =C
+- Manage the personal server with NixOS too

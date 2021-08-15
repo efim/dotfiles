@@ -78,7 +78,6 @@
         enableContribAndExtras = true;
       };
     };
-    autorandr.enable = true;
   };
 
   # Enable CUPS to print documents.

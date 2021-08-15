@@ -5,6 +5,7 @@
 {
   imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
     xmonad
+    my-autorandr
     my-emacs
     my-screen-locker
   ];

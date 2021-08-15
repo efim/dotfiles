@@ -71,14 +71,18 @@ additionalKeys =
     , ("C-M-e", spawn "emacs")
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
-    , ("M-S-m d", spawn (myTerminal
+    , ("M-S-m d d", spawn (myTerminal
                          ++ " -- autorandr --change &")) -- automatically load first detected configuration
-    , ("M-S-m h", spawn (myTerminal
+    , ("M-S-m d h", spawn (myTerminal
                          ++ " -- autorandr horizontal &"))
-    , ("M-S-m v", spawn (myTerminal
+    , ("M-S-m d v", spawn (myTerminal
                          ++ " -- autorandr vertical &"))
-    , ("M-S-m c", spawn (myTerminal
+    , ("M-S-m d c", spawn (myTerminal
                          ++ " -- autorandr common &"))
+    , ("M-S-m d p", spawn (myTerminal
+                         ++ " -- autorandr primary &"))
+    , ("M-S-m d e", spawn (myTerminal
+                         ++ " -- autorandr external &"))
     , ("M-S-m b", spawn (myTerminal
                         ++ " -- bluetoothctl"))
     , ("M-S-m a", spawn (myTerminal

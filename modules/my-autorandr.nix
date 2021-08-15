@@ -15,6 +15,7 @@ in {
   options =
     let
       xrandr-display = types.enum [
+        "DP-0"
         "eDP-1"
         "DP-1"
         "HDMI-1"
@@ -52,9 +53,8 @@ in {
         };
   };
   config = {
-    # TODO - maybe keep as this level of inclusion
-    #   or import from place that is already in the 'home-manager.users.efim'
     home-manager.users.efim.programs.autorandr = {
+      enable = true;
       profiles = {
         both = {
           config = {

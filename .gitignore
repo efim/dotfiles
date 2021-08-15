@@ -2,3 +2,4 @@
 /nixpkgs/current-host.nix
 /nixpkgs/home.nix
 /nixos/result
+/result

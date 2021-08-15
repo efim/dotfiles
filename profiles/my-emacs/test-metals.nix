@@ -1,3 +1,5 @@
+# TODO - make metals an importable module?
+#         so that it maybe could have been imported places other that emacs config
 { stdenv, lib, coursier, jdk, jre, makeWrapper }:
 
 stdenv.mkDerivation rec {

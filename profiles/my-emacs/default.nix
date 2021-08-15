@@ -22,12 +22,13 @@ in {
     gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
     metals
     ripgrep
+    cowsay
   ];
 
   home.file.".doom.d" = {
-    source = ../emacs-doom/config;
+    source = ./doom;
     recursive = true;
-    onChange = builtins.readFile ../emacs-doom/setup.sh;
+    onChange = builtins.readFile ./setup.sh;
   };
 
 

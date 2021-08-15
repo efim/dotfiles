@@ -15,7 +15,7 @@
     home.username = "efim";
     home.homeDirectory = "/home/efim";
 
-    # nixpkgs.config.allowUnfree = true; # fails after home-manager flake module
+    # nixpkgs.config.allowUnfree = true;
 
     programs = {
       # Let Home Manager install and manage itself.
@@ -37,8 +37,6 @@
       bash.enable = true;
       git = {
         enable = true;
-        # userName = "efim"; # TODO define in hosts ?
-        # userEmail = "efim.nefedov@nordigy.ru";
       };
     };
 
@@ -82,17 +80,6 @@
       firefox
       chromium
     ];
-
-    # xsession = {
-    #   enable = true;
-    #   windowManager.xmonad = {
-    #     enable = true;
-    #     enableContribAndExtras = true;
-    #     config = ../xmonad/xmonad.hs;
-    #   };
-    # };
-    # xdg.configFile."xmobar/xmobarrc".source = ../xmobar/xmobarrc;
-
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

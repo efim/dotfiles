@@ -3,18 +3,17 @@
 { inputs, config, pkgs, ... }:
 
 {
-  # while this is wrapped in attrs of 'home-manager.users.efim' inner imports of profiles should be top level
-  # TODO - make this one top level and have inner profiles define users.efim ?
+  imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
+    xmonad
+    my-emacs
+    my-screen-locker
+  ];
+
   home-manager.users.efim = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     home.username = "efim";
     home.homeDirectory = "/home/efim";
-
-    imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
-      my-emacs
-      my-screen-locker
-    ];
 
     # nixpkgs.config.allowUnfree = true; # fails after home-manager flake module
 
@@ -84,17 +83,15 @@
       chromium
     ];
 
-    xsession = {
-      enable = true;
-
-      windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        config = ../xmonad/xmonad.hs;
-      };
-    };
-
-    xdg.configFile."xmobar/xmobarrc".source = ../xmobar/xmobarrc;
+    # xsession = {
+    #   enable = true;
+    #   windowManager.xmonad = {
+    #     enable = true;
+    #     enableContribAndExtras = true;
+    #     config = ../xmonad/xmonad.hs;
+    #   };
+    # };
+    # xdg.configFile."xmobar/xmobarrc".source = ../xmobar/xmobarrc;
 
 
     # This value determines the Home Manager release that your

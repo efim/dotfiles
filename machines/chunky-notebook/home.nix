@@ -1,8 +1,7 @@
-{ inputs, config, pkgs, ... }:
-
 # pre-flakes centralized home-manager config
 #   imports base - common with office-machine
 #   sets my-options
+{ inputs, config, pkgs, ... }:
 {
 
   imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
@@ -10,7 +9,7 @@
     my-autorandr # TODO probably can be in hm-common
   ];
 
-  home-manager.users.efim.my-screen-locker.isNixManaged = true;
+  my-screen-locker.isNixManaged = true;
 
   # TODO ? use unstable from inputs of flake?
   # home.packages = let
@@ -37,8 +36,6 @@
   #      #     19|
   # ];
 
-  # TODO - since imported here - not in 'home-manager.users.efim'
-  #         while others are. How to make this consistent?
   my-autorandr = {
     # laptop display
     display1 = {

@@ -27,7 +27,8 @@
 
       nixosProfiles = builtins.listToAttrs (findModules ./profiles);
 
-      nixosRoles = builtins.listToAttrs (findModules ./roles); #import ./roles;
+      # nixosRoles = builtins.listToAttrs (findModules ./roles); #import ./roles;
+      nixosRoles = import ./roles;
 
       nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

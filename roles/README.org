@@ -1,4 +1,0 @@
-#+TITLE: Roles
-* Hight level bundles of configuration
-Planned to combine lot's of applications and settings
-so that machines would only need to specify their roles, and limited amount of profiles

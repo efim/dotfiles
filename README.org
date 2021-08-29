@@ -21,6 +21,19 @@ sudo nixos-rebuild switch --flake ~/dotfiles/.#chunky-notebook
 #+end_src
 
 Any "home-manager" related updates are also done with that command
+* notes on structure
+** Profiles :: Granular application/service configurations
+Read in the flake.nix, passed with inputs.self.nixosProfiles
+Could contain NixOS configuration & options as well as Home-Manager configuraitons, options & xdg files
+
+Idea is to keep relevant nix configuration close to managed dotfiles
+and join configurations for applications that are managed in tandem
+
+Intended for grouping in the Roles, so that Roles could be imported for machines
+** Roles :: Hight level bundles of configuration
+Planned to combine lot's of applications and settings
+so that machines would only need to specify their roles, and limited amount of profiles
+
 * todo
 - After migration to flake, usage of "home-manager" on non NixOS machines is not yet fixed =C
 - Manage the personal server with NixOS too

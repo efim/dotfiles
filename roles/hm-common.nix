@@ -56,6 +56,8 @@
       keepass
       tdesktop
       discord
+      element-desktop
+
       openconnect
       shutter
       gnucash

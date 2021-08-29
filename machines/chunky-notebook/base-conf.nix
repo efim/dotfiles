@@ -67,7 +67,7 @@
     xserver = {
       enable = true;
       # there's also `displaylink` - with manual actions
-      videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ];
       # Configure keymap in X11
       layout = "us,ru";
       xkbOptions = "grp:caps_toggle";
@@ -121,7 +121,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   programs = {
-    steam.enable = true;
     ssh.startAgent = true;
   };
 

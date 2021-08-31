@@ -62,3 +62,5 @@
 (package! mermaid-mode)
 
 (package! ob-mermaid)
+
+(package! auto-overlays)

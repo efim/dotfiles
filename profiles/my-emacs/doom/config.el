@@ -115,10 +115,11 @@
   (setq org-capture-todo-file "gtd/inbox.org")
   ;; agenda files are roots to org agenda search
   (setq org-agenda-files '(;;"~/org/gtd/inbox.org"
-                          "~/org/gtd/gtd.org"
-                          "~/org/gtd/tickler.org"
-                          "~/org/Work"
-        "~/org/Journal");; temporarily add journal files, until I move completely to agenda and gtd setup
+                           "~/org/gtd/gtd.org"
+                           "~/org/gtd/tickler.org"
+                           "~/org/Work/dino_systems.org" ;; have something like org/Work/gtd
+                           ;; "~/org/Journal" ;; temporarily add journal files, until I move completely to agenda and gtd setup
+                           )
         )
 
   (setq org-todo-keywords `((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
@@ -139,8 +140,8 @@
 
 (after! org-agenda
  (load-file "~/.doom.d/norang-ca-org-mode.el")
- (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view)
-)
+ (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 ;; 'visual - having numbers for lines created by virtual line breaks for long lines

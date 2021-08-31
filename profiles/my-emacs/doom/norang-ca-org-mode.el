@@ -303,7 +303,8 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 ;; Custom agenda command definitions
 (setq bh/org-agenda-view
      `(" " "Complex Agenda"
-               ((agenda "" nil)
+                ((agenda ""
+                         ((org-agenda-span `day)))
                 (todo "TODO"
                       ((org-agenda-overriding-header "To Refile")
                        (org-agenda-files '(,(concat "~/org/gtd/" "inbox.org")))))

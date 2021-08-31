@@ -50,6 +50,7 @@
 
     home.packages = with pkgs; [
       ammonite
+      sbcl
 
       htop
       killall

@@ -95,6 +95,7 @@
   users.users.efim = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    # A hashed password can be generated using mkpasswd -m sha-512.
     hashedPassword = "$6$8dFV7k1Jo3C$SS59WvnUPfFiAXLwpJTG3DGzSjZTklrt5sztUuZwUCdU8NBXxrwuOKnc1hy.7o1a384jyhtf2s5OMZsztyy260";
   };
 

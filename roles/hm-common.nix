@@ -3,6 +3,11 @@
 { inputs, config, pkgs, ... }:
 
 {
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    iosevka
+  ];
+
   imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
     xmonad
     my-autorandr

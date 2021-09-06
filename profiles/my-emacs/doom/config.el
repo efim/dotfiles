@@ -18,30 +18,36 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-
+;; (setq
+;;  doom-font (font-spec :family "monospace" :size 16 :weight 'semi-light)
+;;  doom-variable-pitch-font (font-spec :family "sans" :size 17))
+;;
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
 (setq doom-theme 'doom-one-light)
 
-(setq doom-font (font-spec :family "monospace" :size 16 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 17))
+(setq
+ doom-font (font-spec :name "Iosevka" :size 20)
+ doom-big-font (font-spec :name "Iosevka" :size 27)
+ ;; doom-font "Source Code Pro"
+ ;; doom-font "DejaVu Sans Mono"
+ doom-font-increment 1
+ doom-variable-pitch-font (font-spec :family "sans" :size 17))
 
 (after! frog-jump-buffer
   (map! :leader "," `frog-jump-buffer)
-
-  (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project)
-  )
+  (setq frog-jump-buffer-default-filter 'frog-jump-buffer-filter-same-project))
 ;;   default is "+ivy/switch-workspace-buffer"
+
 (use-package! frog-jump-buffer :init)
 
 (use-package! protobuf-mode :init)
 
 (use-package! mermaid-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.mmd\\'" . mermaid-mode))
-  )
+  (add-to-list 'auto-mode-alist '("\\.mmd\\'" . mermaid-mode)))
 
 (use-package! ob-mermaid
   :init
@@ -95,8 +101,7 @@
          :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
          :desc "Tag"                           "t" #'org-roam-tag-add
          :desc "Un-tag"                        "T" #'org-roam-tag-delete
-         )))
-)
+         ))))
 
 
 (setq org-directory "~/org/")

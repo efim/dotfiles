@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 with lib;
 
@@ -10,11 +10,20 @@ let
   };
 in {
 
+  nixpkgs.overlays = [
+    inputs.emacs-community-overlay.overlay
+  ];
+
   home-manager.users.efim = {
     programs = {
       emacs = {
         enable = true;
         extraPackages = epkgs: [ epkgs.vterm ];
+        package = pkgs.emacsPgtkGcc;
+        # TODO - add declarative cachix, it has repo & modules
+        #   for some reason couldn't figure out how to import
+        #   and whether I'd need my current ~/.config/nix/conf
+        # until then would need `$ cachix use nix-community`
       };
 
     };

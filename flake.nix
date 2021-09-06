@@ -3,9 +3,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
     home-manager.url = "github:nix-community/home-manager/release-21.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-community-overlay.url = "github:nix-community/emacs-overlay";
+    # emacs-community-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }@inputs:
+  outputs = { self, nixpkgs, home-manager, emacs-community-overlay }@inputs:
     let
       # copied from github:belsoft/nixos
       findModules = dir:
@@ -27,7 +29,6 @@
 
       nixosProfiles = builtins.listToAttrs (findModules ./profiles);
 
-      # nixosRoles = builtins.listToAttrs (findModules ./roles); #import ./roles;
       nixosRoles = import ./roles;
 
       nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {

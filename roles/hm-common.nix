@@ -49,6 +49,8 @@
     # home.file.".bashrc".source = ../.bashrc;
 
     home.packages = with pkgs; [
+      cachix
+
       ammonite
       sbcl
 

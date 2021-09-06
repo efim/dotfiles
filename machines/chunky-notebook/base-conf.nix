@@ -34,6 +34,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    trustedUsers = [ "root" "efim" ];
   };
 
   # networking.hostName = "nixos"; # Define your hostname.

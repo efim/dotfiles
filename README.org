@@ -35,5 +35,7 @@ Planned to combine lot's of applications and settings
 so that machines would only need to specify their roles, and limited amount of profiles
 
 * todo
+- make `cachix add nix-community` declarative
+- !! disable `emacsPgtkGcc` durnig install, since `cachix add nix-community` is manual for now
 - After migration to flake, usage of "home-manager" on non NixOS machines is not yet fixed =C
 - Manage the personal server with NixOS too

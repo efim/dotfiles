@@ -33,7 +33,7 @@ in {
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
       metals
       ripgrep
-      cowsay
+      rnix-lsp # lsp server for nix files
     ];
 
     home.file.".doom.d" = {

@@ -82,6 +82,7 @@
 ;; change `org-directory'. It must be set before org loads!
 
 ;; roam thingis
+(setq org-roam-v2-ack t)
 (setq org-roam-directory "~/org/")
 (use-package! org-roam
   :after org

@@ -2,8 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-# put symlink to these files into /etc/nixos/
-
 # pre-flakes nixos centralized config
 { inputs, config, pkgs, ... }:
 
@@ -131,6 +129,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    iosevka
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

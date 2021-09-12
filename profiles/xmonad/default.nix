@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  home-manager.users.efim = {
 
     xsession = {
       enable = true;
@@ -37,5 +36,4 @@
         };
       };
     };
-  };
 }

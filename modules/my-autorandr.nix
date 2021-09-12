@@ -53,7 +53,7 @@ in {
         };
   };
   config = {
-    home-manager.users.efim.programs.autorandr = {
+    programs.autorandr = {
       enable = true;
       profiles = {
         both = {

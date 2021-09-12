@@ -8,13 +8,13 @@ let
     jdk = pkgs.openjdk11;
     jre = pkgs.openjdk11;
   };
-in {
+in
+{
 
-  nixpkgs.overlays = [
-    inputs.emacs-community-overlay.overlay
-  ];
+    nixpkgs.overlays = [
+      inputs.emacs-community-overlay.overlay
+    ];
 
-  home-manager.users.efim = {
     programs = {
       emacs = {
         enable = true;
@@ -42,5 +42,4 @@ in {
       onChange = builtins.readFile ./setup.sh;
     };
 
-  };
 }

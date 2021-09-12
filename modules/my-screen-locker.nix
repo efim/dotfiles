@@ -26,7 +26,7 @@ in {
   };
 
   config = {
-    home-manager.users.efim.services = {
+    services = {
       xscreensaver.enable = isNixManaged;
       screen-locker = {
         enable = true;

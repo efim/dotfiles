@@ -11,34 +11,55 @@
     let
       # copied from github:belsoft/nixos
       findModules = dir:
-        builtins.concatLists (builtins.attrValues (builtins.mapAttrs
-          (name: type:
-            if type == "regular" then
-              [{
-                name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
-                value = dir + "/${name}";
-              }]
-            else if (builtins.readDir (dir + "/${name}"))
-            ? "default.nix" then [{
-              inherit name;
-              value = dir + "/${name}";
-            }] else
-              findModules (dir + "/${name}")) (builtins.readDir dir)));
-    in {
-      nixosModules = builtins.listToAttrs (findModules ./modules);
+        builtins.concatLists (
+          builtins.attrValues (
+            builtins.mapAttrs
+              (
+                name: type:
+                  if type == "regular" then
+                    [
+                      {
+                        name = builtins.elemAt (builtins.match "(.*)\\.nix" name) 0;
+                        value = dir + "/${name}";
+                      }
+                    ]
+                  else if (builtins.readDir (dir + "/${name}"))
+                  ? "default.nix" then [
+                    {
+                      inherit name;
+                      value = dir + "/${name}";
+                    }
+                  ] else
+                    findModules (dir + "/${name}")
+              ) (builtins.readDir dir)
+          )
+        );
+    in
+      {
+        nixosModules = builtins.listToAttrs (findModules ./modules);
 
-      nixosProfiles = builtins.listToAttrs (findModules ./profiles);
+        nixosProfiles = builtins.listToAttrs (findModules ./profiles);
 
-      nixosRoles = import ./roles;
+        nixosRoles = import ./roles;
 
-      nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
 
-        modules = [
-          (import ./machines/chunky-notebook/base-conf.nix)
-        ];
-        specialArgs = { inherit inputs; };
-    };
+          modules = [
+            (import ./machines/chunky-notebook/base-conf.nix)
+          ];
+          specialArgs = { inherit inputs; };
+        };
 
-  };
+        homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {
+          configuration = {
+            imports = [ ./machines/work-laptop/home-for-flake.nix ];
+          };
+          extraSpecialArgs = { inherit inputs; };
+          system = "x86_64-linux";
+          homeDirectory = "/home/efim";
+          username = "efim";
+        };
+
+      };
 }

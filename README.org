@@ -23,6 +23,7 @@ sudo nixos-rebuild switch --flake ~/dotfiles/.#chunky-notebook
 Any "home-manager" related updates are also done with that command
 * notes on structure
 ** Profiles :: Granular application/service configurations
+(expected to be imported on `home-manager.users.<user>` level, if in future would want OS level modules would need to figure out anew)
 Read in the flake.nix, passed with inputs.self.nixosProfiles
 Could contain NixOS configuration & options as well as Home-Manager configuraitons, options & xdg files
 
@@ -30,7 +31,17 @@ Idea is to keep relevant nix configuration close to managed dotfiles
 and join configurations for applications that are managed in tandem
 
 Intended for grouping in the Roles, so that Roles could be imported for machines
-** Roles :: Hight level bundles of configuration
+** Modules :: defining options
+(expected to be imported on `home-manager.users.<user>` level, if in future would want OS level modules would need to figure out anew)
+Option - is a value that can be set differently
+and which influences some part of configuration
+
+My own modules are:
+- autorandr sharing window configuration, by individual computer defining monitor fingerprints
+- screenlocker setting different 'lock' command, to share code between NixOS & Ubuntu installed 'xscreensaver'
+
+** Roles :: High level bundles of configuration
+(doesn't work yet - only Home-Manager common file there)
 Planned to combine lot's of applications and settings
 so that machines would only need to specify their roles, and limited amount of profiles
 

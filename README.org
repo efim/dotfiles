@@ -1,9 +1,21 @@
 * personal dotfiles
+Mostly declarative configuration for my computers, using Nix & flakes
+Currently serves 2 work machines:
+- chunky-notebook : NixOS + home-manager
+- work-laptop : home-manager on top of Ubuntu
 
-* installation
-not tested yet
-** install basic nixos to the machine
-** enable flakes
+Most treasured goodies:
+- Emacs : with native-comp & pgtk, courtesy of "nix-community/emacs-overlay"
+   with Doom Emacs config that's being setup manually
+- xmonad : comfortable tiling wm, for which I copy-pasted configs
+   with xmobar, autorandr setup for monitor detection
+- ability to reuse configuration between Ubuntu+Nix and NixOS
+   I'd like it to have less technical debt & better documentation, but it works
+
+
+** installation
+*** install basic nixos to the machine
+*** enable flakes
 in `config.nix` add
 #+begin_src nix
   nix = {
@@ -14,15 +26,19 @@ in `config.nix` add
   };
 #+end_src
 and apply the config
-** pull in repo (or possibly nix can install flake by github address too)
+*** pull in repo (or possibly nix can install flake by github address too)
 and apply config with
 #+begin_src bash
 sudo nixos-rebuild switch --flake ~/dotfiles/.#chunky-notebook
 #+end_src
 
 Any "home-manager" related updates are also done with that command
-* notes on structure
-** Profiles :: Granular application/service configurations
+*** NOTE cachix setup is not yet declarative
+so on first installation either:
+- use `nix shell nixpkgs#cachix; cachix use nix-community` to enable cache for "emacsPgtkGcc"
+- disable "emacsPgtkGcc" for first installation and then add `nix-community` cache
+** notes on structure
+*** Profiles :: Granular application/service configurations
 (expected to be imported on `home-manager.users.<user>` level, if in future would want OS level modules would need to figure out anew)
 Read in the flake.nix, passed with inputs.self.nixosProfiles
 Could contain NixOS configuration & options as well as Home-Manager configuraitons, options & xdg files
@@ -31,7 +47,7 @@ Idea is to keep relevant nix configuration close to managed dotfiles
 and join configurations for applications that are managed in tandem
 
 Intended for grouping in the Roles, so that Roles could be imported for machines
-** Modules :: defining options
+*** Modules :: defining options
 (expected to be imported on `home-manager.users.<user>` level, if in future would want OS level modules would need to figure out anew)
 Option - is a value that can be set differently
 and which influences some part of configuration
@@ -40,13 +56,12 @@ My own modules are:
 - autorandr sharing window configuration, by individual computer defining monitor fingerprints
 - screenlocker setting different 'lock' command, to share code between NixOS & Ubuntu installed 'xscreensaver'
 
-** Roles :: High level bundles of configuration
+*** Roles :: High level bundles of configuration
 (doesn't work yet - only Home-Manager common file there)
 Planned to combine lot's of applications and settings
 so that machines would only need to specify their roles, and limited amount of profiles
 
-* todo
+** todo
 - make `cachix add nix-community` declarative
-- !! disable `emacsPgtkGcc` durnig install, since `cachix add nix-community` is manual for now
-- After migration to flake, usage of "home-manager" on non NixOS machines is not yet fixed =C
+- !! `cachix add nix-community` is manual for now
 - Manage the personal server with NixOS too

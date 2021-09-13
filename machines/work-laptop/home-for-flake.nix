@@ -53,7 +53,8 @@
     };
     bash.profileExtra = ''
     source /home/efim/.nix-profile/etc/profile.d/nix.sh
-    '';
+    syncthing -no-browser -no-restart -logflags=0 & # copied from `systemctl --user cat syncthing`
+    ''; # TODO - figure out why service fails!
   };
 
   # INFO on languages:

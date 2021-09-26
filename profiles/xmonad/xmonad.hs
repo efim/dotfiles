@@ -63,12 +63,13 @@ additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
   [ ("M-S-<Return>", spawn myTerminal)
-    , ("M-<Return>", spawn "emacs --execute '(eshell t)'")
+    , ("M-<Return>", spawn "emacsclient -create-frame -eval \"(+vterm/here t)\"")
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")
     , ("C-M-k p", spawn "keepass ~/Documents/private/enef.kdbx")
     , ("C-M-k d", spawn "keepass ~/Documents/private/dino.kdbx")
-    , ("C-M-e", spawn "emacs")
+    , ("C-M-e", spawn "emacsclient --create-frame")
+    , ("C-M-i", spawn "emacsclient -eval \"(emacs-everywhere)\"")
     -- System control
     , ("M-S-l", spawn "xscreensaver-command -lock; xset dpms force off")
     , ("M-S-m d d", spawn (myTerminal

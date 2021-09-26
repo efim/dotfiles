@@ -28,12 +28,20 @@ in
 
     };
 
+    services.emacs.enable = true;
+
     home.packages = with pkgs; [
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
       metals
       ripgrep
       rnix-lsp # lsp server for nix files
+
+      # for emacs-everywhere
+      xclip
+      xdotool
+      xorg.xprop
+      xorg.xwininfo
     ];
 
     home.file.".doom.d" = {

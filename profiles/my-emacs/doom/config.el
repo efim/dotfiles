@@ -208,7 +208,30 @@
 (after! em-term
   (pushnew! eshell-visual-commands "ssh" "sbt"))
 
+;; turning on abbrev for automatic tempo + skeleton expansion
+(setq-default abbrev-mode t)
 
+(use-package! skempo
+  :hook ((emacs-lisp-mode
+          lisp-interaction-mode
+          org-mode
+          org-journal-mode
+          nix-mode) . skempo-mode)
+  :custom
+  (skempo-completing-read t)
+  (skempo-delete-duplicate-marks t)
+  (skempo-update-identical-tags t)
+  (skempo-skeleton-marks-support t)
+  (skempo-always-create-tag t)
+  (skempo-always-create-abbrev t)
+  (skempo-mode-lighter " Sk")
+  :bind
+  (:map skempo-mode-map
+   ("s-`" . skempo-complete-tag-or-call-on-region)
+   ("M-g M-j" . skempo-forward-mark)
+   ("M-g M-k" . skempo-backward-mark)))
+(after! skempo
+   (load-file "~/.doom.d/xFA25E-skempo-templates.el"))
 
 (require `epa-file)
 (epa-file-enable)

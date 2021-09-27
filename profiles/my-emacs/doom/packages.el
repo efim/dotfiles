@@ -64,3 +64,6 @@
 (package! ob-mermaid)
 
 (package! auto-overlays)
+
+(package! skempo
+    :recipe (:host github :repo "xFA25E/skempo"))

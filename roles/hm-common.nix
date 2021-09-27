@@ -74,6 +74,7 @@
     transmission-qt
     firefox
     chromium
+    thunderbird
   ];
 
 }

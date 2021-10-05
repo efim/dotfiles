@@ -5,15 +5,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-community-overlay.url = "github:nix-community/emacs-overlay";
     emacs-community-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    gmail-oauth2-tools = {
-      url = "github:google/gmail-oauth2-tools";
-      flake = false;
-    };
-
-    oauth2-lib = {
-      url = "github:robn/sasl2-oauth";
-      flake = false;
-    };
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-community-overlay, ... }@inputs:

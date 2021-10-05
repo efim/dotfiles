@@ -6,6 +6,7 @@
 
   home-manager.users.efim = {
 
+    # to add `inputs` as call attribute to imported modules
     _module.args.inputs = inputs;
 
     imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
@@ -14,6 +15,8 @@
       my-autorandr
       my-emacs
       my-screen-locker
+      # ./my-mail.nix
+      ./mail.nix
     ];
 
     programs.git = {

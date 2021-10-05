@@ -67,3 +67,8 @@
 
 (package! skempo
     :recipe (:host github :repo "xFA25E/skempo"))
+
+(package! notmuch
+  :recipe ( :host nil :type git
+            :repo "git://git.notmuchmail.org/git/notmuch"
+            :branch "release"))

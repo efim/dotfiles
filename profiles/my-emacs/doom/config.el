@@ -230,8 +230,20 @@
    ("s-`" . skempo-complete-tag-or-call-on-region)
    ("M-g M-j" . skempo-forward-mark)
    ("M-g M-k" . skempo-backward-mark)))
+
 (after! skempo
    (load-file "~/.doom.d/xFA25E-skempo-templates.el"))
+
+(use-package! notmuch :init)
+(progn
+  (progn
+    (evil-set-initial-state 'notmuch-hello-mode 'emacs)
+    (evil-set-initial-state 'notmuch-search-mode 'normal))
+  (add-hook 'notmuch-hello-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'notmuch-search-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'notmuch-message-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'notmuch-show-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'notmuch-tree-mode-hook #'doom-mark-buffer-as-real-h))
 
 (require `epa-file)
 (epa-file-enable)

@@ -1,4 +1,4 @@
-Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
+Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB

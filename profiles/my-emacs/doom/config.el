@@ -29,10 +29,8 @@
 (setq doom-theme 'doom-one-light)
 
 (setq
- doom-font (font-spec :name "Iosevka" :size 20)
- doom-big-font (font-spec :name "Iosevka" :size 27)
- ;; doom-font "Source Code Pro"
- ;; doom-font "DejaVu Sans Mono"
+ doom-font (font-spec :name "Iosevka" :size 20 )
+ doom-big-font (font-spec :name "Iosevka" :size 27 :weight `light)
  doom-font-increment 1
  doom-variable-pitch-font (font-spec :family "sans" :size 17))
 

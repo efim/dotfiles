@@ -245,5 +245,8 @@
   (add-hook 'notmuch-show-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'notmuch-tree-mode-hook #'doom-mark-buffer-as-real-h))
 
+
+(require 'ol-notmuch)
+
 (require `epa-file)
 (epa-file-enable)

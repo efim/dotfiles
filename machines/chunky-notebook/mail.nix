@@ -28,6 +28,7 @@ in
     {
       programs.afew.enable = true;
       programs.password-store.enable = true;
+      programs.password-store.settings.PASSWORD_STORE_DIR =  "${config.home.homeDirectory}/.password-store";
 
       programs.afew.extraConfig = with builtins;
         let

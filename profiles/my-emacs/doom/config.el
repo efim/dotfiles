@@ -32,7 +32,8 @@
  doom-font (font-spec :name "Iosevka" :size 20 )
  doom-big-font (font-spec :name "Iosevka" :size 27 :weight `light)
  doom-font-increment 1
- doom-variable-pitch-font (font-spec :family "sans" :size 17))
+ doom-variable-pitch-font (font-spec :family "Playfair Display" :size 24)
+ )
 
 (after! frog-jump-buffer
   (map! :leader "," `frog-jump-buffer)

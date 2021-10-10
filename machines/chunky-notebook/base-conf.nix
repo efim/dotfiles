@@ -131,9 +131,13 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  fonts.fonts = with pkgs; [
+  fonts.fonts = with pkgs;
+    let my-font =     callPackage ./my-playfair-font.nix {} ;
+          in [
     source-code-pro
     iosevka
+    etBook
+    my-font
   ];
 
   # This value determines the NixOS release from which the default

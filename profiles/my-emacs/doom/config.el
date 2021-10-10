@@ -243,8 +243,16 @@
   (add-hook 'notmuch-show-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'notmuch-tree-mode-hook #'doom-mark-buffer-as-real-h))
 
+(defun efim-config/manual-notmuch-email-update ()
+  (interactive)
+  "Trigger manual execution of mbsync & notmuch."
+  (start-process "manual mbsync all" "*Messages*" "mbsync" "-all" "--verbose")
+  (start-process "manual notmuch update" "*Messages*" "notmuch" "--config" "/home/efim/.config/notmuch/notmuchrc" "new"))
+
 
 (require 'ol-notmuch)
+
+(require `notifications)
 
 (require `epa-file)
 (epa-file-enable)

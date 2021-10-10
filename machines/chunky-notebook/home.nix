@@ -16,7 +16,9 @@
       my-emacs
       my-screen-locker
       # ./my-mail.nix
-      ./mail.nix
+      # ./mail.nix
+      personal
+      mail
     ];
 
     programs.git = {

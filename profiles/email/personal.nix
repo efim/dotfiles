@@ -1,9 +1,6 @@
-{ inputs, pkgs, lib, config, ... }: with inputs;
-{
-  imports = [
-    ../../modules/mail.nix
-  ];
+{ config, lib, pkgs, ... }:
 
+{
   accounts.email = let
     mailDir = "${config.home.homeDirectory}/.mail";
     mbsyncExtraConf = {
@@ -77,5 +74,4 @@
         };
       };
     };
-
 }

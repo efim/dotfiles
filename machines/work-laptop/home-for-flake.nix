@@ -11,7 +11,11 @@
     my-autorandr
     my-emacs
     my-screen-locker
+    personal
+    mail
   ];
+
+  # home.file.".bashrc".source = ../../.bashrc;
 
   my-screen-locker.isNixManaged = false;
 
@@ -51,6 +55,7 @@
       userName = "efim";
       userEmail = "efim.nefedov@nordigy.ru";
     };
+    bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
     bash.profileExtra = ''
     source /home/efim/.nix-profile/etc/profile.d/nix.sh
     syncthing -no-browser -no-restart -logflags=0 & # copied from `systemctl --user cat syncthing`

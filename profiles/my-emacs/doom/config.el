@@ -32,7 +32,8 @@
  doom-font (font-spec :name "Iosevka" :size 20 )
  doom-big-font (font-spec :name "Iosevka" :size 27 :weight `light)
  doom-font-increment 1
- doom-variable-pitch-font (font-spec :family "Playfair Display" :size 24)
+ ;; doom-variable-pitch-font (font-spec :family "Playfair Display" :size 24)
+ doom-variable-pitch-font (font-spec :family "Noto Serif CJK KR" :size 24)
  )
 
 (after! frog-jump-buffer
@@ -80,28 +81,31 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 
-;; roam thingis
-(setq org-roam-v2-ack t)
-(setq org-roam-directory "~/org/")
-(use-package! org-roam
-  :after org
-  :commands
-  (org-roam-buffer
-   org-roam-setup
-   org-roam-capture
-   org-roam-node-find)
-  :config
-  (org-roam-setup))
+;; ;; roam thingis
+;; (setq org-roam-v2-ack t)
+;; (setq org-roam-directory "~/org/")
+;; (use-package! org-roam
+;;   :after org
+;;   :commands
+;;   (org-roam-buffer
+;;    org-roam-setup
+;;    org-roam-capture
+;;    org-roam-node-find)
+;;   :config
+;;   (org-roam-setup))
+;; (add-to-list 'load-path ".")
+;; (require `testing-roam-config-w-hydra)
+(load-file "~/.doom.d/testing-roam-config-w-hydra.el")
 
-(map! (:leader (:prefix "n"
-        (:prefix-map ("r" . "roam")
-         :desc "Org Roam Capture"              "c" #'org-roam-capture
-         :desc "Find file"                     "f" #'org-roam-node-find
-         :desc "Insert"                        "i" #'org-roam-node-insert
-         :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
-         :desc "Tag"                           "t" #'org-roam-tag-add
-         :desc "Un-tag"                        "T" #'org-roam-tag-delete
-         ))))
+;; (map! (:leader (:prefix "n"
+;;         (:prefix-map ("r" . "roam")
+;;          :desc "Org Roam Capture"              "c" #'org-roam-capture
+;;          :desc "Find file"                     "f" #'org-roam-node-find
+;;          :desc "Insert"                        "i" #'org-roam-node-insert
+;;          :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
+;;          :desc "Tag"                           "t" #'org-roam-tag-add
+;;          :desc "Un-tag"                        "T" #'org-roam-tag-delete
+;;          ))))
 
 
 (setq org-directory "~/org/")
@@ -122,8 +126,9 @@
   (setq org-agenda-files '(;;"~/org/gtd/inbox.org"
                            "~/org/gtd/gtd.org"
                            "~/org/gtd/tickler.org"
-                           "~/org/Work/dino_systems.org" ;; have something like org/Work/gtd
-                           ;; "~/org/Journal" ;; temporarily add journal files, until I move completely to agenda and gtd setup
+                           "~/org/Work/gtd/dins-gtd.org"
+                           "~/org/Work/gtd/dins-tickler.org"
+                           "~/org/Work/dino_systems.org" ;; retire in favor of gtd
                            )
         )
 
@@ -132,16 +137,24 @@
   (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
                             ("~/org/gtd/someday.org" :level . 1)
                             ("~/org/gtd/tickler.org" :maxlevel . 2)
+                            ("~/org/Work/gtd/dins-gtd.org" :maxlevel . 3)
+                            ("~/org/Work/gtd/dins-someday.org" :level . 1)
+                            ("~/org/Work/gtd/dins-tickler.org" :maxlevel . 2)
                             ("~/org/writing-inbox.org" :maxlevel . 2)))
 
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                (file+headline "~/org/gtd/inbox.org" "Tasks")
-                                "* TODO %i%?")
+                                 (file+headline "~/org/gtd/inbox.org" "Tasks")
+                                 "* TODO %i%?")
+                                ("w" "Dins Todo [inbox]" entry
+                                 (file+headline "~/org/Work/gtd/dins-inbox.org" "Tasks")
+                                 "* TODO %i%?")
                                 ("T" "Tickler" entry
-                                (file+headline "~/org/gtd/tickler.org" "Tickler")
-                                "* %i%? \n %U")))
-  (setq org-modules '(ol-bibtex org-habit))
-)
+                                 (file+headline "~/org/gtd/tickler.org" "Tickler")
+                                 "* %i%? \n %U")))
+  (add-to-list `org-modules `ol-bibtex)
+  (add-to-list `org-modules `org-habit)
+  (add-to-list `org-modules `org-habit-plus ))
+
 
 (after! org-agenda
  (load-file "~/.doom.d/norang-ca-org-mode.el")
@@ -256,4 +269,6 @@
 (require `notifications)
 
 (require `epa-file)
+
+(server-start)
 (epa-file-enable)

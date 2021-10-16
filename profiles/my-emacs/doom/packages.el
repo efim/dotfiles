@@ -53,6 +53,9 @@
 (package! org-roam
   :recipe (:host github :repo "org-roam/org-roam"))
 
+(package! org-habit-plus
+  :recipe (:host github :repo "myshevchuk/org-habit-plus"))
+
 (package! frog-jump-buffer)
 
 (package! protobuf-mode)
@@ -72,3 +75,6 @@
   :recipe ( :host nil :type git
             :repo "git://git.notmuchmail.org/git/notmuch"
             :branch "release"))
+
+;; depends on hydra.el, dash.el and s.el
+(package! pretty-hydra)

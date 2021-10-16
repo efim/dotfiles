@@ -2,15 +2,7 @@
 
 with lib;
 
-let
-  metals = with pkgs; import ./test-metals.nix {
-    inherit stdenv lib coursier makeWrapper;
-    jdk = pkgs.openjdk11;
-    jre = pkgs.openjdk11;
-  };
-in
 {
-
     nixpkgs.overlays = [
       inputs.emacs-community-overlay.overlay
     ];

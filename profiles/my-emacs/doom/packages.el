@@ -76,5 +76,10 @@
             :repo "git://git.notmuchmail.org/git/notmuch"
             :branch "release"))
 
+;; used for pretty and interactionable command dispatch menues (in roam copied config)
 ;; depends on hydra.el, dash.el and s.el
 (package! pretty-hydra)
+
+;; integration with 0x0.st (sharing service)
+(package! 0x0
+  :recipe (:host gitlab :repo "willvaughn/emacs-0x0"))

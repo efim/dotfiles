@@ -263,12 +263,34 @@
   (start-process "manual mbsync all" "*Messages*" "mbsync" "-all" "--verbose")
   (start-process "manual notmuch update" "*Messages*" "notmuch" "--config" "/home/efim/.config/notmuch/notmuchrc" "new"))
 
+(eval-when-compile
+  (defmacro my/embark-ace-action (fn)
+    `(defun ,(intern (concat "my/embark-ace-" (symbol-name fn))) ()
+       (interactive)
+       (with-demoted-errors "%s"
+         (require 'ace-window)
+         (let ((aw-dispatch-always t))
+           (aw-switch-to-window (aw-select nil))
+           (call-interactively (symbol-function ',fn)))))))
+
+(define-key embark-file-map     (kbd "o") (my/embark-ace-action find-file))
+(define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
+(define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump))
 
 (require 'ol-notmuch)
 
 (require `notifications)
 
 (require `epa-file)
+
+(define-key minibuffer-mode-map (kbd "C-u") #'universal-argument)
+;; minibuffer-local-completion-map C-u
+;; minibuffer-local-isearch-map C-u
+;; minibuffer-local-ns-map C-u
+;; minibuffer-local-must-match-map C-u
+
+(use-package! 0x0)
+(define-key embark-region-map (kbd "U") #'0x0-dwim) ; probably need to wrap with `after!
 
 (server-start)
 (epa-file-enable)

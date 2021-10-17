@@ -1,0 +1,10 @@
+#+TITLE: Notes on doom config
+* [2021-10-17 Вс]
+** enabling embark
+~C-;~ for buffer & minibuffer to redirect input into other function
+~C-c C-;~ for minibuffer export
+*** adding ace-window copied of karthink
+to target buffer with embark and then select where to put it with 'o'
+(ace dispatch)
+*** adding (maybe will not use?) 0x0 - free (?) online sharing dump
+** setting vertico as doom completion

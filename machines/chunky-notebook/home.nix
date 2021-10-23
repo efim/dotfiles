@@ -3,6 +3,7 @@
 #   sets my-options
 { inputs, config, pkgs, ... }:
 {
+  home-manager.useUserPackages = true; # needed to use fonts from User declaration
 
   home-manager.users.efim = {
 
@@ -19,6 +20,7 @@
       # ./mail.nix
       personal
       mail
+      fonts
     ];
 
     programs.git = {

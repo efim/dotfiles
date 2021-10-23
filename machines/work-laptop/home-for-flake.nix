@@ -13,6 +13,7 @@
     my-screen-locker
     personal
     mail
+    fonts
   ];
 
   # home.file.".bashrc".source = ../../.bashrc;

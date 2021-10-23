@@ -9,10 +9,6 @@
   home.username = "efim";
   home.homeDirectory = "/home/efim";
 
-  imports = [
-    inputs.self.nixosModules.fonts
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   programs = {

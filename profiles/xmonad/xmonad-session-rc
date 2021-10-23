@@ -4,7 +4,6 @@
 # https://unix.stackexchange.com/questions/64513/run-xmonads-startup-hook-only-on-initial-startup/342754#342754
 
 nitrogen --restore &
-picom &
 safeeyes &
 /usr/lib/notification-daemon/notification-daemon &
 xfce4-power-manager &

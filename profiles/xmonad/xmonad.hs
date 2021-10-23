@@ -255,7 +255,6 @@ myLogHook = return ()
 -- Check ./xmonad/xmonad-session-rc for Ubuntu install workaround (add the commands to there also)
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
-  spawnOnce "picom &"
   spawnOnce "safeeyes &"
   -- spawnOnce "systemctl --user start syncthing.service" -- should be covered by nix home-manager
   -- spawnOnce "/usr/lib/notification-daemon/notification-daemon &" --  should be covered by nix home-manager

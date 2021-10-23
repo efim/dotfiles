@@ -72,7 +72,6 @@
     safeeyes
     nitrogen
     rescuetime
-    picom
 
     vlc
     transmission-qt

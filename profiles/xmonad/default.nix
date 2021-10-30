@@ -16,7 +16,6 @@
       source = ./xmobar-tray-autopadding.sh;
       executable = true;
     };
-    xdg.configFile.".xmonad/smonad-session-rc".source = ./xmonad-session-rc;
 
     # start service for Notifications, e.g from Emacs timers
     services = {

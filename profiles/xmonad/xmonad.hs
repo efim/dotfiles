@@ -67,8 +67,8 @@ additionalKeys =
     , ("M-<Return>", spawn "emacsclient -create-frame -eval \"(+vterm/here t)\"")
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")
-    , ("C-M-k p", spawn "keepass ~/Documents/private/enef.kdbx")
-    , ("C-M-k d", spawn "keepass ~/Documents/private/dino.kdbx")
+    , ("C-M-k p", spawn "keepassxc ~/Documents/private/enef.kdbx")
+    , ("C-M-k d", spawn "keepassxc ~/Documents/private/dino.kdbx")
     , ("C-M-e", spawn "emacsclient --create-frame")
     , ("C-M-i", spawn "emacsclient -eval \"(emacs-everywhere)\"")
     -- System control
@@ -257,7 +257,7 @@ myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "safeeyes &"
   -- spawnOnce "systemctl --user start syncthing.service" -- should be covered by nix home-manager
-  -- spawnOnce "/usr/lib/notification-daemon/notification-daemon &" --  should be covered by nix home-manager
+  spawnOnce "keepassxc &"
   spawnOnce "rescuetime &"
   spawnOnce "xscreensaver -no-splash &"
 

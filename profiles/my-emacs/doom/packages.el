@@ -87,3 +87,5 @@
 (package! eshell-z :disable t)
 
 (package! consult-dir)
+
+(package! org-appear)

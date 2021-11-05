@@ -113,8 +113,12 @@
 (setq org-journal-file-format "%Y-%m-%d.org")
 (setq org-journal-date-format "%d.%m.%Y")
 
-(after! org
+;; Show hidden emphasis markers
+(use-package! org-appear
+  :hook (org-mode . org-appear-mode))
 
+(after! org
+  (setq org-hide-emphasis-markers t)
   (add-hook 'org-mode-hook
           (lambda ()
             (evil-local-set-key 'motion "gk" #'org-backward-element)

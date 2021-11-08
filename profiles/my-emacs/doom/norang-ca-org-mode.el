@@ -1,4 +1,5 @@
 ;;; norang-ca-org-mode.el -*- lexical-binding: t; -*-
+(require `org-habit)
 
 ;; helper functions for agenda
 (defun bh/is-project-p ()

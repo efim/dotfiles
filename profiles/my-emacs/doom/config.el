@@ -324,5 +324,11 @@ any directory proferred by `consult-dir'."
        (t (eshell/cd (if regexp (eshell-find-previous-directory regexp)
                             (completing-read "cd: " eshell-dirs)))))))
 
+
+;; adding agenda items into "appt" for notifications & enabling system notifications
+(run-with-timer 2 1800 (lambda() (org-agenda-to-appt t)))
+(load-file "~/.doom.d/app-sys-notify.el")
+(advice-add #'appt-display-message :after #'my/appt-notifications-notify)
+
 (server-start)
 (epa-file-enable)

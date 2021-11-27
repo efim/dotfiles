@@ -8,6 +8,7 @@
 ;; clients, file templates and snippets.
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
+(setq default-input-method "russian-computer")
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -296,6 +297,8 @@
 (use-package! 0x0)
 (after! embark
   (define-key embark-region-map (kbd "U") #'0x0-dwim)) ; probably need to wrap with `after!
+
+(use-package! ox-ssh)
 
 (use-package! consult-dir
   :bind (("C-x C-d" . consult-dir)

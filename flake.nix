@@ -5,7 +5,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-community-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-community-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-community-overlay, ... }@inputs:

@@ -11,6 +11,20 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.pop-gtk-theme;
+    };
+    iconTheme = {
+      name = "Pop";
+      package = pkgs.pop-icon-theme;
+    };
+    font.name = "Victor Mono SemiBold 12";
+  };
+  # home.sessionVariables.GTK_THEME = "Pop-dark";
+
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;

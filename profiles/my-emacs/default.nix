@@ -29,6 +29,8 @@ with lib;
       ripgrep
       rnix-lsp # lsp server for nix files
 
+      nodePackages.mermaid-cli
+
       # for emacs-everywhere
       xclip
       xdotool

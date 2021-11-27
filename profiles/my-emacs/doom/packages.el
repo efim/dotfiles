@@ -85,3 +85,7 @@
   :recipe (:host gitlab :repo "willvaughn/emacs-0x0"))
 
 (package! ox-ssh)
+
+(package! eshell-z :disable t)
+
+(package! consult-dir)

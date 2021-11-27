@@ -50,7 +50,7 @@
 
     htop
     killall
-    keepass
+    keepassxc
     tdesktop
     discord
     element-desktop

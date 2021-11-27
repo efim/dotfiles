@@ -12,7 +12,10 @@
     };
 
     xdg.configFile."xmobar/xmobarrc".source = ./xmobarrc;
-    xdg.configFile.".xmonad/smonad-session-rc".source = ./xmonad-session-rc;
+    xdg.configFile."xmobar/xmobar-tray-autopadding.sh" = {
+      source = ./xmobar-tray-autopadding.sh;
+      executable = true;
+    };
 
     # start service for Notifications, e.g from Emacs timers
     services = {
@@ -50,6 +53,23 @@
             line_height = 4;
             format = ''<b>%s</b>\n%b'';
           };
+        };
+      };
+      trayer = {
+        enable = true;
+        settings = {
+          edge = "top";
+          align = "right";
+          widthtype = "request";
+          expand = true;
+          SetDockType = true;
+          SetPartialStrut = true;
+          transparent = true;
+          alpha = 0;
+          tint = "0x1A1918";
+          heighttype = "pixel";
+          height = 22;
+          padding = 1;
         };
       };
     };

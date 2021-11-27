@@ -53,11 +53,10 @@ Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
         , Run UnsafeStdinReader
-        , Run Kbd   [
-       
-] 
+        , Run Kbd   []
+        , Run Com "/home/efim/.config/xmobar/xmobar-tray-autopadding.sh" ["panel"] "traypad" 100
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc> | %kbd% | %ULLI% "
+       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc> | %kbd% | %ULLI% | %traypad% "
        }

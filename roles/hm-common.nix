@@ -73,6 +73,7 @@
     transmission-qt
     firefox
     chromium
+    inputs.nixpkgs-21-05.legacyPackages.x86_64-linux.nyxt
   ];
 
 }

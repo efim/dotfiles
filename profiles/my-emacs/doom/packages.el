@@ -83,3 +83,5 @@
 ;; integration with 0x0.st (sharing service)
 (package! 0x0
   :recipe (:host gitlab :repo "willvaughn/emacs-0x0"))
+
+(package! ox-ssh)

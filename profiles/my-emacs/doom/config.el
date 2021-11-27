@@ -294,5 +294,7 @@
 (after! embark
   (define-key embark-region-map (kbd "U") #'0x0-dwim)) ; probably need to wrap with `after!
 
+(use-package! ox-ssh)
+
 (server-start)
 (epa-file-enable)

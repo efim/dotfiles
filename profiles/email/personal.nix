@@ -62,9 +62,6 @@
           };
           msmtp = {
             enable = true;
-            extraConfig = {
-              auth = "oauthbearer";
-            };
           };
           notmuch.enable = true;
 

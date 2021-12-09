@@ -8,6 +8,13 @@
 ;; A Property List of my `org-roam' capture templates.
 (setq ef/org-roam-capture-templates-plist
       (list
+       :general
+       '("g" "General" plain "%?"
+	 :if-new
+         (file+head
+          "%<%Y%m%d%H%M%s>-${slug}.org"
+          "#+title: ${title}\n\n")
+	 :unnarrowed t)
        :personal
        '("p" "Personal" plain "%?"
 	 :if-new
@@ -63,7 +70,7 @@
                        :prefix "w"
                        :path-to-todo "~/org/Work/gtd/dins-gtd.org")
        :personal (list
-                  :templates (list :personal)
+                  :templates (list :personal :general)
                   :name "personal"
                   :title "Personal"
                   :group "Life"

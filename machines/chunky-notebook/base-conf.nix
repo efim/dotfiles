@@ -25,6 +25,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
+  # from researching remote deployment to arm systems
+  # https://sgt.hootr.club/molten-matter/nixops-on-the-pi/
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   nixpkgs.config.allowUnfree = true;
 
   nix = {

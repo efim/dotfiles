@@ -1,13 +1,16 @@
 {
+  description = "One mans configurations";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-21-05.url = "github:NixOS/nixpkgs/nixos-21.05";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-community-overlay.url = "github:nix-community/emacs-overlay";
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, ... }@inputs:
     let
       # copied from github:belsoft/nixos
       findModules = dir:
@@ -36,15 +39,14 @@
         );
     in
       {
-        nixosModules = builtins.listToAttrs (findModules ./modules);
+        myModules = builtins.listToAttrs (findModules ./modules);
 
-        nixosProfiles = builtins.listToAttrs (findModules ./profiles);
+        myProfiles = builtins.listToAttrs (findModules ./profiles);
 
-        nixosRoles = import ./roles;
+        myRoles = import ./roles;
 
         nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-
           modules = [
             (import ./machines/chunky-notebook/base-conf.nix)
           ];
@@ -60,6 +62,28 @@
           homeDirectory = "/home/efim";
           username = "efim";
         };
+
+        nixosConfigurations.pythia = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [ (import ./machines/oracle/pythia/configuration.nix) ];
+        };
+
+        deploy = {
+          magicRollback = true;
+          nodes = {
+            pythia = {
+              hostname = "hidden-for-now";
+              profiles.system = {
+                  user = "root";
+                  sshUser = "root"; # for some reason
+                  path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.pythia;
+              };
+            };
+          };
+        };
+
+        # This is highly advised, and will prevent many possible mistakes
+        checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       };
 }

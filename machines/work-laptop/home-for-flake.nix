@@ -5,7 +5,7 @@
 
 {
 
-  imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
+  imports = with inputs.self.myModules; with inputs.self.myProfiles; [
     inputs.self.nixosRoles.hm-common
     xmonad # see `chunky-notebook/home.nix` for some reason `roles` recurses infinitely
     my-autorandr

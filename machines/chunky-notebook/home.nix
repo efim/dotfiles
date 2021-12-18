@@ -10,8 +10,8 @@
     # to add `inputs` as call attribute to imported modules
     _module.args.inputs = inputs;
 
-    imports = with inputs.self.nixosModules; with inputs.self.nixosProfiles; [
-      inputs.self.nixosRoles.hm-common
+    imports = with inputs.self.myModules; with inputs.self.myProfiles; [
+      inputs.self.myRoles.hm-common
       xmonad # moving these imports to `hm-common` results in infinite recursion.. somehow
       my-autorandr
       my-emacs
@@ -21,6 +21,7 @@
       personal
       mail
       fonts
+      with-deploy
     ];
 
     programs.git = {

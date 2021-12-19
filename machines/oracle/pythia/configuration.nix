@@ -1,8 +1,13 @@
-{ config, pkgs, ... }: {
+{ inputs, config, pkgs, ... }: {
+
   imports = [
     ./hardware-configuration.nix
+    inputs.self.myProfiles.sops
   ];
 
+  # This is the actual specification of the secrets.
+  sops.secrets.example_key = { };
+  sops.secrets.oi = { };
 
   # is this needed for rs-deploy?
   # https://github.com/serokell/deploy-rs/issues/25
@@ -23,6 +28,7 @@
   environment.systemPackages = with pkgs; [
     cowsay
     hello
+    fd
   ];
 
   users.users.efim = {

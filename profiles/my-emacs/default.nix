@@ -22,6 +22,12 @@ with lib;
 
     services.emacs.enable = true;
 
+    home.sessionVariables = {
+      ALTERNATE_EDITOR = "";
+      EDITOR = "emacsclient -t";                  # $EDITOR opens in terminal
+      VISUAL = "emacsclient -c -a emacs";         # $VISUAL opens in GUI mode
+    };
+
     home.packages = with pkgs; [
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary

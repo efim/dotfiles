@@ -14,7 +14,7 @@
   nix.trustedUsers = [ "@wheel" ];
 
   boot.cleanTmpDir = true;
-  networking.hostName = "pythia";
+  networking.hostName = "niobe";
 
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 21 51820 ];

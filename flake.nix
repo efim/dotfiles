@@ -75,6 +75,15 @@
         ];
         specialArgs = { inherit inputs; };
       };
+      nixosConfigurations.niobe = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/oracle/niobe/configuration.nix
+          sops-nix.nixosModules.sops
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
 
       deploy = {
         magicRollback = true;
@@ -85,6 +94,14 @@
               user = "root";
               sshUser = "root"; # for some reason
               path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.pythia;
+            };
+          };
+          niobe = {
+            hostname = "niobe";
+            profiles.system = {
+              user = "root";
+              sshUser = "root"; # for some reason
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.niobe;
             };
           };
         };

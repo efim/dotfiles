@@ -17,8 +17,8 @@
   networking.hostName = "niobe";
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 21 51820 ];
-  networking.firewall.allowedUDPPorts = [ 21 51820 ];
+  networking.firewall.allowedTCPPorts = [ 21 51820 9001 ];
+  networking.firewall.allowedUDPPorts = [ 21 51820 9001 ];
   # networking.firewall.allowedTCPPortRanges = [ { from = 51000; to = 51999; } ];
 
   services.openssh.enable = true;
@@ -40,20 +40,27 @@
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru" ];
   };
 
-  #   # grafana configuration
-  # services.grafana = {
-  #   enable = true;
-  #   domain = "grafana.pele";
-  #   port = 2342;
-  #   addr = "127.0.0.1";
-  # };
+  services.tailscale.enable = true;
 
-  # # nginx reverse proxy
-  # services.nginx.virtualHosts.${config.services.grafana.domain} = {
-  #   locations."/" = {
-  #       proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
-  #       proxyWebsockets = true;
-  #   };
-  # };
+  services.prometheus = {
+    enable = true;
+    port = 9001;
+    exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "systemd" ];
+        port = 9002;
+      };
+    };
+    scrapeConfigs = [
+      {
+        job_name = "niobe";
+        static_configs = [{
+          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+        }];
+      }
+    ];
+  };
+
 
 }

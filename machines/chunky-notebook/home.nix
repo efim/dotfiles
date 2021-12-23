@@ -4,9 +4,9 @@
 { inputs, config, pkgs, ... }:
 {
   home-manager.useUserPackages = true; # needed to use fonts from User declaration
+  services.tailscale.enable = true;
 
   home-manager.users.efim = {
-
     # to add `inputs` as call attribute to imported modules
     _module.args.inputs = inputs;
 

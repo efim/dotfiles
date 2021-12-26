@@ -54,6 +54,16 @@
 
   networking.networkmanager.enable = true;
 
+  services.yggdrasil.enable = true;
+  services.yggdrasil.persistentKeys = true;
+  services.yggdrasil.config = {
+    Peers = [
+      "tcp://130.61.94.233:13338" #niobe
+      "tls://ygg.loskiq.dev:17314"
+      "tls://box.paulll.cc:13338"
+    ];
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";

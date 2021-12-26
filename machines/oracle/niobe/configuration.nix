@@ -17,8 +17,8 @@
   networking.hostName = "niobe";
 
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 21 51820 9001 ];
-  networking.firewall.allowedUDPPorts = [ 21 51820 9001 ];
+  networking.firewall.allowedTCPPorts = [ 21 51820 9001 13338 ];
+  networking.firewall.allowedUDPPorts = [ 21 51820 9001 13338 ];
   # networking.firewall.allowedTCPPortRanges = [ { from = 51000; to = 51999; } ];
 
   services.openssh.enable = true;
@@ -62,5 +62,19 @@
     ];
   };
 
+  services.yggdrasil.enable = true;
+  services.yggdrasil.persistentKeys = true;
+  services.yggdrasil.config = {
+    Listen = [
+      "tcp://0.0.0.0:13338"
+    ];
+    Peers = [
+      "tls://01.ffm.deu.ygg.yt:443"
+      "tls://ygg.mkg20001.io:443"
+      "tls://ygg.cofob.ru:443"
+      "tcp://bunkertreff.ddns.net:5454"
+      "tcp://phrl42.ydns.eu:8842"
+    ];
+  };
 
 }

@@ -83,13 +83,21 @@
         ];
         specialArgs = { inherit inputs; };
       };
+      nixosConfigurations.morpheus = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/oracle/morpheus/configuration.nix
+          # sops-nix.nixosModules.sops
+        ];
+        specialArgs = { inherit inputs; };
+      };
 
 
       deploy = {
         magicRollback = true;
         nodes = {
           pythia = {
-            hostname = "pythia";
+            hostname = "pythia"; # taken from my ~/.ssh/config
             profiles.system = {
               user = "root";
               sshUser = "root"; # for some reason
@@ -104,6 +112,14 @@
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.niobe;
             };
           };
+          # morpheus = {
+          #   hostname = "130.61.54.99";
+          #   profiles.system = {
+          #     user = "root";
+          #     sshUser = "root"; # for some reason
+          #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
+          #   };
+          # };
         };
       };
 

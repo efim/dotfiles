@@ -88,6 +88,29 @@
     firefox
     chromium
     inputs.nixpkgs-21-05.legacyPackages.x86_64-linux.nyxt
+
+    # https://discourse.nixos.org/t/local-flake-based-nix-search-nix-run-and-nix-shell/13433
+    (writeShellScriptBin "nix-search-local" ''
+      nix search "path:${inputs.nixpkgs}" "$@"
+    '')
+    (writeShellScriptBin "nix-shell-local" ''
+      if [ "$#" -lt 1 ]; then
+        echo "Requires an argument" >&2
+        exit 1
+      fi
+      ATTRIBUTE="$1"
+      shift
+      nix shell "path:${inputs.nixpkgs}#$ATTRIBUTE" "$@"
+    '')
+    (writeShellScriptBin "nix-run-local" ''
+      if [ "$#" -lt 1 ]; then
+        echo "Requires an argument" >&2
+        exit 1
+      fi
+      ATTRIBUTE="$1"
+      shift
+      nix run "path:${inputs.nixpkgs}#$ATTRIBUTE" "$@"
+    '')
   ];
 
 }

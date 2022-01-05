@@ -18,6 +18,8 @@
         })
     ];
 
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_15; # not sure why would I really want to pin that?
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 15;

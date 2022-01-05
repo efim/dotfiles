@@ -282,7 +282,7 @@
   (define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
   (define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump)))
 
-(require 'ol-notmuch)
+;; (require 'ol-notmuch)
 
 (require `notifications)
 

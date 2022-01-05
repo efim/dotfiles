@@ -11,7 +11,7 @@ with lib;
       emacs = {
         enable = true;
         extraPackages = epkgs: [ epkgs.vterm ];
-        package = pkgs.emacsPgtkGcc;
+        package = pkgs.emacsGcc;
         # TODO - add declarative cachix, it has repo & modules
         #   for some reason couldn't figure out how to import
         #   and whether I'd need my current ~/.config/nix/conf
@@ -47,7 +47,7 @@ with lib;
     home.file.".doom.d" = {
       source = ./doom;
       recursive = true;
-      onChange = builtins.readFile ./setup.sh;
+#      onChange = builtins.readFile ./setup.sh;
     };
 
 }

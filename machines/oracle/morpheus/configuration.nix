@@ -15,39 +15,39 @@
   # https://github.com/serokell/deploy-rs/issues/25
   nix.trustedUsers = [ "@wheel" ];
 
-  # networking.firewall.enable = true;
-  # networking.firewall.allowedTCPPorts = [ 21 51820 9001 ];
-  # networking.firewall.allowedUDPPorts = [ 21 51820 9001 ];
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 9001 ];
+  networking.firewall.allowedUDPPorts = [ 9001 ];
 
-  #   users.users.efim = {
-  #   isNormalUser = true;
-  #   home = "/home/efim";
-  #   description = "Foobar yups";
-  #   extraGroups = [ "wheel" "networkmanager" ];
-  #   openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru" ];
-  # };
+  users.users.efim = {
+    isNormalUser = true;
+    home = "/home/efim";
+    description = "Foobar yups";
+    extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru" ];
+  };
 
-  # services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
-  # services.prometheus = {
-  #   enable = true;
-  #   port = 9001;
-  #   exporters = {
-  #     node = {
-  #       enable = true;
-  #       enabledCollectors = [ "systemd" ];
-  #       port = 9002;
-  #     };
-  #   };
-  #   scrapeConfigs = [
-  #     {
-  #       job_name = "morpheus";
-  #       static_configs = [{
-  #         targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-  #       }];
-  #     }
-  #   ];
-  # };
+  services.prometheus = {
+    enable = true;
+    port = 9001;
+    exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "systemd" ];
+        port = 9002;
+      };
+    };
+    scrapeConfigs = [
+      {
+        job_name = "morpheus";
+        static_configs = [{
+          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
+        }];
+      }
+    ];
+  };
 
   #   services.yggdrasil.enable = true;
   # services.yggdrasil.persistentKeys = true;

@@ -112,14 +112,14 @@
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.niobe;
             };
           };
-          # morpheus = {
-          #   hostname = "130.61.54.99";
-          #   profiles.system = {
-          #     user = "root";
-          #     sshUser = "root"; # for some reason
-          #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
-          #   };
-          # };
+          morpheus = {
+            hostname = "morpheus";
+            profiles.system = {
+              user = "root";
+              sshUser = "root"; # for some reason
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
+            };
+          };
         };
       };
 

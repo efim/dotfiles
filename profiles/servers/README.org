@@ -1,0 +1,4 @@
+#+TITLE: notes on servers profiles
+* TODO expect to be imported at base config level
+and other profiles expect to be imported at `home-manager.users.efim` level
+and that's because one of my machines is Ubuntu + HM, yup

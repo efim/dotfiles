@@ -36,4 +36,7 @@
     ];
   };
 
+  services.boinc.enable = true;
+  services.boinc.package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.boinc;
+
 }

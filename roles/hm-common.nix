@@ -87,7 +87,7 @@
     transmission-qt
     firefox
     chromium
-    inputs.nixpkgs-21-05.legacyPackages.x86_64-linux.nyxt
+    inputs.nixpkgs-stable.legacyPackages.x86_64-linux.nyxt
 
     # https://discourse.nixos.org/t/local-flake-based-nix-search-nix-run-and-nix-shell/13433
     (writeShellScriptBin "nix-search-local" ''

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-21-05.url = "github:NixOS/nixpkgs/nixos-21.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
     emacs-community-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

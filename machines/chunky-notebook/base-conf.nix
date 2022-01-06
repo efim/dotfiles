@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 # pre-flakes nixos centralized config
-{ inputs, config, pkgs, ... }:
+{ inputs, rev, config, pkgs, ... }:
 
 {
   imports =
@@ -14,7 +14,7 @@
       ({ pkgs, ... }: {
           # Let 'nixos-version --json' know about the Git revision
           # of this flake.
-          system.configurationRevision = inputs.nixpkgs.lib.mkIf (inputs.self ? rev) inputs.self.rev;
+          system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
         })
     ];
 

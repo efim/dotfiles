@@ -17,6 +17,7 @@
     let
       utils = import ./kinda-utils.nix;
       findModules = utils.findModules;
+      rev = if self ? rev then self.rev else null;
     in
     {
       myModules = builtins.listToAttrs (findModules ./modules);
@@ -30,7 +31,7 @@
         modules = [
           ./machines/chunky-notebook/base-conf.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs rev; };
       };
 
       homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {

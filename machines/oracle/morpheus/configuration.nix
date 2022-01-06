@@ -2,9 +2,12 @@
 
   networking.hostName = "morpheus";
 
-  imports = with inputs.self.myProfiles; [
+  imports = with inputs.self.myRoles; [
     ./hardware-configuration.nix
-    base
+    base-server
   ];
+
+  sops.secrets.example_key = { };
+  sops.secrets.my_new_test_key = { };
 
 }

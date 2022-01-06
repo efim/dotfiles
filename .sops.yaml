@@ -6,6 +6,7 @@ keys:
   - &efim age1ets7cgysvpl7a9grya62ddnpy5v3qk2kmxeysgnzvanx7ugzse5qaq4x9z
   - &pythia age1utvxcqrefpp2d4wgsd26m786cpq94hy4pjumddlecudqqg0qkvsscj4s0r
   - &niobe age15htmcxm4ya7ru9xkxy5tlwytm4543vzd8lpys3rza7vpcsf73stqpfqu56
+  - &morpheus age1wzmdqwjjq8u5far3dcjdkwlama39nlfwm8y0mnu7px0lun36lvuqe35cew
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
@@ -13,3 +14,4 @@ creation_rules:
       - *efim
       - *pythia
       - *niobe
+      - *morpheus

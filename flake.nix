@@ -89,7 +89,7 @@
         system = "x86_64-linux";
         modules = [
           ./machines/oracle/morpheus/configuration.nix
-          # sops-nix.nixosModules.sops
+          sops-nix.nixosModules.sops
         ];
         specialArgs = { inherit inputs; };
       };

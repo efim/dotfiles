@@ -73,7 +73,6 @@
         system = "aarch64-linux";
         modules = [
           ./machines/oracle/pythia/configuration.nix
-          sops-nix.nixosModules.sops
         ];
         specialArgs = { inherit inputs; };
       };
@@ -81,7 +80,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/oracle/niobe/configuration.nix
-          sops-nix.nixosModules.sops
         ];
         specialArgs = { inherit inputs; };
       };
@@ -89,7 +87,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/oracle/morpheus/configuration.nix
-          sops-nix.nixosModules.sops
         ];
         specialArgs = { inherit inputs; };
       };

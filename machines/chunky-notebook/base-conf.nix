@@ -61,8 +61,6 @@
   services.yggdrasil.config = {
     Peers = [
       "tcp://130.61.94.233:13338" #niobe
-      "tls://ygg.loskiq.dev:17314"
-      "tls://box.paulll.cc:13338"
     ];
   };
 

@@ -34,6 +34,14 @@
         specialArgs = { inherit inputs rev; };
       };
 
+      nixosConfigurations.ancient-one = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/ancient-one/configuration.nix
+        ];
+        specialArgs = { inherit inputs rev; };
+      };
+
       homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {
         configuration = {
           imports = [ ./machines/work-laptop/home-for-flake.nix ];
@@ -94,6 +102,15 @@
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
             };
           };
+          ancient-one = {
+            hostname = "ancient-one";
+            profiles.system = {
+              user = "root";
+              sshUser = "root"; # for some reason
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ancient-one;
+            };
+          };
+
         };
       };
 

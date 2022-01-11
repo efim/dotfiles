@@ -16,10 +16,8 @@
       my-autorandr
       my-emacs
       my-screen-locker
-      # ./my-mail.nix
-      # ./mail.nix
       personal
-      mail
+      # mail # for some reason notmuch is broken on unstable, and I don't use it yet
       fonts
       with-deploy
     ];

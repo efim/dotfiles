@@ -7,6 +7,22 @@
     base-server
   ];
 
+  services.bind = {
+    enable = true;
+    zones = {
+      "nope" = {
+        file = ./from-linux-guide.zone;
+        # file = ./dns-attempt.zone;
+        master = true;
+        slaves = [
+          "127.0.0.1"
+        ];
+      };
+    };
+  };
+  networking.firewall.allowedUDPPorts = [ 53 ];
+
+
   sops.secrets.example_key = { };
   sops.secrets.my_new_test_key = { };
 

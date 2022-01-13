@@ -25,6 +25,9 @@
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
+  # networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
+  networking.nameservers = [ "100.116.45.26" ];
+
   services.logind.lidSwitch = "ignore";
 
   # Enable the X11 windowing system.

@@ -21,6 +21,9 @@
   networking.firewall.allowedUDPPorts = [ 13338 ];
   # networking.firewall.allowedTCPPortRanges = [ { from = 51000; to = 51999; } ];
 
+  # networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
+  networking.nameservers = [ "100.116.45.26" ];
+
   sops.secrets."yggdrasil/niobe" = {};
   services.yggdrasil = {
     enable = true;

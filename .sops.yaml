@@ -7,6 +7,7 @@ keys:
   - &pythia age1utvxcqrefpp2d4wgsd26m786cpq94hy4pjumddlecudqqg0qkvsscj4s0r
   - &niobe age15htmcxm4ya7ru9xkxy5tlwytm4543vzd8lpys3rza7vpcsf73stqpfqu56
   - &morpheus age1wzmdqwjjq8u5far3dcjdkwlama39nlfwm8y0mnu7px0lun36lvuqe35cew
+  - &franzk age19vkjfrlv8mnxql6g099r7arx0ncl8mc69upjnhqdaw2ahwkgc3ysrwm0yl
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
@@ -15,3 +16,9 @@ creation_rules:
       - *pythia
       - *niobe
       - *morpheus
+      - *franzk
+  - path_regex: machines/franzk/secrets.yaml$
+    key_groups:
+    - age:
+      - *efim
+      - *franzk

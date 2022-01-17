@@ -4,6 +4,7 @@
 
   imports = with inputs.self.myRoles; [
     ./vpsadminos.nix
+    ./nextcloud.nix
     base-server
   ];
 

@@ -15,9 +15,6 @@
   networking.firewall.allowedUDPPorts = [ 21 51820 ];
   # networking.firewall.allowedTCPPortRanges = [ { from = 51000; to = 51999; } ];
 
-  # networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
-  networking.nameservers = [ "100.116.45.26" ];
-
   environment.systemPackages = with pkgs; [
     cowsay
     hello

@@ -24,9 +24,7 @@
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
-
-  # networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
-  networking.nameservers = [ "100.116.45.26" ];
+  networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
 
   services.logind.lidSwitch = "ignore";
 

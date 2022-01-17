@@ -74,10 +74,25 @@
         specialArgs = { inherit inputs; };
       };
 
+      nixosConfigurations.franzk = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/franzk/configuration.nix
+        ];
+        specialArgs = { inherit inputs; };
+      };
 
       deploy = {
         magicRollback = true;
         nodes = {
+          franzk = {
+            hostname = "franzk";
+            profiles.system = {
+              user = "root";
+              # sshUser = "root"; # for some reason
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
+            };
+          };
           pythia = {
             hostname = "pythia"; # taken from my ~/.ssh/config
             profiles.system = {

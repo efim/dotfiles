@@ -7,6 +7,16 @@
     base-server
   ];
 
+  services.syncthing.enable = true;
+  # nginx reverse proxy
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."syncthing.franzk.nope" = {
+    locations."/" = {
+        proxyPass = "http://127.0.0.1:8384";
+    };
+  };
+  networking.firewall.allowedTCPPorts = [ 80 8080 ];
+
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
 

@@ -6,7 +6,7 @@
 {
 
   imports = with inputs.self.myModules; with inputs.self.myProfiles; [
-    inputs.self.nixosRoles.hm-common
+    inputs.self.myRoles.hm-common
     xmonad # see `chunky-notebook/home.nix` for some reason `roles` recurses infinitely
     my-autorandr
     my-emacs
@@ -14,6 +14,7 @@
     personal
     mail
     fonts
+    with-deploy
   ];
 
   # home.file.".bashrc".source = ../../.bashrc;

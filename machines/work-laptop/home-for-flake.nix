@@ -12,7 +12,7 @@
     my-emacs
     my-screen-locker
     personal
-    mail
+    mail-client
     fonts
     with-deploy
   ];

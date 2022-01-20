@@ -1,0 +1,18 @@
+#+TITLE: mail
+with notmuch
+
+on server - mbsync to get messages from mailboxes
+
+muchsync on client and server to sync messages and notmuch tags
+
+on server:
+notmuch new - triggers mbsync and afew
+but no systemd jobs
+
+on client:
+muchsync job
+
+executes local notmuch new - to sync tags, trigger afew
+executes remote notmuch new - so server syncs with mailboxes and processes tags
+
+existing problem - ssh has passphrase, for now bad hack is to use sdd-add

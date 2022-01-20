@@ -7,11 +7,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1638665590,
-        "narHash": "sha256-nhtfL3z4TizWHemyZvgLvq11FhYX5Ya4ke+t6Np5PKQ=",
+        "lastModified": 1642113498,
+        "narHash": "sha256-4tNIt2EGDppYQI06gsid0QKW5dtBEOAiNKfMYC8wxv8=",
         "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "715e92a13018bc1745fb680b5860af0c5641026a",
+        "rev": "0ac333cdc03407538b5b19d60a8e7c64588490fb",
         "type": "github"
       },
       "original": {
@@ -22,17 +22,17 @@
     },
     "emacs-community-overlay": {
       "locked": {
-        "lastModified": 1641901534,
-        "narHash": "sha256-Nvm6Zj80fVtzmGsUFYlz9XGFyLnyAe9VoduPmDBu+js=",
+        "lastModified": 1642587497,
+        "narHash": "sha256-Get8o0+6dTn8DIdV3Gs1TCEfFlLl6UHi9zPZuywIO5I=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "57378ea2f62e9f450f420dc9d01cc06e0d3dd15e",
+        "rev": "87ec04a69354a3ea8061de205e87078a10d1fb2a",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "57378ea2f62e9f450f420dc9d01cc06e0d3dd15e",
+        "rev": "87ec04a69354a3ea8061de205e87078a10d1fb2a",
         "type": "github"
       }
     },
@@ -115,8 +115,8 @@
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "rev": "5aaed40d22f0d9376330b6fa413223435ad6fee5",
         "type": "github"
       }
     },

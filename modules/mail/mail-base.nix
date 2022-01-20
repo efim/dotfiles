@@ -1,10 +1,14 @@
 # copied from https://github.com/junyi-hou/dotfiles/blob/main/modules/mail.nix
 { config, lib, pkgs, ... }:
 
-{
+let
+  notmuchConfig = "${config.xdg.configHome}/notmuch/notmuchrc";
+in {
+
   programs.notmuch = {
     enable = true;
-    maildir.synchronizeFlags = true;
+    maildir.synchronizeFlags = false; # to optimize muchsync
+    # since flags are stored by modigying file name. Stars and Read will not get propagated to gmail
     new = {
       tags = [ "new" ]; # to be used together with afew
     };
@@ -17,12 +21,14 @@
     search.excludeTags = [ "trash" "spam" ];
   };
 
-  # home.activation.fixNotmuchConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #   $DRY_RUN_CMD ln $VERBOSE_ARG -sf ~/.config/notmuch/notmuchrc ~/.notmuch-config
-  # '';
+  # this might save me from needing to specify path to config
+  home.activation.fixNotmuchConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD ln $VERBOSE_ARG -sf ~/.config/notmuch/notmuchrc ~/.notmuch-config
+  '';
+
   programs.afew.enable = true;
-  programs.password-store.enable = true;
-  programs.password-store.settings.PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
+  # programs.password-store.enable = true;
+  # programs.password-store.settings.PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
 
   programs.afew.extraConfig = with builtins;
     let
@@ -64,39 +70,6 @@
 
   programs.msmtp.enable = true;
 
-  programs.mbsync = {
-    enable = true;
-  };
-
-  services = {
-    mbsync = {
-      enable = true;
-      # sync every 5 minutes, but alerts can be less frequent
-      frequency = "*:0/5";
-    };
-  };
-
-  # A service to update the notmuch database for new messages.
-  systemd.user.services."notmuch-update-database" = {
-    Unit.Description = "Update the notmuch database for new messages";
-    Service.Type = "oneshot";
-    Service.ExecStart = "${config.home.profileDirectory}/bin/notmuch --config ${config.xdg.configHome}/notmuch/notmuchrc new";
-    # for some reason without explisit --config flag error "Error: cannot load config file." showed up
-    Service.WorkingDirectory = "${config.accounts.email.maildirBasePath}/.notmuch";
-  };
-
-  # Copied from here: https://github.com/iamthememory/dotfiles/blob/5d463625e08477db8919b12b1dc15e2426121b2c/home/mail/default.nix
-  # Run the service to update the notmuch database every two minutes.
-  systemd.user.timers."notmuch-update-database" = {
-    Unit.Description =
-    config.systemd.user.services."notmuch-update-database".Unit.Description;
-    Timer.OnCalendar = "*:0/2";
-    Timer.RandomizedDelaySec = 30;
-    Install.WantedBy = [
-      "timers.target"
-    ];
-  };
-
   home.activation.initMailDir =
     let
       mailDir = "${config.home.homeDirectory}/.mail";
@@ -107,6 +80,5 @@
         );
     in
       lib.hm.dag.entryAfter [ "writeBoundary" ] mkAccountDir;
-
 
 }

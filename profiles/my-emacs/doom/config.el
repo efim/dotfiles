@@ -264,9 +264,8 @@
 
 (defun efim-config/manual-notmuch-email-update ()
   (interactive)
-  "Trigger manual execution of mbsync & notmuch."
-  (start-process "manual mbsync all" "*Messages*" "mbsync" "-all" "--verbose")
-  (start-process "manual notmuch update" "*Messages*" "notmuch" "--config" "/home/efim/.config/notmuch/notmuchrc" "new"))
+  "Trigger manual execution of muchsync."
+  (start-process "manual muchsync" "*Messages*" "systemctl" "--user" "start" "muchsync-server.service"))
 
 (after! embark (eval-when-compile
                  (defmacro my/embark-ace-action (fn)

@@ -2,9 +2,9 @@
   description = "One mans configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
-    emacs-community-overlay.url = "github:nix-community/emacs-overlay/57378ea2f62e9f450f420dc9d01cc06e0d3dd15e";
+    emacs-community-overlay.url = "github:nix-community/emacs-overlay/87ec04a69354a3ea8061de205e87078a10d1fb2a";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -52,6 +52,17 @@
         username = "efim";
       };
 
+      homeConfigurations.frankz-efim = home-manager.lib.homeManagerConfiguration {
+        configuration = {
+          imports = [ ./machines/franzk/home.nix ];
+        };
+        extraSpecialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        homeDirectory = "/home/efim";
+        username = "efim";
+      };
+
+
       nixosConfigurations.pythia = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
@@ -87,9 +98,15 @@
         nodes = {
           franzk = {
             hostname = "franzk";
-            profiles.system = {
-              user = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
+            profiles = {
+              system = {
+                user = "root";
+                path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
+              };
+              efim = {
+                path = deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations.frankz-efim;
+                user = "efim";
+              };
             };
           };
           pythia = {

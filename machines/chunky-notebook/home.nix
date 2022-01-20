@@ -17,7 +17,7 @@
       my-emacs
       my-screen-locker
       personal
-      # mail # for some reason notmuch is broken on unstable, and I don't use it yet
+      mail-client
       fonts
       with-deploy
     ];

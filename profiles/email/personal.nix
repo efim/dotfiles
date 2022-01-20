@@ -65,7 +65,10 @@
           };
           notmuch.enable = true;
 
-          passwordCommand = "${pkgs.pass}/bin/pass  email/efim.wool@gmail.com";
+          # I guess this could be one way to use sops-nix with home-manager
+          # if passwords can be issued with commands
+          passwordCommand = "${pkgs.coreutils}/bin/cat /run/secrets/email/efim.wool@gmail.com";
+          # passwordCommand = "${pkgs.pass}/bin/pass  email/efim.wool@gmail.com";
 
           primary = true;
         };

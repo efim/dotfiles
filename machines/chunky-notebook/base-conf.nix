@@ -16,6 +16,8 @@
           # of this flake.
           system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
         })
+      inputs.self.myProfiles.sops
+      inputs.self.myModules.mail-secrets-os
     ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_15; # not sure why would I really want to pin that?

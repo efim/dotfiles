@@ -6,12 +6,8 @@
     ./vpsadminos.nix
     ./nextcloud.nix
     base-server
+    inputs.self.myModules.mail-secrets-os
   ];
-
-  sops.secrets."email/efim.wool@gmail.com" = {
-    owner = "efim"; # for home manager?
-    sopsFile = ./secrets.yaml;
-  };
 
   services.syncthing.enable = true;
   # nginx reverse proxy
@@ -25,10 +21,6 @@
 
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
-
-  # environment.systemPackages = with pkgs; [
-  #   muchsync
-  # ];
 
   systemd.extraConfig = ''
     DefaultTimeoutStartSec=900s

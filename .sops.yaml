@@ -4,6 +4,7 @@
 # for a more complex example.
 keys:
   - &efim age1ets7cgysvpl7a9grya62ddnpy5v3qk2kmxeysgnzvanx7ugzse5qaq4x9z
+  - &chunky age17lxh8j0f8l73je5pxpqh7qg93vsdeazarm9wzdewutvjgup2racs0ywxs2
   - &pythia age1utvxcqrefpp2d4wgsd26m786cpq94hy4pjumddlecudqqg0qkvsscj4s0r
   - &niobe age15htmcxm4ya7ru9xkxy5tlwytm4543vzd8lpys3rza7vpcsf73stqpfqu56
   - &morpheus age1wzmdqwjjq8u5far3dcjdkwlama39nlfwm8y0mnu7px0lun36lvuqe35cew
@@ -13,6 +14,7 @@ creation_rules:
     key_groups:
     - age:
       - *efim
+      - *chunky
       - *pythia
       - *niobe
       - *morpheus

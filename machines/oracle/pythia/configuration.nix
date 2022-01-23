@@ -25,7 +25,7 @@
   # grafana configuration
   services.grafana = {
     enable = true;
-    domain = "pythia.efim.github.beta.tailscale.net";
+    domain = "grafana.nope";
     port = 2342;
     addr = "127.0.0.1";
   };

@@ -17,6 +17,7 @@
           system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
         })
       inputs.self.myProfiles.sops
+      inputs.self.myProfiles.dns-client
       inputs.self.myModules.mail-secrets-os
     ];
 
@@ -43,11 +44,7 @@
     trustedUsers = [ "root" "efim" ];
   };
 
-  # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -57,16 +54,6 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;
 
-  # https://unix.stackexchange.com/questions/633799/how-to-use-a-second-nameserver-if-the-first-cant-resolve-a-domain
-  # The Linux DNS resolver isn't good at handling the concept of multiple separate
-  # DNS namespaces. If you send a query to a particular DNS server, and it returns
-  # an authoritative NXDOMAIN, it's basically saying "I am telling you for an
-  # absolute fact that this name does not exist", and the resolver "knows" that it
-  # doesn't need to search any further. I am not aware of any option you can set in
-  # resolv.conf or anywhere else that would change this behavior.
-  networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
-
-  networking.nameservers = [ "100.116.45.26" ];
   networking.networkmanager.enable = true;
 
   services.yggdrasil.enable = true;

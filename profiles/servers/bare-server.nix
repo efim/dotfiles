@@ -41,11 +41,4 @@
 
   services.tailscale.enable = true;
 
-  # first one is personal dns in tailscale vpn
-  # second one is cloudflare as backup when no vpn is yet present
-  # for some reason then first returns "not found" second is used
-  # even though it doesn't seem to be how the protocol supposed to work :shrug:
-  networking.nameservers = [ "100.116.45.26" "1.1.1.1" ];
-
-
 }

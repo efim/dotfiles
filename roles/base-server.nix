@@ -5,5 +5,6 @@
     bare-server
     server-prometheus
     sops
+    inputs.self.myModules.my-dns # whether dns client (default) or dns-server (explicit)
   ];
 }

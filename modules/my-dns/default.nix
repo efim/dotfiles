@@ -7,9 +7,21 @@
       type = lib.types.bool;
       default = false;
     };
+    my-dns.type =
+      let
+        my-dns-type = lib.types.enum [
+          "server"
+          "client-dnsmasq"
+          "client-no-networkmanager"
+        ];
+      in lib.mkOption {
+        description = "Whether machine is server, or a client. And what type of client config.";
+        type = my-dns-type;
+        default = "client-no-networkmanager";
+    };
   };
   config = lib.mkMerge [
-    (lib.mkIf config.my-dns.isServer {
+    (lib.mkIf (config.my-dns.type == "server") {
       #my dns server (primary and only)
       services.bind = {
         enable = true;
@@ -28,13 +40,20 @@
       };
       networking.firewall.allowedUDPPorts = [ 53 ];
     })
-    (lib.mkIf (!config.my-dns.isServer) {
-      # my dns clients
+    (lib.mkIf (config.my-dns.type == "client-dnsmasq") {
+      # my dns clients, primarily for chunky
+      # since he had problems with dhcp picking public dns as primary
       networking.networkmanager.enable = true;
       networking.networkmanager.dns = "dnsmasq";
       services.dnsmasq.enable = true;
       services.dnsmasq.servers = [ "100.116.45.26" ];
       services.dnsmasq.resolveLocalQueries = false;
+    })
+    (lib.mkIf (config.my-dns.type == "client-no-networkmanager") {
+      # my dns clients
+      # same as before for servers
+      # for some reason franzk fails to install NetworkManager
+      networking.nameservers = [ "100.116.45.26" "1.1.1.1" ];
     })
   ];
 }

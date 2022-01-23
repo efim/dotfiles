@@ -7,7 +7,7 @@
     base-server
   ];
 
-  my-dns.isServer = true;
+  my-dns.type = "server";
 
   sops.secrets.example_key = { };
   sops.secrets.my_new_test_key = { };

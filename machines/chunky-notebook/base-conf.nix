@@ -17,7 +17,7 @@
           system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
         })
       inputs.self.myProfiles.sops
-      inputs.self.myProfiles.dns-client
+      inputs.self.myModules.my-dns
       inputs.self.myModules.mail-secrets-os
     ];
 
@@ -55,6 +55,8 @@
   networking.interfaces.wlp2s0.useDHCP = true;
 
   networking.networkmanager.enable = true;
+
+  my-dns.type = "client-dnsmasq";
 
   services.yggdrasil.enable = true;
   services.yggdrasil.persistentKeys = true;

@@ -25,20 +25,12 @@
   networking.interfaces.enp2s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
   networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
+  networking.networkmanager.enable = true;
 
   services.logind.lidSwitch = "ignore";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-  
   environment.systemPackages = with pkgs; [
     vim
-    firefox
-
-    tdesktop
   ];
 
   programs = {

@@ -32,7 +32,12 @@ with lib;
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
       metals
+
+      nixfmt
+      pandoc
+
       ripgrep
+      fd
       rnix-lsp # lsp server for nix files
 
       nodePackages.mermaid-cli

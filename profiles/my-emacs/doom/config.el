@@ -251,16 +251,17 @@
 (after! skempo
    (load-file "~/.doom.d/xFA25E-skempo-templates.el"))
 
-(use-package! notmuch :init)
-(progn
-  (progn
-    (evil-set-initial-state 'notmuch-hello-mode 'emacs)
-    (evil-set-initial-state 'notmuch-search-mode 'normal))
-  (add-hook 'notmuch-hello-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'notmuch-search-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'notmuch-message-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'notmuch-show-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'notmuch-tree-mode-hook #'doom-mark-buffer-as-real-h))
+(use-package! notmuch
+  :config
+  (evil-set-initial-state 'notmuch-search-mode 'normal)
+  (evil-set-initial-state 'notmuch-hello-mode 'emacs)
+  (defun my-maximized-notmuch ()
+    ""
+    (progn
+      (notmuch)
+      (doom/window-maximize-buffer)))
+  (setq +notmuch-home-function #'my-maximized-notmuch)
+  (define-key notmuch-hello-mode-map (kbd "q") #'+notmuch/quit))
 
 (defun efim-config/manual-notmuch-email-update ()
   (interactive)
@@ -280,8 +281,6 @@
   (define-key embark-file-map     (kbd "o") (my/embark-ace-action find-file))
   (define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
   (define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump)))
-
-;; (require 'ol-notmuch)
 
 (require `notifications)
 

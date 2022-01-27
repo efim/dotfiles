@@ -71,11 +71,6 @@
 (package! skempo
     :recipe (:host github :repo "xFA25E/skempo"))
 
-(package! notmuch
-  :recipe ( :host nil :type git
-            :repo "git://git.notmuchmail.org/git/notmuch"
-            :branch "release"))
-
 ;; used for pretty and interactionable command dispatch menues (in roam copied config)
 ;; depends on hydra.el, dash.el and s.el
 (package! pretty-hydra)

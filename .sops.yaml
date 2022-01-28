@@ -9,6 +9,7 @@ keys:
   - &niobe age15htmcxm4ya7ru9xkxy5tlwytm4543vzd8lpys3rza7vpcsf73stqpfqu56
   - &morpheus age1wzmdqwjjq8u5far3dcjdkwlama39nlfwm8y0mnu7px0lun36lvuqe35cew
   - &franzk age19vkjfrlv8mnxql6g099r7arx0ncl8mc69upjnhqdaw2ahwkgc3ysrwm0yl
+  - &ancient-one age1n5y8rdlterw3hsvn6naa2q8c90hwk5s3e6djt5pzmt6n7xvv8dls70vclc
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
@@ -19,6 +20,7 @@ creation_rules:
       - *niobe
       - *morpheus
       - *franzk
+      - *ancient-one
   - path_regex: machines/franzk/secrets.yaml$
     key_groups:
     - age:

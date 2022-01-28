@@ -101,6 +101,7 @@
             profiles = {
               system = {
                 user = "root";
+                sshUser = "root";
                 path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
               };
               efim = {
@@ -113,6 +114,7 @@
             hostname = "pythia"; # taken from my ~/.ssh/config
             profiles.system = {
               user = "root";
+              sshUser = "root";
               path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.pythia;
             };
           };
@@ -120,6 +122,7 @@
             hostname = "niobe";
             profiles.system = {
               user = "root";
+              sshUser = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.niobe;
             };
           };
@@ -127,6 +130,7 @@
             hostname = "morpheus";
             profiles.system = {
               user = "root";
+              sshUser = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
             };
           };
@@ -134,6 +138,7 @@
             hostname = "ancient-one";
             profiles.system = {
               user = "root";
+              sshUser = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ancient-one;
             };
           };

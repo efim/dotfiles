@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
+  imports = with inputs.self.myProfiles; [
+    sops
+  ];
 
   boot.cleanTmpDir = true;
-  # nope this is can be accessed from config, and actually not used here, cool
-  # networking.hostName = "morpheus";
+
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru"
@@ -16,27 +18,20 @@
 
   # is this needed for rs-deploy?
   # https://github.com/serokell/deploy-rs/issues/25
-  nix.trustedUsers = [ "@wheel" ];
-
-  # from https://github.com/serokell/deploy-rs/tree/master/examples/system
-  # due https://github.com/serokell/deploy-rs/issues/25
-  security.sudo.extraRules = [{
-    groups = [ "wheel" ];
-    commands = [{
-      command = "ALL";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
-
+  nix.trustedUsers = [ "@wheel" "root" ];
 
   networking.firewall.enable = true;
+
+  users.mutableUsers = false;
+  sops.secrets.just_pass.neededForUsers = true;
 
   users.users.efim = {
     isNormalUser = true;
     home = "/home/efim";
-    description = "Efim N.";
+    description = "Efim N";
     extraGroups = [ "wheel" "networkmanager" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru" ];
+    passwordFile = config.sops.secrets.just_pass.path;
   };
 
   services.tailscale.enable = true;

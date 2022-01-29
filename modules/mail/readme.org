@@ -16,3 +16,16 @@ executes local notmuch new - to sync tags, trigger afew
 executes remote notmuch new - so server syncs with mailboxes and processes tags
 
 existing problem - ssh has passphrase, for now bad hack is to use sdd-add
+* possible auth
+** have sops nix secret put into fs path
+(not yet integrated into home-manager, defined on NixOS level, and on Ubuntu+hm secret is created manually)
+good:
+- server is on NixOS and can make mbsync requests without manual intervention
+- when multimachine with muchsync, clients work via ssh and would require "ssh-add" or usage of ssh-keys withoug passphrases, but don't require sops
+bad:
+- for single machine setup, machine would need to trigger "mbsync" and would need to be able to access sops thing from home-manager
+** have "pass" application, with manually added / synced pgp file that's a password store
+and use "passwordCommand" that reads that password
+good:
+- for single machine setup, the "pass" command would prompt graphical request for password and it can be cached for the duration of session
+  so mbsync would work fine

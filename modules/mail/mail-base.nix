@@ -22,13 +22,12 @@ in {
   };
 
   # this might save me from needing to specify path to config
+  # seems that muchsync is not good with xdg compliant path. especially in "init"
   home.activation.fixNotmuchConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     $DRY_RUN_CMD ln $VERBOSE_ARG -sf ~/.config/notmuch/notmuchrc ~/.notmuch-config
   '';
 
   programs.afew.enable = true;
-  # programs.password-store.enable = true;
-  # programs.password-store.settings.PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
 
   programs.afew.extraConfig = with builtins;
     let

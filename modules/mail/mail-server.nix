@@ -11,12 +11,4 @@
     enable = true;
   };
 
-  # services = {
-  #   mbsync = {
-  #     enable = true;
-  #     # sync every 5 minutes, but alerts can be less frequent
-  #     frequency = "*:0/5";
-  #   };
-  # };
-
 }

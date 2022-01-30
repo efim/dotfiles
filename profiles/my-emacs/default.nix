@@ -32,6 +32,7 @@ with lib;
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
       metals
+      nailgun
 
       nixfmt
       pandoc

@@ -331,5 +331,22 @@ any directory proferred by `consult-dir'."
 (load-file "~/.doom.d/app-sys-notify.el")
 (advice-add #'appt-display-message :after #'my/appt-notifications-notify)
 
+
+
+(use-package ensime-mode
+  :ensure nil
+  :load-path "~/Downloads/ensime-tng-3.0.0/lisp/"
+  :commands ensime-mode
+  :bind
+  (:map ensime-mode-map
+        ("M-." . ensime-jump-to-definition)
+        ("C-c C-i t" . ensime-type-at-point)
+        ("C-c C-i s" . ensime-symbol-at-point)
+        ("C-c C-r i" . ensime-import-symbol-at-point)))
+
+(set-company-backend! 'scala-mode
+  'ensime-company)
+(add-hook 'scala-mode-hook #'ensime-mode)
+
 (server-start)
 (epa-file-enable)

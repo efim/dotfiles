@@ -36,6 +36,13 @@ with lib;
       nixfmt
       pandoc
 
+      haskellPackages.haskell-language-server
+      haskellPackages.hoogle
+      # haskellPackages.Cabal_3_6_2_0
+      cabal-install
+      stack
+      ghc
+
       ripgrep
       fd
       rnix-lsp # lsp server for nix files

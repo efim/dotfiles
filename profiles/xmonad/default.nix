@@ -10,6 +10,13 @@
         config = ./xmonad.hs;
       };
     };
+    # for lsp to work I guess I'd need to figure out cabal installation
+    # https://www.srid.ca/haskell-new-project
+    # and
+    # https://www.srid.ca/xmonad-conf-ide - so like get cabal project in this directory
+    # and add config.hs to Main.hs or something
+    # and this is the config:
+    # https://github.com/srid/nixos-config/tree/master/features/desktopish/xmonad/xmonad-srid
 
     xdg.configFile."xmobar/xmobarrc".source = ./xmobarrc;
     xdg.configFile."xmobar/xmobar-tray-autopadding.sh" = {

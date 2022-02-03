@@ -26,3 +26,8 @@ creation_rules:
     - age:
       - *efim
       - *franzk
+  - path_regex: machines/ancient-one/secrets.yaml$
+    key_groups:
+    - age:
+      - *efim
+      - *ancient-one

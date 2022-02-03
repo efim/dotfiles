@@ -8,6 +8,7 @@
   imports = with inputs.self.myRoles; [
     ./hardware-configuration.nix
     base-server
+    ./transmission.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -27,11 +28,10 @@
   networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
   networking.networkmanager.enable = true;
 
-  services.logind.lidSwitch = "ignore";
+  # TODO add syncthing for final files
+  #       could be syncthing.ancient-one.nope
 
-  environment.systemPackages = with pkgs; [
-    vim
-  ];
+  services.logind.lidSwitch = "ignore";
 
   programs = {
     ssh.startAgent = true;

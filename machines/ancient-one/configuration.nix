@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     base-server
     ./transmission.nix
+    ./syncthing.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -27,9 +28,6 @@
   networking.interfaces.wlp3s0.useDHCP = true;
   networking.resolvconf.extraOptions = [ "rotate" ]; # this is a hack
   networking.networkmanager.enable = true;
-
-  # TODO add syncthing for final files
-  #       could be syncthing.ancient-one.nope
 
   services.logind.lidSwitch = "ignore";
 

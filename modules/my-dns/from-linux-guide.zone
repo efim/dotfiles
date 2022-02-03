@@ -1,7 +1,7 @@
 ; https://www.linux.com/topic/networking/how-set-private-dns-servers-bind-ubuntu-1604-1/
 $TTL    60
 @       IN      SOA     ns1.nope. admin.nope. (
-                  53       ; Serial
+                  54       ; Serial
              604800     ; Refresh
               86400     ; Retry
             2419200     ; Expire
@@ -25,3 +25,4 @@ syncthing.franzk.nope. IN CNAME franzk.nope.
 nextcloud.nope. IN CNAME franzk.nope.
 grafana.nope. IN CNAME pythia.nope.
 transmission.ancient-one.nope. IN CNAME ancient-one.nope.
+syncthing.ancient-one.nope. IN CNAME ancient-one.nope.

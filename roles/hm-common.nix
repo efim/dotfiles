@@ -64,6 +64,7 @@
 
     htop
     killall
+    tldr
     keepassxc
     tdesktop
     discord

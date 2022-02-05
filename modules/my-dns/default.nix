@@ -33,10 +33,20 @@
               "127.0.0.1"
             ];
           };
+          "badlist" = {
+            file = ./master-badlist;
+            master = true;
+          };
         };
         cacheNetworks = [ "100.0.0.0/8" "127.0.0.1" ];
         forwarders = [ "1.1.1.1" "1.0.0.1" ];
-        extraOptions = "dnssec-validation no;";
+        extraOptions = ''
+dnssec-validation no;
+response-policy { zone "badlist"; };
+'';
+        # extraConfig = ''
+        #   response-policy { zone "badlist"; };
+        # '';
       };
       networking.firewall.allowedUDPPorts = [ 53 ];
     })

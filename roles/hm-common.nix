@@ -55,7 +55,7 @@
   # - In `/home/efim/dotfiles/nixpkgs/common.nix': /home/efim/dotfiles/.bashrc
   # (use '--show-trace' to show detailed location information)
   # home.file.".bashrc".source = ../.bashrc;
-
+  programs.bash.initExtra = "pfetch";
   home.packages = with pkgs; [
     cachix
 
@@ -63,6 +63,7 @@
     sbcl
 
     htop
+    pfetch
     killall
     tldr
     keepassxc

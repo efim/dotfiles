@@ -17,7 +17,9 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    pfetch
   ];
+  programs.bash.interactiveShellInit = "pfetch";
 
   # is this needed for rs-deploy?
   # https://github.com/serokell/deploy-rs/issues/25

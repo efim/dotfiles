@@ -63,7 +63,9 @@ myFocusedBorderColor = "#ff0000"
 additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
-  [ ("M-S-<Return>", spawn myTerminal)
+  [
+    ("M-S-<Return>", spawn "emacsclient -create-frame -eval \"(+vterm/here t)\"")
+  -- ("M-S-<Return>", spawn myTerminal)
     , ("M-<Return>", spawn "emacsclient -create-frame -eval \"(+eshell/here)\"")
     , ("C-M-f", spawn "firefox")
     , ("C-M-t", spawn "telegram-desktop")

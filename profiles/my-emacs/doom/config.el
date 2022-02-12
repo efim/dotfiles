@@ -189,9 +189,25 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+(use-package! vterm
+  :init
+  (defun vterm-quit-from-emacs-client ()
+    (interactive)
+    (vterm-send-C-d)
+    (evil-quit))
+  :bind
+  (:map vterm-mode-map
+   ("C-c C-q" . vterm-quit-from-emacs-client)))
 
+(use-package! eshell
+  :init
+  (defun eshell-quit-from-emacs-client ()
+    (interactive)
+    (evil-quit))
+  :bind
+  (:map eshell-mode-map
+   ("C-c C-q" . eshell-quit-from-emacs-client)))
 (after! eshell
-
   ;; copied from https://github.com/hlissner/doom-emacs/blob/3f2c4b80e9adf1c7809e3fe3c299030cbcc7de33/modules/term/eshell/config.el
         (defun +eshell--current-git-branch ()
         ;; TODO Refactor me
@@ -261,7 +277,8 @@
       (notmuch)
       (doom/window-maximize-buffer)))
   (setq +notmuch-home-function #'my-maximized-notmuch)
-  (define-key notmuch-hello-mode-map (kbd "q") #'+notmuch/quit))
+  (define-key notmuch-hello-mode-map (kbd "q") #'+notmuch/quit)
+  (setq +notmuch-sync-backend "systemctl --user start muchsync-server.service"))
 
 (defun efim-config/manual-notmuch-email-update ()
   (interactive)
@@ -300,7 +317,8 @@
 
 (use-package! consult-dir
   :bind (("C-x C-d" . consult-dir)
-         :map minibuffer-local-completion-map
+         :map vertico-map
+         ;; :map minibuffer-local-completion-map
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 

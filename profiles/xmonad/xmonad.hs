@@ -95,7 +95,7 @@ additionalKeys =
     , ("M-S-o", spawn "xbrightness -5000")
     -- unsorted moving most of others
     -- launch rofi
-    , ("M-p", spawn "rofi -show run -theme Monokai") -- p[rogram]
+    , ("M-p", spawn "rofi -show drun -theme Monokai") -- p[rogram]
     , ("M-f", spawn "rofi -show window -theme Monokai") -- [f]ind window
     , ("C-M-l p", spawn "rofi -show run -theme Monokai")
     , ("C-M-l f", spawn "rofi -show window -theme Monokai") -- [f]ind window
@@ -136,7 +136,7 @@ additionalKeys =
     -- Restart xmonad
     , ("M-q", spawn "xmonad --recompile; xmonad --restart")
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    , ("M-S-/", spawn ("echo \"" ++ help ++ "\" | xmessage -file -")) -- Meta + ?
   ]
 
 ------------------------------------------------------------------------

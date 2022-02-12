@@ -4,6 +4,7 @@
 { inputs, config, pkgs, ... }:
 
 {
+  targets.genericLinux.enable = true;
 
   imports = with inputs.self.myModules; with inputs.self.myProfiles; [
     inputs.self.myRoles.hm-common
@@ -42,9 +43,11 @@
     bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
     bash.profileExtra = ''
     source /home/efim/.nix-profile/etc/profile.d/nix.sh
-    syncthing -no-browser -no-restart -logflags=0 & # copied from `systemctl --user cat syncthing`
-    ''; # TODO - figure out why service fails!
+    export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"
+    '';
   };
+  # adding XDG_DATA_DIRS to drun / app files
+  # advice from https://github.com/nix-community/home-manager/issues/1439#issuecomment-1022576250
 
   # INFO on languages:
   # https://manpages.ubuntu.com/manpages/bionic/man5/keyboard.5.html
@@ -80,6 +83,6 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "20.09";
+  home.stateVersion = "21.11";
 
 }

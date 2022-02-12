@@ -50,6 +50,7 @@
         system = "x86_64-linux";
         homeDirectory = "/home/efim";
         username = "efim";
+        stateVersion = "21.11";
       };
 
       homeConfigurations.frankz-efim = home-manager.lib.homeManagerConfiguration {

@@ -9,6 +9,9 @@
 
   my-dns.type = "server";
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
+  boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = "1";
+
   sops.secrets.example_key = { };
   sops.secrets.my_new_test_key = { };
 

@@ -94,8 +94,14 @@ additionalKeys =
     , ("M-S-i", spawn "xbrightness +5000")
     , ("M-S-o", spawn "xbrightness -5000")
     -- unsorted moving most of others
-    -- launch dmenu
-    , ("M-p", spawn "dmenu_run")
+    -- launch rofi
+    , ("M-p", spawn "rofi -show run -theme Monokai") -- p[rogram]
+    , ("M-f", spawn "rofi -show window -theme Monokai") -- [f]ind window
+    , ("C-M-l p", spawn "rofi -show run -theme Monokai")
+    , ("C-M-l f", spawn "rofi -show window -theme Monokai") -- [f]ind window
+    , ("C-M-l e", spawn "rofi -show emoji -theme Monokai")
+    , ("C-M-l s", spawn "rofi-systemd -theme Monokai")
+    -- , ("M-p", spawn "dmenu_run")
     -- close focused window
     , ("M-S-c", kill)
      -- Rotate through the available layout algorithms

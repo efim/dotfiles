@@ -41,6 +41,25 @@
     git = {
       enable = true;
     };
+
+    rofi = {
+      enable = true;
+      plugins = [
+        pkgs.rofi-emoji
+      ];
+      extraConfig = {
+        modi = "run,drun,window,emoji"; # and emoji for some reason do not work, oh well
+        kb-row-up =                     "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+        kb-row-down =                   "Down,Control+j";
+        kb-accept-entry =               "Control+m,Return,KP_Enter";
+        kb-remove-to-eol =              "Control+Shift+e";
+        kb-mode-next =                  "Shift+Right,Control+Tab";
+        kb-mode-previous =              "Shift+Left,Control+Shift+Tab";
+        kb-remove-char-back =           "BackSpace";
+        font = "Iosevka 16";
+        # Monokai paper-float are official themes I kind of consider
+      };
+    };
   };
 
   services = {
@@ -66,6 +85,7 @@
     pfetch
     killall
     tldr
+    rofi-systemd # i guess this is not a modi, but a separate "application", ok
     keepassxc
     tdesktop
     discord

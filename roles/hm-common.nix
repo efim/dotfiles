@@ -73,6 +73,7 @@
 
     openconnect
     shutter
+    flameshot
     gnucash
 
     zip

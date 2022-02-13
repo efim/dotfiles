@@ -10,6 +10,7 @@
     base-server
     ./transmission.nix
     ./syncthing.nix
+    ./jellyfin.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

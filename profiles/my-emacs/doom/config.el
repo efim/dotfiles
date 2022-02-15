@@ -366,5 +366,9 @@ any directory proferred by `consult-dir'."
   'ensime-company)
 (add-hook 'scala-mode-hook #'ensime-mode)
 
+(use-package! gotham-theme :init)
+
+(use-package! org-pomodoro-third-time :init)
+
 (server-start)
 (epa-file-enable)

@@ -86,3 +86,8 @@
 (package! consult-dir)
 
 (package! org-appear)
+
+(package! gotham-theme)
+
+(package! org-pomodoro-third-time
+  :recipe (:host github :repo "telotortium/org-pomodoro-third-time"))

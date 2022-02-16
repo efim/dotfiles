@@ -6,6 +6,8 @@
 {
   targets.genericLinux.enable = true;
 
+  dconf.enable = false;
+
   imports = with inputs.self.myModules; with inputs.self.myProfiles; [
     inputs.self.myRoles.hm-common
     xmonad # see `chunky-notebook/home.nix` for some reason `roles` recurses infinitely
@@ -15,7 +17,7 @@
     personal
     mail-client
     fonts
-    with-deploy
+    # with-deploy
   ];
 
   # home.file.".bashrc".source = ../../.bashrc;
@@ -35,6 +37,17 @@
     };
   };
 
+  # I dont' know why, but under Ubuntu these protective measures broke things
+  # and i had
+  # фев 16 22:16:46 efimnefedow-LT systemd[21533]: syncthing.service: Failed to set up user namespacing: Operation not permitted
+  # фев 16 22:16:46 efimnefedow-LT systemd[21533]: syncthing.service: Failed at step USER spawning /nix/store/rgsxcg2c7m15a10jfq9wk7h4dy892viw-syncthing-1.19.0/bin/syncthing: Op
+
+  systemd.user.services.syncthing.Service = {
+            RestrictNamespaces = pkgs.lib.mkForce false;
+            PrivateUsers = pkgs.lib.mkForce false;
+            SystemCallFilter = pkgs.lib.mkForce [];
+  };
+
   programs = {
     git = {
       userName = "efim";
@@ -43,10 +56,10 @@
     bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
     bash.profileExtra = ''
     source /home/efim/.nix-profile/etc/profile.d/nix.sh
-    export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"
     '';
   };
   # adding XDG_DATA_DIRS to drun / app files
+    # export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"
   # advice from https://github.com/nix-community/home-manager/issues/1439#issuecomment-1022576250
 
   # INFO on languages:

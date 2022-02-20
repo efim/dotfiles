@@ -17,7 +17,7 @@
     personal
     mail-client
     fonts
-    # with-deploy
+    with-deploy
   ];
 
   # home.file.".bashrc".source = ../../.bashrc;

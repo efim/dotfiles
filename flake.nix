@@ -2,9 +2,9 @@
   description = "One mans configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/5aaed40d22f0d9376330b6fa413223435ad6fee5";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
-    emacs-community-overlay.url = "github:nix-community/emacs-overlay/87ec04a69354a3ea8061de205e87078a10d1fb2a";
+    emacs-community-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = "github:serokell/deploy-rs";

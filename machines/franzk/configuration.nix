@@ -19,6 +19,17 @@
   };
   networking.firewall.allowedTCPPorts = [ 80 8080 ];
 
+  services.gitea = {
+    enable = true;
+    rootUrl = "http://gitea.nope/";
+    disableRegistration = true;
+  };
+  services.nginx.virtualHosts."gitea.nope" = {
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.services.gitea.httpPort}";
+    };
+  };
+
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
 

@@ -69,21 +69,21 @@
         modules = [
           ./machines/oracle/pythia/configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs rev; };
       };
       nixosConfigurations.niobe = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./machines/oracle/niobe/configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs rev; };
       };
       nixosConfigurations.morpheus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./machines/oracle/morpheus/configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs rev; };
       };
 
       nixosConfigurations.franzk = nixpkgs.lib.nixosSystem {
@@ -91,7 +91,7 @@
         modules = [
           ./machines/franzk/configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs rev; };
       };
 
       deploy = {

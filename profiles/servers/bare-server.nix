@@ -1,8 +1,13 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, rev, config, lib, pkgs, ... }:
 
 {
   imports = with inputs.self.myProfiles; [
     sops
+    ({ pkgs, ... }: {
+        # Let 'nixos-version --json' know about the Git revision
+        # of this flake.
+        system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
+      })
   ];
 
   boot.cleanTmpDir = true;

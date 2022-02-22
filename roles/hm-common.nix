@@ -24,6 +24,8 @@
     font.name = "Victor Mono SemiBold 12";
   };
   # home.sessionVariables.GTK_THEME = "Pop-dark";
+  xsession.pointerCursor.package = pkgs.quintom-cursor-theme;
+  xsession.pointerCursor.name = "Quintom_Snow";
 
   programs = {
     # Let Home Manager install and manage itself.

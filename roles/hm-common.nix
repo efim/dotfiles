@@ -112,7 +112,7 @@
     transmission-qt
     firefox
     chromium
-    inputs.nixpkgs-stable.legacyPackages.x86_64-linux.nyxt
+    ferdi # browser for web-apps
 
     # https://discourse.nixos.org/t/local-flake-based-nix-search-nix-run-and-nix-shell/13433
     (writeShellScriptBin "nix-search-local" ''

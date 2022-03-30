@@ -1,6 +1,8 @@
 ;;; norang-ca-org-mode.el -*- lexical-binding: t; -*-
 (require `org-habit)
 
+(setq org-agenda-start-day nil)
+
 ;; helper functions for agenda
 (defun bh/is-project-p ()
   "Any task with a todo keyword subtask"

@@ -50,8 +50,8 @@
 ;(unpin! t)
 
 ;; (unpin! org-roam company-org-roam)
-(package! org-roam
-  :recipe (:host github :repo "org-roam/org-roam"))
+;; (package! org-roam
+;;   :recipe (:host github :repo "org-roam/org-roam"))
 
 (package! org-habit-plus
   :recipe (:host github :repo "myshevchuk/org-habit-plus"))
@@ -91,3 +91,4 @@
 
 (package! org-pomodoro-third-time
   :recipe (:host github :repo "telotortium/org-pomodoro-third-time"))
+

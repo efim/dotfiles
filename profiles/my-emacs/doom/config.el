@@ -97,6 +97,7 @@
 ;; (add-to-list 'load-path ".")
 ;; (require `testing-roam-config-w-hydra)
 (load-file "~/.doom.d/testing-roam-config-w-hydra.el")
+(setq +org-roam-open-buffer-on-find-file nil)
 
 ;; (map! (:leader (:prefix "n"
 ;;         (:prefix-map ("r" . "roam")

@@ -15,27 +15,17 @@ Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Weather "ULLI" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-        -- network activity monitor (dynamic interface resolution)
-        , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
-                             , "--Low"      , "1000"       -- units: B/s
-                             , "--High"     , "5000"       -- units: B/s
-                             , "--low"      , "darkgreen"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
-                             ] 10
-        , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
+       , commands = [
+        Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
                              , "--low"      , "darkgreen"
                              , "--normal"   , "darkorange"
                              , "--high"     , "darkred"
                              ] 10, Run Memory ["-t","Mem: <usedratio>%"] 10
-        , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+        , Run Date "UTC: %a %b %_d %Y %H:%M:%S" "date" 10
+        , Run DateZone "MSK: %H:%M" "en_US.UTF-8" "Europe/Moscow" "moscowTime" 10
+        , Run DateZone "local: %H:%M" "en_US.UTF-8" "Asia/Tbilisi" "tbilisiTime" 10
                     -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "10"        -- units: %
@@ -58,5 +48,5 @@ Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | %dynnetwork% | <fc=#ee9a00>%date%</fc> | %kbd% | %ULLI% | %traypad% "
+       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | <fc=#277f27>%moscowTime%</fc> | <fc=#277f27>%tbilisiTime%</fc> | <fc=#ee9a00>%date%</fc>  | %kbd% | %traypad% "
        }

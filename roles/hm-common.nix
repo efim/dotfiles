@@ -87,11 +87,7 @@
     pfetch
     killall
     tldr
-    rofi-systemd # i guess this is not a modi, but a separate "application", ok
     keepassxc
-    tdesktop
-    discord
-    element-desktop
 
     openconnect
     shutter
@@ -111,8 +107,7 @@
     vlc
     transmission-qt
     firefox
-    chromium
-    ferdi # browser for web-apps
+    ferdi # browser for web-apps : telegram, element, discord
 
     # https://discourse.nixos.org/t/local-flake-based-nix-search-nix-run-and-nix-shell/13433
     (writeShellScriptBin "nix-search-local" ''

@@ -25,7 +25,7 @@ Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
                              ] 10, Run Memory ["-t","Mem: <usedratio>%"] 10
         , Run Date "UTC: %a %b %_d %Y %H:%M:%S" "date" 10
         , Run DateZone "MSK: %H:%M" "en_US.UTF-8" "Europe/Moscow" "moscowTime" 10
-        , Run DateZone "local: %H:%M" "en_US.UTF-8" "Asia/Tbilisi" "tbilisiTime" 10
+        , Run DateZone "Tbilisi: %H:%M" "en_US.UTF-8" "Asia/Tbilisi" "tbilisiTime" 10
                     -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "10"        -- units: %
@@ -48,5 +48,5 @@ Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | <fc=#277f27>%moscowTime%</fc> | <fc=#277f27>%tbilisiTime%</fc> | <fc=#ee9a00>%date%</fc>  | %kbd% | %traypad% "
+       , template = "%UnsafeStdinReader% }{ %battery% | %memory% | %multicpu% | <fc=#FF6000>%moscowTime%</fc> | <fc=#277f27>%tbilisiTime%</fc> | <fc=#ee9a00>%date%</fc>  | %kbd% | %traypad% "
        }

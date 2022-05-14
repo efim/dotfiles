@@ -20,6 +20,11 @@
     with-deploy
   ];
 
+  # for some reason this config stays "allowUnfree = false" =C
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+    "rescuetime"
+  ];
+
   # home.file.".bashrc".source = ../../.bashrc;
 
   my-screen-locker.isNixManaged = false;

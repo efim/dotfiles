@@ -161,10 +161,13 @@
   (add-to-list `org-modules `org-habit)
   (add-to-list `org-modules `org-habit-plus ))
 
+(general-define-key
+ :keymaps 'doom-leader-notes-map
+ "j k" #'org-journal-open-current-journal-file)
 
 (after! org-agenda
- (load-file "~/.doom.d/norang-ca-org-mode.el")
- (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view))
+  (load-file "~/.doom.d/norang-ca-org-mode.el")
+  (add-to-list 'org-agenda-custom-commands `,bh/org-agenda-view))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

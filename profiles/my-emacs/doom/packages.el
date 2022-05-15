@@ -68,9 +68,6 @@
 
 (package! auto-overlays)
 
-(package! skempo
-    :recipe (:host github :repo "xFA25E/skempo"))
-
 ;; used for pretty and interactionable command dispatch menues (in roam copied config)
 ;; depends on hydra.el, dash.el and s.el
 (package! pretty-hydra)

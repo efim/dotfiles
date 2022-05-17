@@ -11,7 +11,7 @@ with lib;
       emacs = {
         enable = true;
         extraPackages = epkgs: [ epkgs.vterm ];
-        package = pkgs.emacsGcc;
+        package = pkgs.emacsNativeComp;
         # TODO - add declarative cachix, it has repo & modules
         #   for some reason couldn't figure out how to import
         #   and whether I'd need my current ~/.config/nix/conf

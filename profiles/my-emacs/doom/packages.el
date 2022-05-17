@@ -89,3 +89,5 @@
 (package! org-pomodoro-third-time
   :recipe (:host github :repo "telotortium/org-pomodoro-third-time"))
 
+
+(package! evil-owl)

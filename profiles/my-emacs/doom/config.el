@@ -349,5 +349,12 @@ any directory proferred by `consult-dir'."
 
 (use-package! org-pomodoro-third-time :init)
 
+(use-package evil-owl
+  :config
+  (setq evil-owl-display-method 'posframe
+        evil-owl-extra-posframe-args '(:width 50 :height 20)
+        evil-owl-max-string-length 50)
+  (evil-owl-mode))
+
 (server-start)
 (epa-file-enable)

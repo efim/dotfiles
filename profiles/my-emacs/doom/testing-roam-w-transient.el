@@ -97,7 +97,7 @@ If no switch is set return nil."
       (ef/roam-subject-clean-key arg)))))
 
 ;; org-roam-node-find
-(cl-defun ef/roam-node-find-wrapped-with-context (input-context &optional other-window initial-input)
+(cl-defun ef/roam-node-find-wrapped-with-context (&optional other-window initial-input &key (input-context nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
@@ -108,7 +108,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
     (org-roam-node-find other-window initial-input filter-fn :templates templates)))
 
 ;; org-roam-node-insert
-(cl-defun ef/roam-node-insert-wrapped-with-context (input-context)
+(cl-defun ef/roam-node-insert-wrapped-with-context (&key (input-context nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
@@ -119,7 +119,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
     (org-roam-node-insert filter-fn :templates templates)))
 
 ;; org-roam-capture
-(cl-defun ef/roam-capture-wrapped-with-context (input-context)
+(cl-defun ef/roam-capture-wrapped-with-context (&optional goto keys &key (input-context nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
@@ -127,42 +127,51 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
          (subject-name (plist-get context :name))
          (filter-fn (plist-get context :filter-fn))
          (templates (ef/roam-templates-for-context context)))
-    (org-roam-capture :templates templates :filter-fn filter-fn)))
-
-;; now, wrapper that optionally accepts context?
-;; (ef/wrap-roam-function-with-context #'org-roam-node-find :work)
-;; (ef/wrap-roam-function-with-context #'org-roam-node-find ":work")
-;; (ef/wrap-roam-function-with-context #'org-roam-node-find :personal)
-;; (ef/wrap-roam-function-with-context #'org-roam-node-find :personal)
-;; (ef/wrap-roam-function-with-context #'org-roam-node-find ":all")
-;; TODO - put filter-fn into the plist describing context
+    (org-roam-capture goto keys :templates templates :filter-fn filter-fn)))
 
 ;; roam-capture roam-node-insert roam-node-find
-(transient-define-suffix ef/roam-contexed-node-find (&optional OTHER-WINDOW INITIAL-INPUT)
+(transient-define-suffix ef/roam-contexed-node-find ()
   "Wrapping `roam-node-find` with context"
   (interactive)
-  (ef/roam-node-find-wrapped-with-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-node-find-wrapped-with-context nil "" :input-context (ef/roam-context-from-transient-arg-value)))
 
 
-(transient-define-suffix ef/roam-contexed-node-insert (&optional OTHER-WINDOW INITIAL-INPUT)
+(transient-define-suffix ef/roam-contexed-node-insert ()
   "Wrapping `roam-node-insert` with context"
   (interactive)
-  (ef/roam-node-insert-wrapped-with-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-node-insert-wrapped-with-context :input-context (ef/roam-context-from-transient-arg-value)))
 
 
-(transient-define-suffix ef/roam-contexed-capture (&optional OTHER-WINDOW INITIAL-INPUT)
+(transient-define-suffix ef/roam-contexed-capture ()
   "Wrapping `roam-capture` with context"
   (interactive)
-  (ef/roam-capture-wrapped-with-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-capture-wrapped-with-context :input-context (ef/roam-context-from-transient-arg-value)))
+
+;; suffix command that sets default context
+(defun ef/roam-save-context-from-transient-args ()
+  "Setting global org-roam context from transient state."
+  (interactive)
+  (let* ((args (transient-args
+                'ef/roam-things-transient))
+         (key (ef/roam-subject-clean-key
+               (car args))))
+    (if (not key) (message (format "No context selected, keeping state %s" ef/roam-context))
+      (if (eq key ef/roam-context) (message (format "Same context selected, keeping state %s" ef/roam-context))
+        (if (yes-or-no-p (format "Do you want to set global roam context to %s?" key))
+            (progn
+              (set-variable 'ef/roam-context key)
+              (message (format "New saved roam context: %s" ef/roam-context)))
+          (message (format "Cancelled. Keeping state %s" ef/roam-context)))))))
 
 (setq ef/roam-actions-transient-suffixes `[
+   :description (lambda () (format "Current default context: %s" ef/roam-context))
    "Actions"
    ("?" "find" ef/roam-contexed-node-find)
    ("i" "insert" ef/roam-contexed-node-insert)
    ("c" "capture" ef/roam-contexed-capture)
+   ("C" "set context" ef/roam-save-context-from-transient-args)
    ,ef/roam-show-args-transient-suffix
    ])
-;; suffix command that sets default context
 
 ;; prefix command that groups these
 
@@ -184,10 +193,9 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
           ef/roam-contexts-row-group
           ]
          ,ef/roam-actions-transient-suffixes
-         ;; ,(seq--into-vector (append `("Contexts") ef/roam-infix-contexts-list))
          ))
 
-(ef/roam-things-transient)
+;; (ef/roam-things-transient)
 
 (provide 'testing-roam-w-transient)
 ;;; testing-roam-w-transient.el ends here

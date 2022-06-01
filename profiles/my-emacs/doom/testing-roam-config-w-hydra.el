@@ -61,6 +61,7 @@
              :title "All"
              :group "All"
              :prefix "a"
+             :filter-fn (lambda (node) t)
              :path-to-todo "~/org/gtd/gtd.org")
        :work (list
                        :templates (list :work)
@@ -68,6 +69,7 @@
                        :title "Work"
                        :group "Projects"
                        :prefix "w"
+                       :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
                        :path-to-todo "~/org/Work/gtd/dins-gtd.org")
        :personal (list
                   :templates (list :personal :general)
@@ -75,6 +77,7 @@
                   :title "Personal"
                   :group "Life"
                   :prefix "p"
+                  :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "personal"))
                   :path-to-todo "~/org/gtd/gtd.org")
        ))
 

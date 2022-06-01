@@ -1,26 +1,90 @@
 ;;; testing-roam-w-transient.el --- Description -*- lexical-binding: t; -*-
-;;
-;; Copyright (C) 2022 John Doe
-;;
-;; Author: John Doe <john@doe.com>
-;; Maintainer: John Doe <john@doe.com>
-;; Created: мая 31, 2022
-;; Modified: мая 31, 2022
-;; Version: 0.0.1
-;; Keywords: abbrev bib c calendar comm convenience data docs emulations extensions faces files frames games hardware help hypermedia i18n internal languages lisp local maint mail matching mouse multimedia news outlines processes terminals tex tools unix vc wp
-;; Homepage: https://github.com/efim/testing-roam-w-transient
-;; Package-Requires: ((emacs "24.3"))
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; Commentary:
-;;
-;;  Description
-;;
-;;; Code:
-
-;;; templates are already in memory
 (require `dash)
+(require `transient)
+(require `org-roam)
+
+;; See
+;; http://takeonrules.com/2021/08/22/ever-further-refinements-of-org-roam-usage/
+;; for details on this configuration.
+;;
+;; See https://takeonrules.com/2021/08/23/diving-into-the-implementation-of-subject-menus-for-org-roam/
+;; for a walk through of the implementation.
+;;
+;; A Property List of my `org-roam' capture templates.
+(setq ef/org-roam-capture-templates-plist
+      (list
+       :general
+       '("g" "General" plain "%?"
+	 :if-new
+         (file+head
+          "%<%Y%m%d%H%M%s>-${slug}.org"
+          "#+title: ${title}\n\n")
+	 :unnarrowed t)
+       :personal
+       '("p" "Personal" plain "%?"
+	 :if-new
+         (file+head
+          "Personal/%<%Y%m%d%H%M%s>-${slug}.org"
+          "#+title: ${title}\n#+FILETAGS: :personal: \n\n")
+	 :unnarrowed t)
+       :work
+       '("w" "Work" plain "%?"
+         :if-new
+         (file+head
+          "Work/%<%Y%m%d%H%M%s>-${slug}.org"
+          "#+title: ${title}\n#+FILETAGS: :work: \n\n")
+         :unnarrowed t)
+       ))
+
+;; A plist that contains the various org-roam subject.  Each subject
+;; has a plist of :templates, :title, :name, :path-to-todo, :prefix,
+;; and :group.
+;;
+;; The :templates defines the ;; named templates available for this subject.  See
+;; `ef/org-roam-capture-templates-plist' for list of valid templates.
+;;
+;; The :name is the string version of the subject, suitable for
+;; creating function names.
+;;
+;; The :title is the human readable "title-case" form of the subject.
+;;
+;; The :group is for `pretty-hydra-define+'
+;;
+;; The :prefix helps with menu key build for `pretty-hydra-define+'
+;;
+;; The :path-to-todo is the path to the todo file for this subject.
+(setq ef/org-roam-capture-subjects-plist
+      (list
+       ;; The :all subject is different from the other items.
+       :all (list
+             ;; Iterate through all registered capture templates and
+             ;; generate a list
+             :templates (-non-nil (seq-map-indexed (lambda (template index)
+                     (when (cl-evenp index) template))
+                   ef/org-roam-capture-templates-plist))
+             :name "all"
+             :title "All"
+             :group "All"
+             :prefix "a"
+             :filter-fn (lambda (node) t)
+             :path-to-todo "~/org/gtd/gtd.org")
+       :work (list
+                       :templates (list :work)
+                       :name "work"
+                       :title "Work"
+                       :group "Projects"
+                       :prefix "w"
+                       :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
+                       :path-to-todo "~/org/Work/gtd/dins-gtd.org")
+       :personal (list
+                  :templates (list :personal :general)
+                  :name "personal"
+                  :title "Personal"
+                  :group "Life"
+                  :prefix "p"
+                  :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "personal"))
+                  :path-to-todo "~/org/gtd/gtd.org")
+       ))
 
 (defvar ef/roam-context :all
   "For toggling the context for the capture, insert, find.")
@@ -96,6 +160,7 @@ If no switch is set return nil."
      (ef/roam-subject-by-key
       (ef/roam-subject-clean-key arg)))))
 
+;;; need separate wrappers because function differ in what arguments that accept
 ;; org-roam-node-find
 (cl-defun ef/roam-node-find-wrapped-with-context (&optional other-window initial-input &key (input-context nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
@@ -170,20 +235,9 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
    ("i" "insert" ef/roam-contexed-node-insert)
    ("c" "capture" ef/roam-contexed-capture)
    ("C" "set context" ef/roam-save-context-from-transient-args)
-   ,ef/roam-show-args-transient-suffix
    ])
 
 ;; prefix command that groups these
-
-(setq ef/roam-show-args-transient-suffix `("=" "show args" (lambda ()
-                                                             "my increase width"
-                                                             (interactive)
-                                                             ;; (print (transient-args 'ef/roam-things-transient))
-                                                             ;; (print (transient-arg-value ":personal" (transient-args 'ef/roam-things-transient)))
-                                                             ;; (print (transient-arg-value ":work" (transient-args 'ef/roam-things-transient)))
-                                                             ;; (print (transient-arg-value ":all" (transient-args 'ef/roam-things-transient)))
-                                                             (print (ef/roam-context-from-transient-arg-value))
-                                                             )))
 
 (eval `(transient-define-prefix ef/roam-things-transient ()
          "Lalala."
@@ -195,7 +249,49 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
          ,ef/roam-actions-transient-suffixes
          ))
 
+;; for testing purposes
 ;; (ef/roam-things-transient)
 
+;; i need not alias, but remap
+(require `core-keybinds)
+(map! (:leader (:prefix "n"
+                  (:prefix-map ("r" . "roam")
+                   :desc "Org Roam Capture"              "c" 'ef/roam-capture-wrapped-with-context ;; #'org-roam-capture
+                   :desc "Find file"                     "f" 'ef/roam-node-find-wrapped-with-context ;; #'org-roam-node-find
+                   :desc "Insert"                        "i" 'ef/roam-node-insert-wrapped-with-context ;; #'org-roam-node-insert
+                   :desc "Subj Menu"                     "m" 'ef/roam-things-transient ;; #'org-roam-node-insert
+                   :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
+                   :desc "Tag"                           "t" #'org-roam-tag-add
+                   :desc "Un-tag"                        "T" #'org-roam-tag-delete))))
+
+(general-define-key
+ :keymaps 'global
+ "C-c i" 'ef/roam-things-transient)
+
+;; With the latest update of org-roam, things again behavior
+;; correctly.  Now I can just load org-roam as part of my day to day
+(use-package! org-roam
+  :custom
+  (org-roam-directory (file-truename "~/org"))
+  ;; Set more spaces for tags; As much as I prefer the old format,
+  ;; this is the new path forward.
+  (org-roam-node-display-template "${title:*} ${tags:40}")
+  (org-roam-capture-templates (ef/roam-templates-for-context (ef/roam-saved-context)))
+  :init
+  ;; Help keep the `org-roam-buffer', toggled via `org-roam-buffer-toggle', sticky.
+  (add-to-list 'display-buffer-alist
+               '("\\*org-roam\\#"
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (slot . 0)
+                 (window-width . 0.33)
+                 (window-parameters . ((no-other-window . t)
+                                       (no-delete-other-windows . t)))))
+
+  (setq org-roam-completion-everywhere t)
+  (setq org-roam-v2-ack t)
+  (org-roam-db-autosync-mode))
+
 (provide 'testing-roam-w-transient)
+
 ;;; testing-roam-w-transient.el ends here

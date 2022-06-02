@@ -3,6 +3,7 @@
 (require `transient)
 (require `org-roam)
 
+;; Current implementation is with transient, not hydra as in inspirational article.
 ;; See
 ;; http://takeonrules.com/2021/08/22/ever-further-refinements-of-org-roam-usage/
 ;; for details on this configuration.
@@ -72,25 +73,10 @@
 (defvar ef/roam-context :all
   "For toggling the context for the capture, insert, find.")
 
-(defun ef/roam-saved-context ()
-  "Return context set up by 'ef/roam-context'."
-  (plist-get ef/org-roam-capture-subjects-plist ef/roam-context))
-
-;; ef/roam-context-from-transient-arg-value - to return key
-;; so that in wrapped - not context, but key
-;; and get templates by key
-;; and do (or key ef/roam-context)
-;; and query the context-plist in place
-;; and ef/saved-context
-
-(cl-defun ef/roam-templates-for-context (context
-                                              &key
-                                              (template-definitions-plist ef/org-roam-capture-templates-plist))
-  "Return a list of `org-roam' templates for the given SUBJECT.
-Use the given (or default) SUBJECTS-PLIST to fetch from the
-given (or default) TEMPLATE-DEFINITIONS-PLIST."
-  (-let [(&plist :templates) context]
-    (-map (-partial #'plist-get template-definitions-plist) templates)))
+(cl-defun ef/roam-templates-for-context (context-key)
+  "Return a list of `org-roam' templates for the subject by provided CONTEXT-KEY."
+  (-let [(&plist context-key (&plist :templates)) ef/org-roam-capture-subjects-plist]
+    (-map (-partial #'plist-get ef/org-roam-capture-templates-plist) templates)))
 
 (defun ef/roam-subjects-keys ()
   "All keys for configured subjects."
@@ -130,53 +116,53 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
 If no switch is set return nil."
   (interactive)
   (-let [(first-arg) (transient-args 'ef/roam-things-transient)]
-    (plist-get ef/org-roam-capture-subjects-plist (ef/roam-subject-clean-key first-arg))))
+    (ef/roam-subject-clean-key first-arg)))
 
 ;; org-roam-node-find
-(cl-defun ef/roam-node-find-wrapped-with-context (&optional other-window initial-input &key (input-context nil))
+(cl-defun ef/roam-node-find-wrapped-with-context (&optional other-window initial-input &key (context-key nil))
   "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
-    (let* ((context (or input-context (ef/roam-saved-context)))
-           (filter-fn (plist-get context :filter-fn))
-           (templates (ef/roam-templates-for-context context)))
+  (-let* ((context-key (or context-key ef/roam-context))
+          ((&plist context-key (&plist :filter-fn)) ef/org-roam-capture-subjects-plist)
+           (templates (ef/roam-templates-for-context context-key)))
       (org-roam-node-find other-window initial-input filter-fn :templates templates)))
 
 ;; org-roam-node-insert
-(cl-defun ef/roam-node-insert-wrapped-with-context (&key (input-context nil))
+(cl-defun ef/roam-node-insert-wrapped-with-context (&key (context-key nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
-  (let* ((context (or input-context (ef/roam-saved-context)))
-         (filter-fn (plist-get context :filter-fn))
-         (templates (ef/roam-templates-for-context context)))
+  (-let* ((context-key (or context-key ef/roam-context))
+         ((&plist context-key (&plist :filter-fn)) ef/org-roam-capture-subjects-plist)
+         (templates (ef/roam-templates-for-context context-key)))
     (org-roam-node-insert filter-fn :templates templates)))
 
 ;; org-roam-capture
-(cl-defun ef/roam-capture-wrapped-with-context (&optional goto keys &key (input-context nil))
+(cl-defun ef/roam-capture-wrapped-with-context (&optional goto keys &key (context-key nil))
 "Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
 OTHER-WINDOW and INITIAL-INPUT passed as is."
   (interactive)
-  (let* ((context (or input-context (ef/roam-saved-context)))
-         (filter-fn (plist-get context :filter-fn))
-         (templates (ef/roam-templates-for-context context)))
+  (-let* ((context-key (or context-key ef/roam-context))
+         ((&plist context-key (&plist :filter-fn)) ef/org-roam-capture-subjects-plist)
+         (templates (ef/roam-templates-for-context context-key)))
     (org-roam-capture goto keys :templates templates :filter-fn filter-fn)))
 
 ;; roam-capture roam-node-insert roam-node-find
 (transient-define-suffix ef/roam-contexed-node-find ()
   "Wrapping `roam-node-find` with context"
   (interactive)
-  (ef/roam-node-find-wrapped-with-context nil "" :input-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-node-find-wrapped-with-context nil "" :context-key (ef/roam-context-from-transient-arg-value)))
 
 (transient-define-suffix ef/roam-contexed-node-insert ()
   "Wrapping `roam-node-insert` with context"
   (interactive)
-  (ef/roam-node-insert-wrapped-with-context :input-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-node-insert-wrapped-with-context :context-key (ef/roam-context-from-transient-arg-value)))
 
 (transient-define-suffix ef/roam-contexed-capture ()
   "Wrapping `roam-capture` with context"
   (interactive)
-  (ef/roam-capture-wrapped-with-context :input-context (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-capture-wrapped-with-context :context-key (ef/roam-context-from-transient-arg-value)))
 
 ;; suffix command that sets default context
 (defun ef/roam-save-context-from-transient-args ()
@@ -242,7 +228,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
   ;; Set more spaces for tags; As much as I prefer the old format,
   ;; this is the new path forward.
   (org-roam-node-display-template "${title:*} ${tags:40}")
-  (org-roam-capture-templates (ef/roam-templates-for-context (ef/roam-saved-context)))
+  (org-roam-capture-templates (ef/roam-templates-for-context ef/roam-context))
   :init
   ;; Help keep the `org-roam-buffer', toggled via `org-roam-buffer-toggle', sticky.
   (add-to-list 'display-buffer-alist

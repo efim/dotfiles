@@ -148,6 +148,15 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
          (templates (ef/roam-templates-for-context context-key)))
     (org-roam-capture goto keys :templates templates :filter-fn filter-fn)))
 
+;; for visiting todo configured for context
+(defun ef/roam-visit-todo-wrapped-with-context (&optional context-key)
+"Call ROAM-FUNCTION with filter-fn and templates from CONTEXT.
+OTHER-WINDOW and INITIAL-INPUT passed as is."
+  (interactive)
+  (-let* ((context-key (or context-key ef/roam-context))
+         ((&plist context-key (&plist :path-to-todo)) ef/org-roam-capture-subjects-plist))
+    (find-file path-to-todo)))
+
 ;; roam-capture roam-node-insert roam-node-find
 (transient-define-suffix ef/roam-contexed-node-find ()
   "Wrapping `roam-node-find` with context"
@@ -186,6 +195,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
    ("?" "find" ef/roam-contexed-node-find)
    ("i" "insert" ef/roam-contexed-node-insert)
    ("c" "capture" ef/roam-contexed-capture)
+   ("@" "visit todo" (lambda () "doc" (interactive) (ef/roam-visit-todo-wrapped-with-context (ef/roam-context-from-transient-arg-value))))
    ("C" "set context" ef/roam-save-context-from-transient-args)
    ])
 
@@ -212,6 +222,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
                    :desc "Find file"                     "f" 'ef/roam-node-find-wrapped-with-context ;; #'org-roam-node-find
                    :desc "Insert"                        "i" 'ef/roam-node-insert-wrapped-with-context ;; #'org-roam-node-insert
                    :desc "Subj Menu"                     "m" 'ef/roam-things-transient ;; #'org-roam-node-insert
+                   :desc "Todo"                          "@" #'ef/roam-visit-todo-wrapped-with-context
                    :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
                    :desc "Tag"                           "t" #'org-roam-tag-add
                    :desc "Un-tag"                        "T" #'org-roam-tag-delete))))

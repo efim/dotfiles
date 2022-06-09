@@ -82,34 +82,8 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 
-;; ;; roam thingis
-;; (setq org-roam-v2-ack t)
-;; (setq org-roam-directory "~/org/")
-;; (use-package! org-roam
-;;   :after org
-;;   :commands
-;;   (org-roam-buffer
-;;    org-roam-setup
-;;    org-roam-capture
-;;    org-roam-node-find)
-;;   :config
-;;   (org-roam-setup))
-;; (add-to-list 'load-path ".")
-;; (require `testing-roam-config-w-hydra)
-;; (load-file "~/.doom.d/testing-roam-config-w-hydra.el")
 (load-file "~/.doom.d/testing-roam-w-transient.el")
 (setq +org-roam-open-buffer-on-find-file nil)
-
-;; (map! (:leader (:prefix "n"
-;;         (:prefix-map ("r" . "roam")
-;;          :desc "Org Roam Capture"              "c" #'org-roam-capture
-;;          :desc "Find file"                     "f" #'org-roam-node-find
-;;          :desc "Insert"                        "i" #'org-roam-node-insert
-;;          :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
-;;          :desc "Tag"                           "t" #'org-roam-tag-add
-;;          :desc "Un-tag"                        "T" #'org-roam-tag-delete
-;;          ))))
-
 
 (setq org-directory "~/org/")
 (setq org-journal-dir "~/org/Journal/")

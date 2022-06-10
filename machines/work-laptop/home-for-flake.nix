@@ -16,7 +16,6 @@
     my-screen-locker
     personal
     mu4e-mail-client
-    # mail-client
     fonts
     with-deploy
   ];

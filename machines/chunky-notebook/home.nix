@@ -17,7 +17,7 @@
       my-emacs
       my-screen-locker
       personal
-      mail-client
+      mu4e-mail-client
       fonts
       with-deploy
     ];

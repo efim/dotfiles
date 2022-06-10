@@ -56,17 +56,6 @@
         stateVersion = "21.11";
       };
 
-      homeConfigurations.frankz-efim = home-manager.lib.homeManagerConfiguration {
-        configuration = {
-          imports = [ ./machines/franzk/home.nix ];
-        };
-        extraSpecialArgs = { inherit inputs; };
-        system = "x86_64-linux";
-        homeDirectory = "/home/efim";
-        username = "efim";
-      };
-
-
       nixosConfigurations.pythia = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
@@ -107,10 +96,6 @@
                 user = "root";
                 sshUser = "root";
                 path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
-              };
-              efim = {
-                path = deploy-rs.lib.x86_64-linux.activate.home-manager self.homeConfigurations.frankz-efim;
-                user = "efim";
               };
             };
           };

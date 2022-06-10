@@ -1,21 +1,15 @@
 #+TITLE: mail
-with notmuch
+* with mu4e
+mu - mail indexing program, all state is stored in maildir.
+mu4e - interface for emacs.
 
-on server - mbsync to get messages from mailboxes
+mbsync - to read mail, external program
+msmtp - to send mail, external program
 
-muchsync on client and server to sync messages and notmuch tags
+both of these can be configured from home-manager email options
 
-on server:
-notmuch new - triggers mbsync and afew
-but no systemd jobs
+Since all mail state is stored in maildir, simple syncing via mbsync is enough, same config on all machines should work.
 
-on client:
-muchsync job
-
-executes local notmuch new - to sync tags, trigger afew
-executes remote notmuch new - so server syncs with mailboxes and processes tags
-
-existing problem - ssh has passphrase, for now bad hack is to use sdd-add
 * possible auth
 ** have sops nix secret put into fs path
 (not yet integrated into home-manager, defined on NixOS level, and on Ubuntu+hm secret is created manually)
@@ -24,8 +18,3 @@ good:
 - when multimachine with muchsync, clients work via ssh and would require "ssh-add" or usage of ssh-keys withoug passphrases, but don't require sops
 bad:
 - for single machine setup, machine would need to trigger "mbsync" and would need to be able to access sops thing from home-manager
-** have "pass" application, with manually added / synced pgp file that's a password store
-and use "passwordCommand" that reads that password
-good:
-- for single machine setup, the "pass" command would prompt graphical request for password and it can be cached for the duration of session
-  so mbsync would work fine

@@ -126,7 +126,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
   (-let* ((context-key (or context-key ef/roam-context))
           ((&plist context-key (&plist :filter-fn)) ef/org-roam-capture-subjects-plist)
            (templates (ef/roam-templates-for-context context-key)))
-      (org-roam-node-find other-window initial-input filter-fn :templates templates)))
+      (org-roam-node-find other-window initial-input filter-fn nil :templates templates)))
 
 ;; org-roam-node-insert
 (cl-defun ef/roam-node-insert-wrapped-with-context (&key (context-key nil))
@@ -171,7 +171,7 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
 (transient-define-suffix ef/roam-contexed-capture ()
   "Wrapping `roam-capture` with context"
   (interactive)
-  (ef/roam-capture-wrapped-with-context :context-key (ef/roam-context-from-transient-arg-value)))
+  (ef/roam-capture-wrapped-with-context nil nil :context-key (ef/roam-context-from-transient-arg-value)))
 
 ;; suffix command that sets default context
 (defun ef/roam-save-context-from-transient-args ()

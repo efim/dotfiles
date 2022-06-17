@@ -78,6 +78,7 @@
   )
 
 (setq-default evil-escape-key-sequence "kj") ;; from stack quection: https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
+(setq-default evil-escape-unordered-key-sequence t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -221,7 +222,7 @@
   (pushnew! eshell-visual-commands "ssh" "sbt"))
 
 (use-package! mu4e
-  :init
+  :config
   ;; these are actually the defaults
   (setq doom-modeline-mu4e nil        ; until i figure out how to exclude spam from unread
         mu4e-update-interval 300

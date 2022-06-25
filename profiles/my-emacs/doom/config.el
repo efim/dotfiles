@@ -178,6 +178,12 @@
   :bind
   (:map vterm-mode-map
    ("C-c C-q" . vterm-quit-from-emacs-client)))
+(defun my/create-vterm-without-perspective ()
+  "Start vterm buffer, first deleting perspective and swithcing to persp #1."
+  (+workspace:delete)
+  (+workspace/switch-to 0)
+  (+vterm/here t)
+  )
 
 (use-package! eshell
   :init
@@ -220,6 +226,11 @@
   )
 (after! em-term
   (pushnew! eshell-visual-commands "ssh" "sbt"))
+(defun my/create-eshell-without-perspective ()
+  "Start eshell buffer, first deleting perspective and swithcing to persp #1."
+  (+workspace:delete)
+  (+workspace/switch-to 0)
+  (+eshell/here))
 
 (use-package! mu4e
   :config

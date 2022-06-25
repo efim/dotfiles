@@ -382,5 +382,8 @@ any directory proferred by `consult-dir'."
         evil-owl-max-string-length 50)
   (evil-owl-mode))
 
+(use-package! kubel)
+(use-package! kubel-evil)
+
 (server-start)
 (epa-file-enable)

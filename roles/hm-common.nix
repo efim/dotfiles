@@ -110,6 +110,8 @@
     firefox
     ferdi # browser for web-apps : telegram, element, discord
 
+    kubectl
+
     # https://discourse.nixos.org/t/local-flake-based-nix-search-nix-run-and-nix-shell/13433
     (writeShellScriptBin "nix-search-local" ''
       nix search "path:${inputs.nixpkgs}" "$@"

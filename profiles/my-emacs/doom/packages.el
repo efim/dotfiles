@@ -87,3 +87,6 @@
 
 
 (package! evil-owl)
+
+(package! kubel)
+(package! kubel-evil)

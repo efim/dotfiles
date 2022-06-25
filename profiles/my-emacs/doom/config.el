@@ -224,23 +224,23 @@
 (use-package! mu4e
   :config
   ;; these are actually the defaults
-  (setq doom-modeline-mu4e nil        ; until i figure out how to exclude spam from unread
+  (setq doom-modeline-mu4e nil ; until i figure out how to exclude spam from unread
         mu4e-update-interval 300
         mu4e-headers-fields
         '((:account-stripe . 1)
-          (:human-date . 12)            ; doom default cut off right digits of a year
-          (:flags . 6) ; 3 icon flags
+          (:human-date . 12)       ; doom default cut off right digits of a year
+          (:flags . 6)             ; 3 icon flags
           (:from-or-to . 25)
           (:subject)))
-  (setq                                    ; TODO check out set-email-account! in doom, when adding new one
-   mu4e-sent-folder   "/personal/sent"   ;; folder for sent messages
-   mu4e-drafts-folder "/personal/drafts" ;; unfinished messages
-   mu4e-trash-folder  "/personal/trash"  ;; trashed messages
+  (setq         ; TODO check out set-email-account! in doom, when adding new one
+   mu4e-sent-folder   "/personal/sent"     ;; folder for sent messages
+   mu4e-drafts-folder "/personal/drafts"   ;; unfinished messages
+   mu4e-trash-folder  "/personal/trash"    ;; trashed messages
    mu4e-refile-folder "/personal/archive") ;; saved messages
   (setq mu4e-maildir-shortcuts
-  '( (:maildir "/personal/inbox"     :key  ?i)
-     (:maildir "/personal/archive"   :key  ?a)
-     (:maildir "/personal/sent"      :key  ?s)))
+        '( (:maildir "/personal/inbox"     :key  ?i)
+           (:maildir "/personal/archive"   :key  ?a)
+           (:maildir "/personal/sent"      :key  ?s)))
   )
 
 (after!

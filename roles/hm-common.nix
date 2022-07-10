@@ -21,7 +21,7 @@
       name = "Pop";
       package = pkgs.pop-icon-theme;
     };
-    font.name = "Victor Mono SemiBold 12";
+    font.name = "Roboto Condenced 12";
   };
   # home.sessionVariables.GTK_THEME = "Pop-dark";
   home.pointerCursor.package = pkgs.quintom-cursor-theme;

@@ -108,6 +108,7 @@
     vlc
     transmission-qt
     firefox
+    chromium
     ferdi # browser for web-apps : telegram, element, discord
 
     kubectl

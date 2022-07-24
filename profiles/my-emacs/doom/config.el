@@ -385,5 +385,7 @@ any directory proferred by `consult-dir'."
 (use-package! kubel)
 (use-package! kubel-evil)
 
+(use-package! keycast)
+
 (server-start)
 (epa-file-enable)

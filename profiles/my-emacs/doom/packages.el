@@ -90,3 +90,5 @@
 
 (package! kubel)
 (package! kubel-evil)
+
+(package! keycast)

@@ -12,8 +12,8 @@
     # deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    simple-nixos-mailserver.url = "git+https://gitlab.com/simple-nixos-mailserver/nixos-mailserver";
-    simple-nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs";
+    # simple-nixos-mailserver.url = "git+https://gitlab.com/simple-nixos-mailserver/nixos-mailserver";
+    # simple-nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, sops-nix, ... }@inputs:
@@ -46,14 +46,18 @@
       };
 
       homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {
-        configuration = {
-          imports = [ ./machines/work-laptop/home-for-flake.nix ];
-        };
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          {
+            imports = [ ./machines/work-laptop/home-for-flake.nix ];
+            home = {
+              homeDirectory = "/home/efim";
+              username = "efim";
+              stateVersion = "21.11";
+            };
+          }
+        ];
         extraSpecialArgs = { inherit inputs; };
-        system = "x86_64-linux";
-        homeDirectory = "/home/efim";
-        username = "efim";
-        stateVersion = "21.11";
       };
 
       nixosConfigurations.pythia = nixpkgs.lib.nixosSystem {

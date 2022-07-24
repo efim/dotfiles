@@ -82,7 +82,6 @@
     cachix
 
     ammonite
-    sbcl
 
     htop
     pfetch

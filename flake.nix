@@ -55,6 +55,7 @@
               username = "efim";
               stateVersion = "21.11";
             };
+            nix.registry.nixpkgs.flake = nixpkgs;
           }
         ];
         extraSpecialArgs = { inherit inputs; };

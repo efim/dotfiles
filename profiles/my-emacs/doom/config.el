@@ -98,9 +98,9 @@
 (after! org
   (setq org-hide-emphasis-markers t)
   (add-hook 'org-mode-hook
-          (lambda ()
-            (evil-local-set-key 'motion "gk" #'org-backward-element)
-            (evil-local-set-key 'motion "gj" #'org-forward-element)))
+            (lambda ()
+              (evil-local-set-key 'motion "gk" #'org-backward-element)
+              (evil-local-set-key 'motion "gj" #'org-forward-element)))
 
 
   (setq org-capture-todo-file "gtd/inbox.org")
@@ -117,12 +117,24 @@
   (setq org-todo-keywords `((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
   ;; GTD: setup for [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][gtd inspired]] refile and capture
   (setq org-refile-targets '(("~/org/gtd/gtd.org" :maxlevel . 3)
-                            ("~/org/gtd/someday.org" :level . 1)
-                            ("~/org/gtd/tickler.org" :maxlevel . 2)
-                            ("~/org/Work/gtd/dins-gtd.org" :maxlevel . 3)
-                            ("~/org/Work/gtd/dins-someday.org" :level . 1)
-                            ("~/org/Work/gtd/dins-tickler.org" :maxlevel . 2)
-                            ("~/org/writing-inbox.org" :maxlevel . 2)))
+                             ("~/org/gtd/someday.org" :level . 1)
+                             ("~/org/gtd/tickler.org" :maxlevel . 2)
+                             ("~/org/Work/gtd/dins-gtd.org" :maxlevel . 3)
+                             ("~/org/Work/gtd/dins-someday.org" :level . 1)
+                             ("~/org/Work/gtd/dins-tickler.org" :maxlevel . 2)
+                             ("~/org/writing-inbox.org" :maxlevel . 2)))
+
+  (setq my/journal-dir "~/org/Work/Journal/")
+
+  (defun get-journal-file-today ()
+    "Return filename for today's journal entry."
+    (let ((daily-name (format-time-string "%Y-%m-%d.org")))
+      (expand-file-name (concat my/journal-dir daily-name))))
+
+  (defun journal-file-today ()
+    "Create and load a journal file based on today's date."
+    (interactive)
+    (find-file (get-journal-file-today)))
 
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
                                  (file+headline "~/org/gtd/inbox.org" "Tasks")
@@ -132,7 +144,11 @@
                                  "* TODO %i%?")
                                 ("T" "Tickler" entry
                                  (file+headline "~/org/gtd/tickler.org" "Tickler")
-                                 "* %i%? \n %U")))
+                                 "* %i%? \n %U")
+                                ("j" "Work Journal Note" ; not quite same os org-journal, all headings on top
+                                 entry (file get-journal-file-today)
+                                 "* %<%H:%M> %?" ; %<> see format-time-string
+                                 :empty-lines 1)))
   (add-to-list `org-modules `ol-bibtex)
   (add-to-list `org-modules `org-habit)
   (add-to-list `org-modules `org-habit-plus ))

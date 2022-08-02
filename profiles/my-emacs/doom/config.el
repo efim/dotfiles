@@ -27,7 +27,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-(setq doom-theme 'doom-monokai-machine)
+(setq doom-theme 'modus-vivendi)
 
 (setq
  doom-font (font-spec :name "Iosevka" :size 20 )
@@ -386,8 +386,6 @@ any directory proferred by `consult-dir'."
 (set-company-backend! 'scala-mode
   'ensime-company)
 (add-hook 'scala-mode-hook #'ensime-mode)
-
-(use-package! gotham-theme :init)
 
 (use-package! org-pomodoro-third-time :init)
 

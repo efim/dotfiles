@@ -53,22 +53,24 @@
              ;; Iterate through all registered capture templates and
              ;; generate a list
              :templates (-non-nil (seq-map-indexed (lambda (template index)
-                     (when (cl-evenp index) template))
-                   ef/org-roam-capture-templates-plist))
+                                                     (when (cl-evenp index) template))
+                                                   ef/org-roam-capture-templates-plist))
              :prefix "a"
              :filter-fn (lambda (node) t)
-             :path-to-todo "~/org/gtd/gtd.org")
+             :path-to-todo "~/org/gtd/gtd.org"
+             :path-to-journal-dir "~/org/Journal")
        :work (list
-                       :templates (list :work)
-                       :prefix "w"
-                       :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
-                       :path-to-todo "~/org/Work/gtd/dins-gtd.org")
+              :templates (list :work)
+              :prefix "w"
+              :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
+              :path-to-todo "~/org/Work/gtd/dins-gtd.org"
+              :path-to-journal-dir "~/org/Work/Journal")
        :personal (list
                   :templates (list :personal :general)
                   :prefix "p"
                   :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "personal"))
-                  :path-to-todo "~/org/gtd/gtd.org")
-       ))
+                  :path-to-todo "~/org/gtd/gtd.org"
+                  :path-to-journal-dir "~/org/Journal")))
 
 (defvar ef/roam-context :all
   "For toggling the context for the capture, insert, find.")
@@ -197,6 +199,8 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
    ("c" "capture" ef/roam-contexed-capture)
    ("@" "visit todo" (lambda () "doc" (interactive) (ef/roam-visit-todo-wrapped-with-context (ef/roam-context-from-transient-arg-value))))
    ("C" "set context" ef/roam-save-context-from-transient-args)
+   ("j" "new journal entry" (lambda () "doc" (interactive) (let ((ef/roam-context (or (ef/roam-context-from-transient-arg-value) ef/roam-context)))
+                                                             (ef/org-journal-contexted nil))))
    ])
 
 ;; prefix command that groups these
@@ -214,18 +218,32 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
 ;; for testing purposes
 ;; (ef/roam-things-transient)
 
+(defun ef/org-journal-contexted (prefix)
+  (interactive "P")
+  (-let* (((&plist ef/roam-context (&plist :path-to-journal-dir)) ef/org-roam-capture-subjects-plist)
+         (org-journal-dir (or path-to-journal-dir org-journal-dir)))
+    (org-journal-new-entry prefix)))
+
+;; (ef/org-journal-contexted nil)
+;; to have it work with transient context, what I'd want is have a single wrapper function
+;; that sets context in let, then calls inner functions
+;; and inner functions would refer to context as dynamically scoped, so I wouldn't need several wrappers
+;; but i forgot something about suffixes? they can't be what?
+
 ;; i need not alias, but remap
 (require `core-keybinds)
 (map! (:leader (:prefix "n"
-                  (:prefix-map ("r" . "roam")
-                   :desc "Org Roam Capture"              "c" 'ef/roam-capture-wrapped-with-context ;; #'org-roam-capture
-                   :desc "Find file"                     "f" 'ef/roam-node-find-wrapped-with-context ;; #'org-roam-node-find
-                   :desc "Insert"                        "i" 'ef/roam-node-insert-wrapped-with-context ;; #'org-roam-node-insert
-                   :desc "Subj Menu"                     "m" 'ef/roam-things-transient ;; #'org-roam-node-insert
-                   :desc "Todo"                          "@" #'ef/roam-visit-todo-wrapped-with-context
-                   :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
-                   :desc "Tag"                           "t" #'org-roam-tag-add
-                   :desc "Un-tag"                        "T" #'org-roam-tag-delete))))
+                (:prefix-map ("r" . "roam")
+                 :desc "Org Roam Capture"              "c" 'ef/roam-capture-wrapped-with-context ;; #'org-roam-capture
+                 :desc "Find file"                     "f" 'ef/roam-node-find-wrapped-with-context ;; #'org-roam-node-find
+                 :desc "Insert"                        "i" 'ef/roam-node-insert-wrapped-with-context ;; #'org-roam-node-insert
+                 :desc "Subj Menu"                     "m" 'ef/roam-things-transient ;; #'org-roam-node-insert
+                 :desc "Todo"                          "@" #'ef/roam-visit-todo-wrapped-with-context
+                 :desc "Org Roam"                      "r" #'org-roam-buffer-toggle
+                 :desc "Tag"                           "t" #'org-roam-tag-add
+                 :desc "Un-tag"                        "T" #'org-roam-tag-delete)
+                (:prefix "j"
+                 :desc "my journal thingy" "j" #'ef/org-journal-contexted))))
 
 (general-define-key
  :keymaps 'global

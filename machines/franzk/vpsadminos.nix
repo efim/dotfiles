@@ -23,6 +23,7 @@ in {
   systemd.mounts = [ {where = "/sys/kernel/debug"; enable = false;} ];
   systemd.services.systemd-udev-trigger.enable = false;
   systemd.services.rpc-gssd.enable = false;
+  systemd.services.networking-setup.restartIfChanged = false;
 
   boot.isContainer = true;
   boot.enableContainers = mkDefault true;

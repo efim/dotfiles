@@ -63,6 +63,21 @@
     source /home/efim/.nix-profile/etc/profile.d/nix.sh
     '';
   };
+
+  # after moving to Fedora, and setting nvidia as primary card
+  # installing: https://docs.fedoraproject.org/en-US/quick-docs/how-to-set-nvidia-as-primary-gpu-on-optimus-based-laptops/#_step_8_edit_the_x11_configuration
+  # fedoras sessions through gdm work just after that
+  # https://wiki.archlinux.org/title/NVIDIA_Optimus#Display_managers
+  home.packages = [
+    pkgs.xorg.xrandr
+  ];
+
+  xsession = {
+    profileExtra = "xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto";
+  };
+
+
   # adding XDG_DATA_DIRS to drun / app files
     # export XDG_DATA_DIRS=\"$HOME/.nix-profile/share:$XDG_DATA_DIRS\"
   # advice from https://github.com/nix-community/home-manager/issues/1439#issuecomment-1022576250

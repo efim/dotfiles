@@ -37,14 +37,6 @@
         specialArgs = { inherit inputs rev; };
       };
 
-      nixosConfigurations.ancient-one = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/ancient-one/configuration.nix
-        ];
-        specialArgs = { inherit inputs rev; };
-      };
-
       homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [

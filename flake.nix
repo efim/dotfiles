@@ -61,28 +61,6 @@
         extraSpecialArgs = { inherit inputs; };
       };
 
-      nixosConfigurations.pythia = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./machines/oracle/pythia/configuration.nix
-        ];
-        specialArgs = { inherit inputs rev; };
-      };
-      nixosConfigurations.niobe = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/oracle/niobe/configuration.nix
-        ];
-        specialArgs = { inherit inputs rev; };
-      };
-      nixosConfigurations.morpheus = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/oracle/morpheus/configuration.nix
-        ];
-        specialArgs = { inherit inputs rev; };
-      };
-
       nixosConfigurations.franzk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -104,39 +82,6 @@
               };
             };
           };
-          pythia = {
-            hostname = "pythia"; # taken from my ~/.ssh/config
-            profiles.system = {
-              user = "root";
-              sshUser = "root";
-              path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.pythia;
-            };
-          };
-          niobe = {
-            hostname = "niobe";
-            profiles.system = {
-              user = "root";
-              sshUser = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.niobe;
-            };
-          };
-          morpheus = {
-            hostname = "morpheus";
-            profiles.system = {
-              user = "root";
-              sshUser = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.morpheus;
-            };
-          };
-          ancient-one = {
-            hostname = "ancient-one";
-            profiles.system = {
-              user = "root";
-              sshUser = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ancient-one;
-            };
-          };
-
         };
       };
 

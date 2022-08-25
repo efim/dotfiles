@@ -64,13 +64,15 @@
               :prefix "w"
               :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
               :path-to-todo "~/org/Work/gtd/dins-gtd.org"
-              :path-to-journal-dir "~/org/Work/Journal")
+              :path-to-journal-dir "~/org/Work/Journal"
+              :type-of-journal 'monthly)  ; 'weekly inputted day headers on every entry, something with org-journal--insert-entry-header
        :personal (list
                   :templates (list :personal :general)
                   :prefix "p"
                   :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "personal"))
                   :path-to-todo "~/org/gtd/gtd.org"
-                  :path-to-journal-dir "~/org/Journal")))
+                  :path-to-journal-dir "~/Documents/personal/Journal"
+                  :type-of-journal 'monthly)))
 
 (defvar ef/roam-context :all
   "For toggling the context for the capture, insert, find.")
@@ -218,10 +220,17 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
 ;; for testing purposes
 ;; (ef/roam-things-transient)
 
+;; do I add (require `org-journal) ?
+(require 'org-journal)
 (defun ef/org-journal-contexted (prefix)
   (interactive "P")
-  (-let* (((&plist ef/roam-context (&plist :path-to-journal-dir)) ef/org-roam-capture-subjects-plist)
-         (org-journal-dir (or path-to-journal-dir org-journal-dir)))
+  (-let* (((&plist  ef/roam-context current-context-settings) ef/org-roam-capture-subjects-plist)
+          ((&plist :path-to-journal-dir) current-context-settings)
+          ((&plist :type-of-journal) current-context-settings)
+          (org-journal-dir (or path-to-journal-dir org-journal-dir))
+          (org-journal-file-type (or type-of-journal org-journal-file-type)))
+    ;; (set 'org-journal-dir (or path-to-journal-dir org-journal-dir))
+    ;; (set 'org-journal-file-type (or type-of-journal org-journal-file-type)) ; get journal type from selected context, or default
     (org-journal-new-entry prefix)))
 
 ;; (ef/org-journal-contexted nil)
@@ -231,7 +240,6 @@ OTHER-WINDOW and INITIAL-INPUT passed as is."
 ;; but i forgot something about suffixes? they can't be what?
 
 ;; i need not alias, but remap
-(require `core-keybinds)
 (map! (:leader (:prefix "n"
                 (:prefix-map ("r" . "roam")
                  :desc "Org Roam Capture"              "c" 'ef/roam-capture-wrapped-with-context ;; #'org-roam-capture

@@ -4,7 +4,6 @@
 
   imports = with inputs.self.myRoles; [
     ./vpsadminos.nix
-    ./nextcloud.nix
     base-server
     inputs.self.myModules.mail-secrets-os
   ];

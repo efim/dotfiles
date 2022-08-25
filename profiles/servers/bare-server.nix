@@ -18,6 +18,7 @@
   };
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7UaJQWWsKy59CLh7LNQOTwWL3AkQY4qhpnRbZ7sPVB efim@work-laptop"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -40,7 +41,10 @@
     home = "/home/efim";
     description = "Efim N";
     extraGroups = [ "wheel" "networkmanager" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7UaJQWWsKy59CLh7LNQOTwWL3AkQY4qhpnRbZ7sPVB efim@work-laptop"
+    ];
     passwordFile = config.sops.secrets.just_pass.path;
   };
 

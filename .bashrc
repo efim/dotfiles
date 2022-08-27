@@ -134,3 +134,5 @@ single () {
 }
 
 eval "$(direnv hook bash)"
+
+eval "$(ssh-agent)"

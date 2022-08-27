@@ -11,7 +11,9 @@
   services.syncthing.enable = true;
   # nginx reverse proxy
   services.nginx.enable = true;
-  services.nginx.virtualHosts."syncthing.franzk.nope" = {
+  # yay, even without personal dns, I can have one domain per host with tailscala MagicDNS
+  # not perfect, but ok
+  services.nginx.virtualHosts."franzk.efim.github.beta.tailscale.net" = {
     locations."/" = {
         proxyPass = "http://127.0.0.1:8384";
     };
@@ -20,10 +22,10 @@
 
   services.gitea = {
     enable = true;
-    rootUrl = "http://gitea.nope/";
+    rootUrl = "http://git.sunshine.industries/";
     disableRegistration = true;
   };
-  services.nginx.virtualHosts."gitea.nope" = {
+  services.nginx.virtualHosts."git.sunshine.industries" = {
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.gitea.httpPort}";
     };

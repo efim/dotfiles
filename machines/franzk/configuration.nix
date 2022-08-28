@@ -24,6 +24,8 @@
     enable = true;
     rootUrl = "http://git.sunshine.industries/";
     disableRegistration = true;
+    ssh.enable = true;
+    ssh.clonePort = 65433;
   };
   services.nginx.virtualHosts."git.sunshine.industries" = {
     locations."/" = {

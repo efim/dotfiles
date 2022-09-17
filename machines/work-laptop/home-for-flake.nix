@@ -24,6 +24,9 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "rescuetime"
   ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "ferdi-5.8.1"
+  ];
 
   # home.file.".bashrc".source = ../../.bashrc;
 

@@ -401,5 +401,8 @@ any directory proferred by `consult-dir'."
 
 (use-package! keycast)
 
+(use-package! nov)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
 (server-start)
 (epa-file-enable)

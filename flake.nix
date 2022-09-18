@@ -14,6 +14,8 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     # simple-nixos-mailserver.url = "git+https://gitlab.com/simple-nixos-mailserver/nixos-mailserver";
     # simple-nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix"; # welp, that's only for servers
+    homeage.url = "github:jordanisaacs/homeage";
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, sops-nix, ... }@inputs:

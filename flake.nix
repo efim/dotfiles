@@ -18,7 +18,7 @@
     homeage.url = "github:jordanisaacs/homeage";
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, sops-nix, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, sops-nix, ... }@inputs:
     let
       utils = import ./kinda-utils.nix;
       findModules = utils.findModules;
@@ -59,7 +59,7 @@
         system = "x86_64-linux";
         modules = [
           ./machines/franzk/configuration.nix
-          agenix.nixosModule
+          # agenix.nixosModule
         ];
         specialArgs = { inherit inputs rev; };
       };

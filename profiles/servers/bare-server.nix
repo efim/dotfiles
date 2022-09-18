@@ -2,6 +2,7 @@
 
 {
   imports = with inputs.self.myProfiles; [
+    inputs.agenix.nixosModule
     sops
     ({ pkgs, ... }: {
         # Let 'nixos-version --json' know about the Git revision
@@ -9,6 +10,8 @@
         system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
       })
   ];
+
+  age.secrets.main-user-pwd.file = ../../secrets/server-user-password.age;
 
   boot.cleanTmpDir = true;
 
@@ -46,7 +49,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7UaJQWWsKy59CLh7LNQOTwWL3AkQY4qhpnRbZ7sPVB efim@work-laptop"
     ];
-    passwordFile = config.sops.secrets.just_pass.path;
+    # A hashed password can be generated using mkpasswd -m sha-512. Or root can set with `passwd`
+    # passwordFile = config.sops.secrets.just_pass.path;
+    passwordFile = config.age.secrets.main-user-pwd.path;
   };
 
   services.tailscale.enable = true;

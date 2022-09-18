@@ -11,10 +11,6 @@ both of these can be configured from home-manager email options
 Since all mail state is stored in maildir, simple syncing via mbsync is enough, same config on all machines should work.
 
 * possible auth
-** have sops nix secret put into fs path
-(not yet integrated into home-manager, defined on NixOS level, and on Ubuntu+hm secret is created manually)
-good:
-- server is on NixOS and can make mbsync requests without manual intervention
-- when multimachine with muchsync, clients work via ssh and would require "ssh-add" or usage of ssh-keys withoug passphrases, but don't require sops
-bad:
-- for single machine setup, machine would need to trigger "mbsync" and would need to be able to access sops thing from home-manager
+mu4e uses mbsync, and all machines that read mail are clients
+(opposed to with notmuch one machine needing to be a server for xapian database \ tags)
+so all machines would have same config with password for synching mail to local storage, quite simple

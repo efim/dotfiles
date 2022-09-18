@@ -16,8 +16,6 @@
           # of this flake.
           system.configurationRevision = inputs.nixpkgs.lib.mkIf (rev != null) rev;
         })
-      inputs.self.myProfiles.sops
-      inputs.self.myModules.mail-secrets-os
     ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_15; # not sure why would I really want to pin that?
@@ -102,13 +100,12 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  sops.secrets.just_pass.neededForUsers = true;
   users.mutableUsers = false;
   users.users.efim = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     # A hashed password can be generated using mkpasswd -m sha-512. Or root can set with `passwd`
-    passwordFile = config.sops.secrets.just_pass.path;
+    passwordFile = ""; # TODO when I recover my chunky, fix this
   };
 
   services.localtime.enable = true;

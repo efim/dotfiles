@@ -66,9 +66,9 @@
           # notmuch.enable = true;
           mu.enable = true;
 
-          # I guess this could be one way to use sops-nix with home-manager
+          # I guess this could be one way to use agenix with home-manager
+          # maybe passwordFile is already possible and more secure
           # if passwords can be issued with commands
-          # passwordCommand = "${pkgs.coreutils}/bin/cat /run/secrets/email/efim.wool@gmail.com";
           passwordCommand = "${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/secrets/email/efim.wool@gmail.com";
           # passwordCommand = "${pkgs.pass}/bin/pass  email/efim.wool@gmail.com";
 

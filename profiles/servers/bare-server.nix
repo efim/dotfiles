@@ -3,7 +3,6 @@
 {
   imports = with inputs.self.myProfiles; [
     inputs.agenix.nixosModule
-    sops
     ({ pkgs, ... }: {
         # Let 'nixos-version --json' know about the Git revision
         # of this flake.
@@ -38,7 +37,6 @@
   networking.firewall.enable = true;
 
   users.mutableUsers = false;
-  sops.secrets.just_pass.neededForUsers = true;
 
   users.users.efim = {
     isNormalUser = true;
@@ -50,7 +48,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7UaJQWWsKy59CLh7LNQOTwWL3AkQY4qhpnRbZ7sPVB efim@work-laptop"
     ];
     # A hashed password can be generated using mkpasswd -m sha-512. Or root can set with `passwd`
-    # passwordFile = config.sops.secrets.just_pass.path;
     passwordFile = config.age.secrets.main-user-pwd.path;
   };
 

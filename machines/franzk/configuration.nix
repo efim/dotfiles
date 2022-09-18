@@ -5,7 +5,6 @@
   imports = with inputs.self.myRoles; [
     ./vpsadminos.nix
     base-server
-    inputs.self.myModules.mail-secrets-os
   ];
 
   services.syncthing.enable = true;

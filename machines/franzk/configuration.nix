@@ -20,12 +20,21 @@
   };
   networking.firewall.allowedTCPPorts = [ 80 8080 ];
 
+  age.secrets.secret1.file = ../../secrets/franzk-server-secret.age;
+
+  environment.etc."demo.secret".source = config.age.secrets.secret1.path;
+
   services.gitea = {
     enable = true;
     rootUrl = "http://git.sunshine.industries/";
-    disableRegistration = true;
-    ssh.enable = true;
-    ssh.clonePort = 65433;
+    settings.service.DISABLE_REGISTRATION = true;
+    # disableRegistration = true;
+    settings.server = {
+      DISABLE_SSH = false;
+      SSH_PORT = 65433;
+    };
+    # ssh.enable = true;
+    # ssh.clonePort = 65433;
   };
   services.nginx.virtualHosts."git.sunshine.industries" = {
     locations."/" = {

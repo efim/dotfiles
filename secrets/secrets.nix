@@ -11,4 +11,5 @@ in
   "email-pass.age".publicKeys = users;
   "franzk-server-secret.age".publicKeys = users ++ [ franzk ];
   "server-user-password.age".publicKeys = users ++ machines;
+  "radicale-user.age".publicKeys = users ++ [ franzk ];
 }

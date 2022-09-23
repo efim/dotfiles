@@ -41,6 +41,37 @@
     };
   };
 
+  age.secrets.radicale-users = {
+    file = ../../secrets/radicale-user.age;
+    owner = "radicale";
+    mode = "700";
+  };
+
+  # too bad I don't have actual dns over tailscale addresses,
+  # i'd be very happy if I could add only reverse dns over the name
+  # that resolves into an internal ip
+  services.radicale = {
+    enable = true;
+    settings = {
+      server = {
+        hosts = [ "0.0.0.0:5232" "[::]:5232" ];
+      };
+      auth = {
+        type = "htpasswd";
+        htpasswd_filename = config.age.secrets.radicale-users.path;
+        htpasswd_encryption = "plain";
+      };
+      storage = {
+        filesystem_folder = "/var/lib/radicale/collections";
+      };
+    };
+  };
+  services.nginx.virtualHosts."radicale.sunshine.industries" = {
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:5232";
+    };
+  };
+
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
 

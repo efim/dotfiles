@@ -87,9 +87,11 @@
 (setq +org-roam-open-buffer-on-find-file nil)
 
 (setq org-directory "~/org/")
-(setq org-journal-dir "~/org/Journal/")
-(setq org-journal-file-format "%Y-%m-%d.org")
-(setq org-journal-date-format "%d.%m.%Y")
+
+(after! org-journal
+  (setq org-journal-dir "~/org/Journal/"
+        org-journal-file-format "%Y-%m-%d.org"
+        org-journal-date-format "%d.%m.%Y"))
 
 ;; Show hidden emphasis markers
 (use-package! org-appear
@@ -403,6 +405,11 @@ any directory proferred by `consult-dir'."
 
 (use-package! nov)
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(use-package! org-cv
+  :init (require 'ox-moderncv))
+
+(use-package! format-all)
 
 (server-start)
 (epa-file-enable)

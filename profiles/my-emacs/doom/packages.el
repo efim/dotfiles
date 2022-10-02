@@ -91,4 +91,10 @@
 
 (package! keycast)
 
-(package! nov)
+(package! nov)                          ; reading epub
+
+(package! org-cv
+  :recipe (:host gitlab :repo "Titan-C/org-cv"))
+
+(package! format-all
+  :recipe (:host github :repo "lassik/emacs-format-all-the-code"))

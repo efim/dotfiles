@@ -105,10 +105,11 @@
     rescuetime
 
     vlc
-    transmission-qt
+    # transmission-qt
+    transmission-gtk
     firefox
     chromium
-    ferdi # browser for web-apps : telegram, element, discord
+    ferdium
 
     kubectl
   ];

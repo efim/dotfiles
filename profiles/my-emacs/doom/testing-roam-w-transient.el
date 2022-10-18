@@ -18,21 +18,21 @@
        '("g" "General" plain "%?"
 	 :if-new
          (file+head
-          "%<%Y%m%d%H%M%s>-${slug}.org"
+          "roam/General/%<%Y%m%d%H%M%s>-${slug}.org" ; here path
           "#+title: ${title}\n\n")
 	 :unnarrowed t)
        :personal
        '("p" "Personal" plain "%?"
 	 :if-new
          (file+head
-          "Personal/%<%Y%m%d%H%M%s>-${slug}.org"
+          "roam/Personal/%<%Y%m%d%H%M%s>-${slug}.org"
           "#+title: ${title}\n#+FILETAGS: :personal: \n\n")
 	 :unnarrowed t)
        :work
        '("w" "Work" plain "%?"
          :if-new
          (file+head
-          "Work/%<%Y%m%d%H%M%s>-${slug}.org"
+          "roam/Work/%<%Y%m%d%H%M%s>-${slug}.org"
           "#+title: ${title}\n#+FILETAGS: :work: \n\n")
          :unnarrowed t)
        ))
@@ -63,8 +63,8 @@
               :templates (list :work)
               :prefix "w"
               :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "work"))
-              :path-to-todo "~/org/Work/gtd/dins-gtd.org"
-              :path-to-journal-dir "~/org/Work/Journal"
+              :path-to-todo "~/org/roam/Work/gtd/dins-gtd.org"
+              :path-to-journal-dir "~/org/roam/Work/Journal"
               :type-of-journal 'monthly)  ; 'weekly inputted day headers on every entry, something with org-journal--insert-entry-header
        :personal (list
                   :templates (list :personal :general)

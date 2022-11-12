@@ -88,7 +88,8 @@
 
 (setq org-directory "~/org/")
 
-(after! org-journal
+(use-package! org-journal
+  :config
   (setq org-journal-dir "~/org/Journal/"
         org-journal-file-format "%Y-%m-%d.org"
         org-journal-date-format "%d.%m.%Y"))
@@ -410,6 +411,11 @@ any directory proferred by `consult-dir'."
   :init (require 'ox-moderncv))
 
 (use-package! format-all)
+
+
+;; workaround for lsp-metals problem, sad life
+;; https://github.com/emacs-lsp/lsp-metals/issues/84
+(require `treemacs-extensions)
 
 (server-start)
 (epa-file-enable)

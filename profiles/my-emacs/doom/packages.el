@@ -98,3 +98,5 @@
 
 (package! format-all
   :recipe (:host github :repo "lassik/emacs-format-all-the-code"))
+
+(package! ef-themes)

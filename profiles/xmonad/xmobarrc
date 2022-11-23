@@ -1,11 +1,11 @@
-Config { font = "xft:Iosevka:bold:pixelsize=16:antialias=true:hinting=true"
+Config { font = "Iosevka Comfy Bold 12"
        , additionalFonts = []
        , borderColor = "black"
        , border = TopB
        , bgColor = "black"
        , fgColor = "grey"
        , alpha = 255
-       , position = Top
+       , position = TopH 22
        , textOffset = -1
        , iconOffset = -1
        , lowerOnStart = True

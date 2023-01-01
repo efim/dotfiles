@@ -378,7 +378,8 @@ any directory proferred by `consult-dir'."
 
 (use-package ensime-mode
   :ensure nil
-  :load-path "~/Downloads/ensime-tng-3.0.0/lisp/"
+  :load-path "~/Downloads/ensime-tng-3.0.12/lisp/"
+  ;; :load-path "~/Downloads/ensime-tng-3.0.0/lisp/"
   :commands ensime-mode
   :bind
   (:map ensime-mode-map

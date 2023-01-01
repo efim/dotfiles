@@ -418,5 +418,7 @@ any directory proferred by `consult-dir'."
 ;; https://github.com/emacs-lsp/lsp-metals/issues/84
 (require `treemacs-extensions)
 
+(setq sly-complete-symbol-function 'sly-flex-completions)
+
 (server-start)
 (epa-file-enable)

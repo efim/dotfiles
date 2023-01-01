@@ -77,14 +77,14 @@
   # - In `/home/efim/dotfiles/nixpkgs/common.nix': /home/efim/dotfiles/.bashrc
   # (use '--show-trace' to show detailed location information)
   # home.file.".bashrc".source = ../.bashrc;
-  programs.bash.initExtra = "pfetch";
+  programs.bash.initExtra = "profetch";
   home.packages = with pkgs; [
     cachix
 
     ammonite
 
     htop
-    pfetch
+    profetch
     killall
     tldr
     keepassxc

@@ -61,7 +61,7 @@
     };
     bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
     bash.profileExtra = ''
-    source /home/efim/.nix-profile/etc/profile.d/nix.sh
+    source ~/.nix-profile/etc/profile.d/nix.sh
     '';
   };
 

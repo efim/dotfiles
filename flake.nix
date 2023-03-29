@@ -41,8 +41,8 @@
           {
             imports = [ ./machines/work-laptop/home-for-flake.nix ];
             home = {
-              homeDirectory = "/home/efim";
-              username = "efim";
+              homeDirectory = "/home/enefedov";
+              username = "enefedov";
               stateVersion = "21.11";
             };
             nix.registry.nixpkgs.flake = nixpkgs;

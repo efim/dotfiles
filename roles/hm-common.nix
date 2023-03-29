@@ -6,8 +6,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "efim";
-  home.homeDirectory = "/home/efim";
+  # home.username = "efim";
+  # home.homeDirectory = "/home/efim";
 
   nixpkgs.config.allowUnfree = true;
 

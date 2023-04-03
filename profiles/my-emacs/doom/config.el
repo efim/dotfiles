@@ -378,15 +378,17 @@ any directory proferred by `consult-dir'."
 
 (use-package ensime-mode
   :ensure nil
-  :load-path "~/Downloads/ensime-tng-3.0.12/lisp/"
-  ;; :load-path "~/Downloads/ensime-tng-3.0.0/lisp/"
+  :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
+  ;; :load-path "~/Downloads/ensime-tng-3.0.12/lisp/"
   :commands ensime-mode
   :bind
   (:map ensime-mode-map
-        ("M-." . ensime-jump-to-definition)
-        ("C-c C-i t" . ensime-type-at-point)
-        ("C-c C-i s" . ensime-symbol-at-point)
-        ("C-c C-r i" . ensime-import-symbol-at-point)))
+        ("C-c C-<Tab> g" . ensime-jump-to-definition)
+        ("C-c C-<Tab> t" . ensime-type-at-point)
+        ("C-c C-<Tab> s" . ensime-symbol-at-point)
+        ("C-c C-<Tab> i" . ensime-import-symbol-at-point)))
+
+(advice-add #'ensime-jump-to-definition :after #'better-jumper-set-jump)
 
 (set-company-backend! 'scala-mode
   'ensime-company)

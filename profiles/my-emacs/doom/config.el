@@ -435,9 +435,24 @@ any directory proferred by `consult-dir'."
 (setq sly-complete-symbol-function 'sly-flex-completions)
 
 (use-package! eat
+  :init
+  (defun eat-quit-from-emacs-client ()
+    (interactive)
+    (cl-letf (((symbol-function 'yes-or-no-p) (lambda (prompt) t)))
+      (kill-current-buffer))
+    (evil-quit))
+  :bind
+  (:map eat-mode-map
+        ("C-c C-q" . eat-quit-from-emacs-client))
   :config
   (evil-set-initial-state 'eat-mode 'emacs)
   (add-hook 'eat-mode-hook #'(lambda () (message "Eat mode initialized!"))))
+
+(defun my/create-eat-without-perspective ()
+  "Start eshell buffer, first deleting perspective and swithcing to persp #1."
+  (+workspace:delete)
+  (+workspace/switch-to 0)
+  (eat))
 
 (server-start)
 (epa-file-enable)

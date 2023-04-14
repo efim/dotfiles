@@ -17,6 +17,10 @@ with lib;
         #   and whether I'd need my current ~/.config/nix/conf
         # until then would need `$ cachix use nix-community`
       };
+    bash.bashrcExtra = ''
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/bash"
+    ''; # for the emacs-eat optional integration start. for some reason __eat_enable_integration doesn't run
 
     };
 

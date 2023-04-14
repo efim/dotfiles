@@ -64,7 +64,8 @@ additionalKeys :: [(String, X ())]
 additionalKeys =
   -- APPS
   [
-    ("M-S-<Return>", spawn "emacsclient -create-frame -eval \"(my/create-vterm-without-perspective)\"")
+    ("M-S-<Return>", spawn "emacsclient -create-frame -eval \"(my/create-eat-without-perspective)\"")
+    -- ("M-S-<Return>", spawn "emacsclient -create-frame -eval \"(my/create-vterm-without-perspective)\"")
   -- ("M-S-<Return>", spawn myTerminal)
     , ("M-<Return>", spawn "emacsclient -create-frame -eval \"(my/create-eshell-without-perspective)\"")
     , ("C-M-f", spawn "firefox")

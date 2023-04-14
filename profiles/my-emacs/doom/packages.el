@@ -93,10 +93,22 @@
 
 (package! nov)                          ; reading epub
 
-(package! org-cv
-  :recipe (:host gitlab :repo "Titan-C/org-cv"))
+;; (package! org-cv
+;;   :recipe (:host gitlab :repo "Titan-C/org-cv"))
 
 (package! format-all
   :recipe (:host github :repo "lassik/emacs-format-all-the-code"))
 
 (package! ef-themes)
+
+(package! chatgpt-shell
+  :recipe (:host github :repo "xenodium/chatgpt-shell"))
+
+;; https://codeberg.org/akib/emacs-eat.git
+(package! eat
+  :recipe (:host codeberg :repo "akib/emacs-eat"
+           :files ("*.el" ("term" "term/*.el") "*.texi"
+               "*.ti" ("terminfo/e" "terminfo/e/*")
+               ("terminfo/65" "terminfo/65/*")
+               ("integration" "integration/*")
+               (:exclude ".dir-locals.el" "*-tests.el"))))

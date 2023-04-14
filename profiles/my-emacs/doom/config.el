@@ -197,7 +197,9 @@
     (evil-quit))
   :bind
   (:map vterm-mode-map
-   ("C-c C-q" . vterm-quit-from-emacs-client)))
+        ("C-c C-q" . vterm-quit-from-emacs-client))
+  :config (evil-set-initial-state 'vterm-mode 'emacs))
+
 (defun my/create-vterm-without-perspective ()
   "Start vterm buffer, first deleting perspective and swithcing to persp #1."
   (+workspace:delete)
@@ -383,10 +385,10 @@ any directory proferred by `consult-dir'."
   :commands ensime-mode
   :bind
   (:map ensime-mode-map
-        ("C-c C-<Tab> g" . ensime-jump-to-definition)
-        ("C-c C-<Tab> t" . ensime-type-at-point)
-        ("C-c C-<Tab> s" . ensime-symbol-at-point)
-        ("C-c C-<Tab> i" . ensime-import-symbol-at-point)))
+        ("C-c <tab> g" . ensime-jump-to-definition)
+        ("C-c <tab> t" . ensime-type-at-point)
+        ("C-c <tab> s" . ensime-symbol-at-point)
+        ("C-c <tab> i" . ensime-import-symbol-at-point)))
 
 (advice-add #'ensime-jump-to-definition :after #'better-jumper-set-jump)
 
@@ -411,17 +413,31 @@ any directory proferred by `consult-dir'."
 (use-package! nov)
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
-(use-package! org-cv
-  :init (require 'ox-moderncv))
+;; i'm ready to give up. i guess i don't need (require 'org-cv) anywhere
+;; but it's called from somewhere, and it's missing in the repo. also - things don't seem to work in easy wasy
+;; and also - where the hell is my CV org file...
+;; (use-package! org-cv
+;;   :init (require 'ox-moderncv))
 
 (use-package! format-all)
 
+(use-package! chatgpt-shell
+  :config
+  (setq chatgpt-shell-openai-key
+      (auth-source-pick-first-password :host "openai.com")))
+(require 'ob-chatgpt-shell)
+(ob-chatgpt-shell-setup)
 
 ;; workaround for lsp-metals problem, sad life
 ;; https://github.com/emacs-lsp/lsp-metals/issues/84
 (require `treemacs-extensions)
 
 (setq sly-complete-symbol-function 'sly-flex-completions)
+
+(use-package! eat
+  :config
+  (evil-set-initial-state 'eat-mode 'emacs)
+  (add-hook 'eat-mode-hook #'(lambda () (message "Eat mode initialized!"))))
 
 (server-start)
 (epa-file-enable)

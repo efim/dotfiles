@@ -7,6 +7,6 @@
 
     home.packages = with pkgs; [
       deploy-rs.deploy-rs
-      inputs.agenix.defaultPackage.x86_64-linux
+      inputs.agenix.packages.x86_64-linux.default
     ];
 }

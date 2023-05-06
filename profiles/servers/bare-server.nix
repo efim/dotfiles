@@ -2,7 +2,7 @@
 
 {
   imports = with inputs.self.myProfiles; [
-    inputs.agenix.nixosModule
+    inputs.agenix.nixosModules.default
     ({ pkgs, ... }: {
         # Let 'nixos-version --json' know about the Git revision
         # of this flake.

@@ -112,3 +112,5 @@
                ("terminfo/65" "terminfo/65/*")
                ("integration" "integration/*")
                (:exclude ".dir-locals.el" "*-tests.el"))))
+
+(package! codeium :recipe (:host github :repo "Exafunction/codeium.el"))

@@ -424,9 +424,10 @@ any directory proferred by `consult-dir'."
 (use-package! chatgpt-shell
   :config
   (setq chatgpt-shell-openai-key
-      (auth-source-pick-first-password :host "openai.com")))
-(require 'ob-chatgpt-shell)
-(ob-chatgpt-shell-setup)
+        (auth-source-pick-first-password :host "openai.com"))
+  ;; (require 'ob-chatgpt-shell)
+  ;; (ob-chatgpt-shell-setup)
+  )
 
 ;; workaround for lsp-metals problem, sad life
 ;; https://github.com/emacs-lsp/lsp-metals/issues/84
@@ -453,6 +454,9 @@ any directory proferred by `consult-dir'."
   (+workspace:delete)
   (+workspace/switch-to 0)
   (eat))
+
+(load-file "~/.doom.d/codeium-sample-config.el")
+
 
 (server-start)
 (epa-file-enable)

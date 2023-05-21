@@ -457,6 +457,23 @@ any directory proferred by `consult-dir'."
 
 (load-file "~/.doom.d/codeium-sample-config.el")
 
+;; note manual action to lsp-install-server
+(use-package! lsp-tailwindcss
+  :init
+  (setq lsp-tailwindcss-add-on-mode t))
+
+(defun my/rustywind-in-project-root ()
+  "Running tailwindcss reformatting."
+  ;; TODO - different actual commands --check-formatted --dry-run. maybe add --ignored-files from gitignore?
+  ;; TODO - make it also run from 'npx rustywind' and remove PATH dependency on the binary
+  (interactive)
+  (let ((command (mapconcat 'identity
+                            (list "rustywind ."
+                                  "--custom-regex"
+                                  (shell-quote-argument "className := \"([^\"]+)\"")
+                                  "--write") " ")))
+    (projectile-run-shell-command-in-root command)
+    (revert-buffer t t)))
 
 (server-start)
 (epa-file-enable)

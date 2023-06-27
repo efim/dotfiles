@@ -14,13 +14,13 @@
     homeage.url = "github:jordanisaacs/homeage";
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs
+    , ... }@inputs:
     let
       utils = import ./kinda-utils.nix;
       findModules = utils.findModules;
       rev = if self ? rev then self.rev else null;
-    in
-    {
+    in {
       myModules = builtins.listToAttrs (findModules ./modules);
 
       myProfiles = builtins.listToAttrs (findModules ./profiles);
@@ -29,16 +29,14 @@
 
       nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
-          ./machines/chunky-notebook/base-conf.nix
-        ];
+        modules = [ ./machines/chunky-notebook/base-conf.nix ];
         specialArgs = { inherit inputs rev; };
       };
 
-      homeConfigurations.work-laptop = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          {
+      homeConfigurations.work-laptop =
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [{
             imports = [ ./machines/work-laptop/home-for-flake.nix ];
             home = {
               homeDirectory = "/home/enefedov";
@@ -46,10 +44,9 @@
               stateVersion = "21.11";
             };
             nix.registry.nixpkgs.flake = nixpkgs;
-          }
-        ];
-        extraSpecialArgs = { inherit inputs; };
-      };
+          }];
+          extraSpecialArgs = { inherit inputs; };
+        };
 
       nixosConfigurations.franzk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -69,7 +66,8 @@
               system = {
                 user = "root";
                 sshUser = "root";
-                path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.franzk;
+                path = deploy-rs.lib.x86_64-linux.activate.nixos
+                  self.nixosConfigurations.franzk;
               };
             };
           };
@@ -77,7 +75,8 @@
       };
 
       # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
     };
 }

@@ -107,7 +107,7 @@
     vlc
     # transmission-qt
     transmission-gtk
-    firefox
+    # firefox
     chromium
     ferdium
 

@@ -12,10 +12,13 @@
     # deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     agenix.url = "github:ryantm/agenix"; # welp, that's only for servers
     homeage.url = "github:jordanisaacs/homeage";
+
+    htmx-examples.url = "git+http://git.sunshine.industries/efim/Learning-HTMX.git";
+    # htmx-examples.url = "path:/home/enefedov/Documents/personal/learning-htmx";
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs
-    , ... }@inputs:
+    , htmx-examples, ... }@inputs:
     let
       utils = import ./kinda-utils.nix;
       findModules = utils.findModules;

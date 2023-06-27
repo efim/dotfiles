@@ -1,7 +1,17 @@
 { inputs, config, pkgs, ... }: {
   networking.hostName = "franzk";
 
-  imports = with inputs.self.myRoles; [ ./vpsadminos.nix base-server ];
+  imports = with inputs.self.myRoles; [
+    ./vpsadminos.nix
+    base-server
+    inputs.htmx-examples.nixosModules.x86_64-linux.price-grid-app
+  ];
+
+  # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
+
+  services.priceGridService.enable = true;
+  services.priceGridService.host = "price-grid.frontendmentor.sunshine.industries";
+  services.priceGridService.port = 12345;
 
   services.syncthing.enable = true;
   # nginx reverse proxy

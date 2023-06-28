@@ -5,17 +5,28 @@
     ./vpsadminos.nix
     base-server
     inputs.htmx-examples.nixosModules.x86_64-linux.price-grid-app
+    inputs.htmx-examples.nixosModules.x86_64-linux.order-summary
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
 
-  services.priceGridService.enable = true;
-  services.priceGridService.host = "price-grid.frontendmentor.sunshine.industries";
-  services.priceGridService.port = 12345;
+  services.priceGridService = {
+    enable = true;
+    host = "price-grid.frontendmentor.sunshine.industries";
+    port = 12345;
+  };
+  services.orderSummaryComponent = {
+    enable = true;
+    host = "price-summary.frontendmentor.sunshine.industries";
+    port = 49012;
+  };
 
   services.syncthing.enable = true;
   # nginx reverse proxy
-  services.nginx.enable = true;
+  services.nginx = {
+    enable = true;
+    serverNamesHashBucketSize = 128;  # to allow longer domain names
+  };
   # yay, even without personal dns, I can have one domain per host with tailscala MagicDNS
   # not perfect, but ok
   services.nginx.virtualHosts."franzk.efim.github.beta.tailscale.net" = {

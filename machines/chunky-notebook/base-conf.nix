@@ -38,7 +38,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    trustedUsers = [ "root" "efim" ];
+    settings.trusted-users = [ "root" "efim" ];
   };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -55,7 +55,7 @@
 
   services.yggdrasil.enable = true;
   services.yggdrasil.persistentKeys = true;
-  services.yggdrasil.config = {
+  services.yggdrasil.settings = {
     Peers = [
       "tcp://130.61.94.233:13338" #niobe
     ];
@@ -108,7 +108,7 @@
     passwordFile = ""; # TODO when I recover my chunky, fix this
   };
 
-  services.localtime.enable = true;
+  services.localtimed.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -40,10 +40,10 @@
 
   services.gitea = {
     enable = true;
-    rootUrl = "http://git.sunshine.industries/";
     settings.service.DISABLE_REGISTRATION = true;
     # disableRegistration = true;
     settings.server = {
+      ROOT_URL = "http://git.sunshine.industries/";
       DISABLE_SSH = false;
       SSH_PORT = 65433;
     };
@@ -52,7 +52,7 @@
   };
   services.nginx.virtualHosts."git.sunshine.industries" = {
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.services.gitea.httpPort}";
+      proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
     };
   };
 
@@ -108,7 +108,7 @@
     };
 
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
+  services.openssh.settings.PermitRootLogin = "yes";
 
   systemd.extraConfig = ''
     DefaultTimeoutStartSec=900s

@@ -12,12 +12,12 @@
 
   age.secrets.main-user-pwd.file = ../../secrets/server-user-password.age;
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
     ports = [ 65433 ];
+    settings.PasswordAuthentication = false;
   };
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNPzNPVCApezdx9JVaHMGU2ha1NsdnS2FMgCXnzPmLz efim.nefedov@nordigy.ru"
@@ -32,7 +32,7 @@
 
   # is this needed for rs-deploy?
   # https://github.com/serokell/deploy-rs/issues/25
-  nix.trustedUsers = [ "@wheel" "root" ];
+  nix.settings.trusted-users = [ "@wheel" "root" ];
 
   networking.firewall.enable = true;
 

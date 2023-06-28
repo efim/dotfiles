@@ -336,9 +336,9 @@
 ;; minibuffer-local-ns-map C-u
 ;; minibuffer-local-must-match-map C-u
 
-(use-package! 0x0)
-(after! embark
-  (define-key embark-region-map (kbd "U") #'0x0-dwim)) ; probably need to wrap with `after!
+;; (use-package! 0x0)
+;; (after! embark
+;;   (define-key embark-region-map (kbd "U") #'0x0-dwim)) ; probably need to wrap with `after!
 
 (use-package! ox-ssh)
 

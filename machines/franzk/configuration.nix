@@ -6,6 +6,7 @@
     base-server
     inputs.htmx-examples.nixosModules.x86_64-linux.price-grid-app
     inputs.htmx-examples.nixosModules.x86_64-linux.order-summary
+    inputs.htmx-examples.nixosModules.x86_64-linux.testimonials-grid
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
@@ -19,6 +20,11 @@
     enable = true;
     host = "price-summary.frontendmentor.sunshine.industries";
     port = 49012;
+  };
+  services."testimonials-grid-section" = {
+    enable = true;
+    host = "testimonials-grid.frontendmentor.sunshine.industries";
+    port = 49013;
   };
 
   services.syncthing.enable = true;

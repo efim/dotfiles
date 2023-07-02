@@ -7,6 +7,7 @@
     inputs.htmx-examples.nixosModules.x86_64-linux.price-grid-app
     inputs.htmx-examples.nixosModules.x86_64-linux.order-summary
     inputs.htmx-examples.nixosModules.x86_64-linux.testimonials-grid
+    inputs.htmx-examples.nixosModules.x86_64-linux.rock-paper-scissors
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
@@ -25,6 +26,11 @@
     enable = true;
     host = "testimonials-grid.frontendmentor.sunshine.industries";
     port = 49013;
+  };
+  services."rock-paper-scissors" = {
+    enable = true;
+    host = "rock-paper-scissors.frontendmentor.sunshine.industries";
+    port = 49014;
   };
 
   services.syncthing.enable = true;

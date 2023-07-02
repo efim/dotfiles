@@ -215,11 +215,11 @@
         "sbt-derivation": "sbt-derivation"
       },
       "locked": {
-        "lastModified": 1688126334,
-        "narHash": "sha256-axCyEu4R6TMw54OBsega3hIgCPlbfdO2GT78kbK99ek=",
+        "lastModified": 1688302305,
+        "narHash": "sha256-QsRd9AGGxVKgveHobI05D9/Z+GgC1HvVCBWn01s5SAM=",
         "ref": "refs/heads/master",
-        "rev": "b6ba1dfcd0fb8c03a87398d6edeb0ef098f4efaa",
-        "revCount": 52,
+        "rev": "80af2e0fd0c4ccaeed26d2a742d537f623973f69",
+        "revCount": 82,
         "type": "git",
         "url": "http://git.sunshine.industries/efim/Learning-HTMX.git"
       },

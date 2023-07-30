@@ -17,10 +17,10 @@
       name = "Adwaita-dark";
       package = pkgs.pop-gtk-theme;
     };
-    iconTheme = {
-      name = "Pop";
-      package = pkgs.pop-icon-theme;
-    };
+    # iconTheme = {
+    #   name = "Pop";
+    #   package = pkgs.pop-icon-theme;
+    # };
     font.name = "Roboto Condenced 12";
   };
   # home.sessionVariables.GTK_THEME = "Pop-dark";
@@ -108,8 +108,10 @@
     # transmission-qt
     transmission-gtk
     # firefox
-    chromium
+    # chromium
     ferdium
+
+    gnome.gnome-calendar
 
     kubectl
   ];

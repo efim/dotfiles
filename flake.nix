@@ -14,11 +14,10 @@
     homeage.url = "github:jordanisaacs/homeage";
 
     htmx-examples.url = "git+http://git.sunshine.industries/efim/Learning-HTMX.git";
-    # htmx-examples.url = "path:/home/enefedov/Documents/personal/learning-htmx";
+    planning-poker-kazbegi.url = "git+http://git.sunshine.industries/efim/planning-poker-gwargh.git";
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-community-overlay, deploy-rs
-    , htmx-examples, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, deploy-rs, ... }@inputs:
     let
       utils = import ./kinda-utils.nix;
       findModules = utils.findModules;

@@ -8,6 +8,8 @@
     inputs.htmx-examples.nixosModules.x86_64-linux.order-summary
     inputs.htmx-examples.nixosModules.x86_64-linux.testimonials-grid
     inputs.htmx-examples.nixosModules.x86_64-linux.rock-paper-scissors
+
+    inputs.planning-poker-kazbegi.nixosModules.x86_64-linux.backendApp
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
@@ -98,26 +100,17 @@
   };
 
   # # most ugly MVP deploy yet:
+  # the static front end manually copied to server
   services.nginx.virtualHosts."planning-poker.sunshine.industries" = {
     root = "/var/www/planning-poker-grargh"; # copied manually
   };
 
-  services.nginx.virtualHosts."planning-poker.sunshine.industries".locations."/api" =
-    {
-      proxyPass = "http://127.0.0.1:8080"; # started manually
-      extraConfig = ''
-        rewrite ^/api/(.*)$ /$1 break;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-
-        # Add the following lines for WebSocket support
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-      '';
-    };
+  # enables systemd service with backend, and nginx config with websocket
+  services."planning-poker-kazbegi-backend" = {
+    enable = true;
+    host = "planning-poker.sunshine.industries";
+    port = 8080;
+  };
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";

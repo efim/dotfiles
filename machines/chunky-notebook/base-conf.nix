@@ -23,9 +23,11 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 15;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # ^ from https://serverfault.com/questions/997055/nixos-rebuild-switch-fails-with-no-space-left-on-device
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.useOSProber = true;
+
 
   # from researching remote deployment to arm systems
   # https://sgt.hootr.club/molten-matter/nixops-on-the-pi/
@@ -105,7 +107,8 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     # A hashed password can be generated using mkpasswd -m sha-512. Or root can set with `passwd`
-    passwordFile = ""; # TODO when I recover my chunky, fix this
+    hashedPassword = "$6$cfSalLM6exqFaA7x$BjOLrT1bGxps3GDXIUOP/5NSVz3OSEPqxmwiILGK5n455Yq4yvwVwYe0vljREHsXgDIG/4p2d4RvdhFo3cKub.";
+    # passwordFile = ""; # TODO when I recover my chunky, fix this
   };
 
   services.localtimed.enable = true;

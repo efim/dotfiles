@@ -6,6 +6,16 @@
   home-manager.useUserPackages = true; # needed to use fonts from User declaration
   services.tailscale.enable = true;
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+  };
+
   home-manager.users.efim = {
     # to add `inputs` as call attribute to imported modules
     _module.args.inputs = inputs;
@@ -25,6 +35,11 @@
     programs.git = {
       userName = "efim";
       userEmail = "efim.wool@gmail.com";
+    };
+
+    services.kdeconnect = {
+      enable = true;
+      indicator = true;
     };
 
     my-screen-locker.isNixManaged = true;

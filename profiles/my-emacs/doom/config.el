@@ -378,23 +378,23 @@ any directory proferred by `consult-dir'."
 
 
 
-(use-package ensime-mode
-  :ensure nil
-  :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
-  ;; :load-path "~/Downloads/ensime-tng-3.0.12/lisp/"
-  :commands ensime-mode
-  :bind
-  (:map ensime-mode-map
-        ("C-c <tab> g" . ensime-jump-to-definition)
-        ("C-c <tab> t" . ensime-type-at-point)
-        ("C-c <tab> s" . ensime-symbol-at-point)
-        ("C-c <tab> i" . ensime-import-symbol-at-point)))
+;; (use-package ensime-mode
+;;   :ensure nil
+;;   :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
+;;   ;; :load-path "~/Downloads/ensime-tng-3.0.12/lisp/"
+;;   :commands ensime-mode
+;;   :bind
+;;   (:map ensime-mode-map
+;;         ("C-c <tab> g" . ensime-jump-to-definition)
+;;         ("C-c <tab> t" . ensime-type-at-point)
+;;         ("C-c <tab> s" . ensime-symbol-at-point)
+;;         ("C-c <tab> i" . ensime-import-symbol-at-point)))
 
-(advice-add #'ensime-jump-to-definition :after #'better-jumper-set-jump)
+;; (advice-add #'ensime-jump-to-definition :after #'better-jumper-set-jump)
 
-(set-company-backend! 'scala-mode
-  'ensime-company)
-(add-hook 'scala-mode-hook #'ensime-mode)
+;; (set-company-backend! 'scala-mode
+;;   'ensime-company)
+;; (add-hook 'scala-mode-hook #'ensime-mode)
 
 (use-package! org-pomodoro-third-time :init)
 

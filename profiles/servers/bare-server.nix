@@ -53,4 +53,6 @@
 
   services.tailscale.enable = true;
 
+  time.timeZone = "UTC";
+
 }

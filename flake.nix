@@ -15,6 +15,7 @@
 
     htmx-examples.url = "git+http://git.sunshine.industries/efim/Learning-HTMX.git";
     planning-poker-kazbegi.url = "git+http://git.sunshine.industries/efim/planning-poker-gwargh.git";
+    go-ssr-oauth-attempt.url = "git+http://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt.git";
   };
 
   outputs = { self, nixpkgs, home-manager, deploy-rs, ... }@inputs:

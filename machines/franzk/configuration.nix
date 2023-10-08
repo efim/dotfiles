@@ -10,9 +10,17 @@
     inputs.htmx-examples.nixosModules.x86_64-linux.rock-paper-scissors
 
     inputs.planning-poker-kazbegi.nixosModules.x86_64-linux.backendApp
+
+    inputs.go-ssr-oauth-attempt.nixosModules.x86_64-linux.auth-pocketbase-attempt
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
+
+  services.auth-pocketbase-attempt = {
+    enable = true;
+    host = "go-ssr-oauth-attempt.sunshine.industries";
+    port = 45001;
+  };
 
   services.priceGridService = {
     enable = true;

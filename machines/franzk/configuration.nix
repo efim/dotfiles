@@ -16,10 +16,15 @@
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
 
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "efim.wool@posteo.net";
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   services.auth-pocketbase-attempt = {
     enable = true;
     host = "go-ssr-oauth-attempt.sunshine.industries";
     port = 45001;
+    useHostTls = true;
   };
 
   services.priceGridService = {
@@ -54,7 +59,6 @@
   services.nginx.virtualHosts."franzk.efim.github.beta.tailscale.net" = {
     locations."/" = { proxyPass = "http://127.0.0.1:8384"; };
   };
-  networking.firewall.allowedTCPPorts = [ 80 ];
 
   age.secrets.secret1.file = ../../secrets/franzk-server-secret.age;
 

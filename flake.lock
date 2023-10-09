@@ -459,11 +459,11 @@
         "sbt-derivation": "sbt-derivation_2"
       },
       "locked": {
-        "lastModified": 1691342226,
-        "narHash": "sha256-kfXfBrdR82YYCpG7a0Aqn/53HT2B7Cp23h+7b0drQq4=",
+        "lastModified": 1696821778,
+        "narHash": "sha256-GMht73Uz/jXr1tvYqD5NaPhnFWdNMhawVQuW1Zz3Hoo=",
         "ref": "refs/heads/master",
-        "rev": "fe9794a796d674366f566e798cad6f81ee0ac148",
-        "revCount": 66,
+        "rev": "e4edffd69f0e53fac865c2dea5c446833b44b777",
+        "revCount": 68,
         "type": "git",
         "url": "http://git.sunshine.industries/efim/planning-poker-gwargh.git"
       },

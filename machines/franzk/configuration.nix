@@ -122,6 +122,7 @@
     enable = true;
     host = "planning-poker.sunshine.industries";
     port = 8080;
+    useHostTls = true;
   };
 
   services.openssh.enable = true;

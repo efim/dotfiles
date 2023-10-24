@@ -13,9 +13,9 @@
     agenix.url = "github:ryantm/agenix"; # welp, that's only for servers
     homeage.url = "github:jordanisaacs/homeage";
 
-    htmx-examples.url = "git+http://git.sunshine.industries/efim/Learning-HTMX.git";
-    planning-poker-kazbegi.url = "git+http://git.sunshine.industries/efim/planning-poker-gwargh.git";
-    go-ssr-oauth-attempt.url = "git+http://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt.git";
+    htmx-examples.url = "git+https://git.sunshine.industries/efim/Learning-HTMX.git";
+    planning-poker-kazbegi.url = "git+https://git.sunshine.industries/efim/planning-poker-gwargh.git";
+    go-ssr-oauth-attempt.url = "git+https://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git";
   };
 
   outputs = { self, nixpkgs, home-manager, deploy-rs, ... }@inputs:

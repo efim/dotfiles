@@ -206,11 +206,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1696797643,
-        "narHash": "sha256-Bpc3ymxc42lRRnXTUnJrpMu+9T1YyWQwE95gyv/kAv8=",
+        "lastModified": 1696837529,
+        "narHash": "sha256-e4PW7TMwfj4WXu76z2LouCeRuPHtSEhZB2ujuUUB7Ro=",
         "ref": "refs/heads/main",
-        "rev": "875de35177462f21732e3ba108a94d77a543da05",
-        "revCount": 15,
+        "rev": "88422353726e9401c12c15e7e5b97a6ec7a6a292",
+        "revCount": 20,
         "type": "git",
         "url": "http://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt.git"
       },

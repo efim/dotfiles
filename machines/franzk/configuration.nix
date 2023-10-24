@@ -77,6 +77,8 @@
     # ssh.clonePort = 65433;
   };
   services.nginx.virtualHosts."git.sunshine.industries" = {
+    forceSSL = true;
+    enableACME = true;
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
     };
@@ -108,6 +110,8 @@
   };
 
   services.nginx.virtualHosts."death-calendar.sunshine.industries" = {
+    forceSSL = true;
+    enableACME = true;
     root = "/var/www/life-expectancy-cal";
   };
 

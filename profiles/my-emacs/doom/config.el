@@ -53,7 +53,7 @@
 
 (use-package! ob-mermaid
   :init
-  (setq ob-mermaid-cli-path "/home/efim/.nix-profile/bin/mmdc"))
+  (setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc"))
 
 (use-package! lispyville
   :init

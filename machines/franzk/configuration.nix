@@ -12,6 +12,7 @@
     inputs.planning-poker-kazbegi.nixosModules.x86_64-linux.backendApp
 
     inputs.go-ssr-oauth-attempt.nixosModules.x86_64-linux.auth-pocketbase-attempt
+    inputs.some-automoderation.nixosModules.x86_64-linux.some-automoderation-module
   ];
 
   # environment.systemPackages = [ inputs.htmx-examples.packages.x86_64-linux.price-grid-app ];
@@ -27,6 +28,14 @@
     useHostTls = true;
   };
 
+  services.some-automoderation = {
+    enable = true;
+    host = "some-automoderation.sunshine.industries";
+    useNginx = true;
+    useHostTls = true;
+    port = 45002;
+    redisPort = 45003;
+  };
   services.priceGridService = {
     enable = true;
     host = "price-grid.frontendmentor.sunshine.industries";

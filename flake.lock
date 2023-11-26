@@ -589,11 +589,11 @@
         "nixpkgs-stable": "nixpkgs-stable_3"
       },
       "locked": {
-        "lastModified": 1700970952,
-        "narHash": "sha256-IL7ezBmm+kPx4aw5ZRaxLL7Gx5xAArurmE36U8/QcVs=",
+        "lastModified": 1700974268,
+        "narHash": "sha256-W9Zp1YIRZ3dpIhjJQYK6aDsyuF8NC0248HtvQS89mcI=",
         "ref": "refs/heads/master",
-        "rev": "1a567c6e12e12e6fccbee2c28553c85b674cc5ba",
-        "revCount": 71,
+        "rev": "f279f8ae05c207d7d304b5592a7eb1bc5216d401",
+        "revCount": 72,
         "type": "git",
         "url": "ssh://gitea@git.sunshine.industries:65433/efim/some-automoderation.git"
       },

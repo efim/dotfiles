@@ -35,35 +35,6 @@
 
       myRoles = import ./roles;
 
-      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.some-automoderation.nixosModules.x86_64-linux.some-automoderation-module
-          ({ ... }: {
-            nix = {
-              extraOptions = ''
-                experimental-features = nix-command flakes
-              '';
-            };
-            users.groups.test = {};
-            users.mutableUsers = false;
-            users.users.test = {
-              isNormalUser = true;
-              password = "test";
-              extraGroups = [ "wheel" "networkmanager" ];
-              group = "test";
-            };
-            services.some-automoderation = {
-              enable = true;
-              host = "some-automoderation.sunshine.industries";
-              useNginx = false;
-              port = 9090;
-              redisPort = 9999;
-            };
-          })
-        ];
-      };
-
       nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./machines/chunky-notebook/base-conf.nix ];

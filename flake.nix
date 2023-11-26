@@ -13,9 +13,14 @@
     agenix.url = "github:ryantm/agenix"; # welp, that's only for servers
     homeage.url = "github:jordanisaacs/homeage";
 
-    htmx-examples.url = "git+https://git.sunshine.industries/efim/Learning-HTMX.git";
-    planning-poker-kazbegi.url = "git+https://git.sunshine.industries/efim/planning-poker-gwargh.git";
-    go-ssr-oauth-attempt.url = "git+https://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git";
+    htmx-examples.url =
+      "git+ssh://gitea@git.sunshine.industries:65433/efim/Learning-HTMX.git";
+    planning-poker-kazbegi.url =
+      "git+ssh://gitea@git.sunshine.industries:65433/efim/planning-poker-gwargh.git";
+    go-ssr-oauth-attempt.url =
+      "git+ssh://gitea@git.sunshine.industries:65433/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git";
+    some-automoderation.url =
+      "git+ssh://gitea@git.sunshine.industries:65433/efim/some-automoderation.git";
   };
 
   outputs = { self, nixpkgs, home-manager, deploy-rs, ... }@inputs:
@@ -29,6 +34,35 @@
       myProfiles = builtins.listToAttrs (findModules ./profiles);
 
       myRoles = import ./roles;
+
+      nixosConfigurations.container = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          inputs.some-automoderation.nixosModules.x86_64-linux.some-automoderation-module
+          ({ ... }: {
+            nix = {
+              extraOptions = ''
+                experimental-features = nix-command flakes
+              '';
+            };
+            users.groups.test = {};
+            users.mutableUsers = false;
+            users.users.test = {
+              isNormalUser = true;
+              password = "test";
+              extraGroups = [ "wheel" "networkmanager" ];
+              group = "test";
+            };
+            services.some-automoderation = {
+              enable = true;
+              host = "some-automoderation.sunshine.industries";
+              useNginx = false;
+              port = 9090;
+              redisPort = 9999;
+            };
+          })
+        ];
+      };
 
       nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

@@ -200,6 +200,24 @@
         "type": "github"
       }
     },
+    "flake-utils_7": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "go-ssr-oauth-attempt": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -212,11 +230,11 @@
         "rev": "c3d496c36c82c5995407cbb916f6fa4860f0631a",
         "revCount": 21,
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git"
       },
       "original": {
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/go-ssr-pocketbase-oauth-attempt-github-mirror.git"
       }
     },
     "home-manager": {
@@ -291,11 +309,11 @@
         "rev": "64dfd3c5b2755b33ffdbf8e4ec22aa3937fe8c01",
         "revCount": 185,
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/Learning-HTMX.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/Learning-HTMX.git"
       },
       "original": {
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/Learning-HTMX.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/Learning-HTMX.git"
       }
     },
     "nixpkgs": {
@@ -342,6 +360,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable_3": {
+      "locked": {
+        "lastModified": 1699169573,
+        "narHash": "sha256-cvUb1xZkvOp3W2SzylStrTirhVd9zCeo5utJl9nSIhw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "aeefe2054617cae501809b82b44a8e8f7be7cc4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-23.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -452,6 +486,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_9": {
+      "locked": {
+        "lastModified": 1699099776,
+        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "planning-poker-kazbegi": {
       "inputs": {
         "flake-utils": "flake-utils_5",
@@ -465,11 +515,11 @@
         "rev": "e4edffd69f0e53fac865c2dea5c446833b44b777",
         "revCount": 68,
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/planning-poker-gwargh.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/planning-poker-gwargh.git"
       },
       "original": {
         "type": "git",
-        "url": "https://git.sunshine.industries/efim/planning-poker-gwargh.git"
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/planning-poker-gwargh.git"
       }
     },
     "root": {
@@ -483,7 +533,8 @@
         "htmx-examples": "htmx-examples",
         "nixpkgs": "nixpkgs_7",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "planning-poker-kazbegi": "planning-poker-kazbegi"
+        "planning-poker-kazbegi": "planning-poker-kazbegi",
+        "some-automoderation": "some-automoderation"
       }
     },
     "sbt-derivation": {
@@ -529,6 +580,26 @@
         "ref": "master",
         "repo": "sbt-derivation",
         "type": "github"
+      }
+    },
+    "some-automoderation": {
+      "inputs": {
+        "flake-utils": "flake-utils_7",
+        "nixpkgs": "nixpkgs_9",
+        "nixpkgs-stable": "nixpkgs-stable_3"
+      },
+      "locked": {
+        "lastModified": 1700970952,
+        "narHash": "sha256-IL7ezBmm+kPx4aw5ZRaxLL7Gx5xAArurmE36U8/QcVs=",
+        "ref": "refs/heads/master",
+        "rev": "1a567c6e12e12e6fccbee2c28553c85b674cc5ba",
+        "revCount": 71,
+        "type": "git",
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/some-automoderation.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://gitea@git.sunshine.industries:65433/efim/some-automoderation.git"
       }
     },
     "systems": {
@@ -577,6 +648,21 @@
       }
     },
     "systems_4": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

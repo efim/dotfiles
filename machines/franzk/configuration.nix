@@ -33,6 +33,7 @@
     host = "some-automoderation.sunshine.industries";
     useNginx = true;
     useHostTls = true;
+    enablePrometheus = true;
     port = 45002;
     redisPort = 45003;
   };
@@ -61,7 +62,7 @@
   # nginx reverse proxy
   services.nginx = {
     enable = true;
-    serverNamesHashBucketSize = 128;  # to allow longer domain names
+    serverNamesHashBucketSize = 128; # to allow longer domain names
   };
   # yay, even without personal dns, I can have one domain per host with tailscala MagicDNS
   # not perfect, but ok
@@ -89,7 +90,9 @@
     forceSSL = true;
     enableACME = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.services.gitea.settings.server.HTTP_PORT}";
+      proxyPass = "http://127.0.0.1:${
+          toString config.services.gitea.settings.server.HTTP_PORT
+        }";
     };
   };
 
@@ -136,6 +139,19 @@
     host = "planning-poker.sunshine.industries";
     port = 8080;
     useHostTls = true;
+  };
+
+  services.grafana = {
+    enable = true;
+    settings.server.http_port = 44400;
+    settings.server.http_addr = "0.0.0.0";
+    provision.datasources = {
+      settings.datasources = [{
+        name = "local-prometheus";
+        type = "prometheus";
+        url = "http://localhost:${toString config.services.prometheus.port}";
+      }];
+    };
   };
 
   services.openssh.enable = true;

@@ -131,7 +131,7 @@ additionalKeys =
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ("M-b", sendMessage ToggleStruts)
+    , ("M-b", sendMessage ToggleStruts)
     -- Quit xmonad
     , ("M-S-q", io (exitWith ExitSuccess))
     -- Restart xmonad

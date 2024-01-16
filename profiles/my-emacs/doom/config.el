@@ -475,5 +475,32 @@ any directory proferred by `consult-dir'."
     (projectile-run-shell-command-in-root command)
     (revert-buffer t t)))
 
+(defun avy-action-embark (pt)
+  (unwind-protect
+      (save-excursion
+        (goto-char pt)
+        (embark-act))
+    (select-window
+     (cdr (ring-ref avy-ring 0))))
+  t)
+
+
+(use-package avy
+  :config
+  (avy-setup-default)
+  (global-set-key (kbd "C-c C-j") 'avy-resume)
+  (global-set-key (kbd "C-'") 'avy-goto-char)
+  (global-set-key (kbd "C-\"") 'avy-goto-char-timer)
+  (global-set-key (kbd "M-g M-g") 'avy-goto-line)
+  (global-set-key (kbd "M-g e") 'avy-goto-word-0)
+  (global-set-key (kbd "M-j") 'avy-goto-char-timer)
+  (setf (alist-get ?. avy-dispatch-alist) 'avy-action-embark))
+
+(setq!
+ isearch-allow-motion 't)
+
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-i") 'imenu)
+
 (server-start)
 (epa-file-enable)

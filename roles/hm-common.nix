@@ -92,7 +92,7 @@
     openconnect
     shutter
     flameshot
-    gnucash
+    # gnucash
 
     zip
     unzip

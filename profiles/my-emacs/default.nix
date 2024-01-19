@@ -35,6 +35,7 @@ with lib;
     home.packages = with pkgs; [
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
+      libgccjit # for emacs jit compilation
       metals
       nailgun
       scalafmt
@@ -66,6 +67,15 @@ with lib;
       source = ./doom;
       recursive = true;
 #      onChange = builtins.readFile ./setup.sh;
+    };
+
+    xdg.configFile."my-emacs-experiment" = {
+    					 source = ./my-emacs-experiment;
+					 recursive = true;
+    };
+
+    programs.bash.shellAliases = {
+        pure-emacs = "emacs --init-directory=~/.config/my-emacs-experiment &";
     };
 
 }

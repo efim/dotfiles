@@ -70,8 +70,8 @@ with lib;
     };
 
     xdg.configFile."my-emacs-experiment" = {
-    					 source = ./my-emacs-experiment;
-					 recursive = true;
+      source = ./my-emacs-experiment;
+      recursive = true;
     };
 
     programs.bash.shellAliases = {

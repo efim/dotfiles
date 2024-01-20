@@ -33,6 +33,20 @@
 ;; Block until current queue processed.
 (elpaca-wait)
 
+(defun +elpaca-unload-seq (e)
+  (and (featurep 'seq) (unload-feature 'seq t))
+  (elpaca--continue-build e))
+
+;; You could embed this code directly in the reicpe, I just abstracted it into a function.
+;; issue with workaround https://github.com/progfolio/elpaca/issues/216
+;; issue to track about updating built-ins https://github.com/progfolio/elpaca/issues/236tt
+(defun +elpaca-seq-build-steps ()
+  (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
+                       elpaca--pre-built-steps elpaca-build-steps))
+          (list '+elpaca-unload-seq 'elpaca--activate-package)))
+
+(use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
+
 (use-package avy
   :config
   (avy-setup-default)
@@ -122,7 +136,9 @@
   (global-set-key (kbd "C-x 4 b") #'consult-buffer-other-window)
   (global-set-key (kbd "C-x 5 b") #'consult-buffer-other-frame)
   (global-set-key (kbd "C-x t b") #'consult-buffer-other-tab)
-  (global-set-key (kbd "M-s d") #'consult-ripgrep))
+  (global-set-key (kbd "M-s d") #'consult-ripgrep)
+  :bind (("C-c j" . #'consult-mark)
+	 ("C-c J" . #'consult-global-mark)))
 
 (use-package helpful
   :config
@@ -134,7 +150,7 @@
 
 (global-set-key (kbd "M-o") #'other-window)
 (global-set-key (kbd "M-i") #'consult-imenu)
-(global-set-key (kbd "M-S-z") #'zap-up-to-char)
+(global-set-key (kbd "C-M-z") #'zap-up-to-char)
 
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
@@ -156,9 +172,39 @@
 
 (use-package dash)
 
-(use-package ef-themes)
+(use-package ef-themes
+  :config
+  (setq ef-themes-to-toggle '(ef-light ef-night)))
 
-;; (require 'testing-roam-w-transient.el)
+;;; here will be stuff about coding
+
+(use-package magit
+  :config
+  (setq magit-define-global-key-bindings 'recommended))
+  ;; sets C-x g for magit status, C-c g for dispatch, and C-c f for file dispatch)
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+(use-package go-mode
+  :config
+  (add-hook 'go-mode-hook 'lsp-deferred)
+  :bind
+  (:map go-mode-map
+   ("C-c C-d" . #'eldoc-doc-buffer)))
+
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+(use-package yasnippet-snippets)
+(use-package consult-yasnippet)
+
+(use-package envrc
+  :config
+  (envrc-global-mode))
+
+;;; end of coding things
+
 (elpaca-wait)
 (load "~/Documents/personal/my-emacs-config/testing-roam-w-transient.el")
 (custom-set-variables

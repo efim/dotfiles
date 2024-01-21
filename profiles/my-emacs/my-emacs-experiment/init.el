@@ -150,7 +150,7 @@
 
 (global-set-key (kbd "M-o") #'other-window)
 (global-set-key (kbd "M-i") #'consult-imenu)
-(global-set-key (kbd "C-M-z") #'zap-up-to-char)
+(global-set-key (kbd "M-Z") #'zap-up-to-char) ; similarity to M-z zap-to-char
 
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
@@ -187,8 +187,8 @@
   :mode "\\.nix\\'")
 
 (use-package go-mode
-  :config
-  (add-hook 'go-mode-hook 'lsp-deferred)
+  :hook
+  (go-mode . eglot-ensure)
   :bind
   (:map go-mode-map
    ("C-c C-d" . #'eldoc-doc-buffer)))
@@ -203,6 +203,30 @@
   :config
   (envrc-global-mode))
 
+(use-package cape)
+(use-package company-web)		; this pulls in company in full
+;; https://github.com/smihica/emmet-mode#html-abbreviations
+(use-package emmet-mode
+  :hook
+  (web-mode . emmet-mode))
+
+;; https://kristofferbalintona.me/posts/202203130102/
+(defun my/cape-capf-setup-web-mode ()
+  (let ((result))
+    (dolist (element (list
+		      #'cape-dabbrev
+		      (cape-company-to-capf #'company-web-html)
+		      (cape-company-to-capf #'company-css))
+		      result)
+      (add-to-list 'completion-at-point-functions element))))
+
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.gohtml?\\'" . web-mode))
+  :hook (web-mode . my/cape-capf-setup-web-mode))
+
+(electric-pair-mode)
 ;;; end of coding things
 
 (elpaca-wait)

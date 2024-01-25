@@ -30,6 +30,34 @@
 
 (setf (alist-get ?. avy-dispatch-alist) 'avy-action-embark)
 
+(defun avy-action-kill-whole-line (pt)
+  (save-excursion
+    (goto-char pt)
+    (kill-whole-line))
+  (select-window
+   (cdr
+    (ring-ref avy-ring 0)))
+  t)
+
+(setf (alist-get ?k avy-dispatch-alist) 'avy-action-kill-stay
+      (alist-get ?K avy-dispatch-alist) 'avy-action-kill-whole-line)
+
+(defun avy-action-copy-whole-line (pt)
+  (save-excursion
+    (goto-char pt)
+    (cl-destructuring-bind (start . end)
+        (bounds-of-thing-at-point 'line)
+      (copy-region-as-kill start end)))
+  (select-window
+   (cdr
+    (ring-ref avy-ring 0)))
+  t)
+
+ 
+(setf (alist-get ?W avy-dispatch-alist) 'avy-action-copy-whole-line)
+
+(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?l))
+
 (provide 'karthink-avy-actions)
 ;;; karthink-avy-actions.el ends here
 

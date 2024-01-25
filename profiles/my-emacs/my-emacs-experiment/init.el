@@ -47,6 +47,22 @@
 
 (use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
 
+(use-package emacs :elpaca nil
+  :config
+  (setq use-package-enable-imenu-support t)
+  (global-unset-key (kbd "C-<backspace>"))
+  :bind (("C-x C-k" . kill-region)
+	 ("C-x C-k" . kill-region)
+	 ("M-d" . kill-region)
+	 ("C-w" . backward-kill-word)
+	 ("M-o" . other-window)
+	 ("M-i" . consult-imenu)
+	 ("M-Z". zap-up-to-char)))
+
+;(global-set-key (kbd "M-o") #'other-window) 
+;(global-set-key (kbd "M-i") #'consult-imenu)
+;(global-set-key (kbd "M-Z") #'zap-up-to-char) ; similarity to M-z zap-to-char
+
 (use-package avy
   :config
   (avy-setup-default)
@@ -59,7 +75,7 @@
 
   (global-set-key (kbd "M-g M-g") 'avy-goto-line)
   (global-set-key (kbd "M-g e") 'avy-goto-word-0)
-  (load "~/Documents/personal/my-emacs-config/karthink-avy-actions.el")
+  (load "~/dotfiles/profiles/my-emacs/my-emacs-experiment/karthink-avy-actions.el")
   )
 
 (use-package vertico
@@ -95,14 +111,11 @@
 
 (use-package embark
   :ensure t
-
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :bind (("C-." . embark-act)	      ;; pick some comfortable binding
+	 ("C-;" . embark-dwim)	      ;; good alternative: M-.
+	 ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
 
   :init
-
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
 
@@ -116,7 +129,6 @@
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
   :config
-
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -146,11 +158,11 @@
   (global-set-key (kbd "C-h v") #'helpful-variable)
   (global-set-key (kbd "C-h k") #'helpful-key)
   (global-set-key (kbd "C-h x") #'helpful-command)
-  (global-set-key (kbd "C-c C-d") #'helpful-at-point))
-
-(global-set-key (kbd "M-o") #'other-window)
-(global-set-key (kbd "M-i") #'consult-imenu)
-(global-set-key (kbd "M-Z") #'zap-up-to-char) ; similarity to M-z zap-to-char
+;  (global-set-key (kbd "C-c C-d") #'helpful-at-point)
+  :bind (:map help-map
+	      ("o" . helpful-symbol)
+	 :map emacs-lisp-mode-map
+	      ("C-c C-d" . helpful-at-point)))
 
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
@@ -190,8 +202,7 @@
   :hook
   (go-mode . eglot-ensure)
   :bind
-  (:map go-mode-map
-   ("C-c C-d" . #'eldoc-doc-buffer)))
+  (:map go-mode-map ("C-c C-d" . #'eldoc-doc-buffer)))
 
 (use-package yasnippet
   :config

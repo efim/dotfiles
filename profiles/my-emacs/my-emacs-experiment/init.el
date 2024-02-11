@@ -237,6 +237,8 @@
   (add-to-list 'auto-mode-alist '("\\.gohtml?\\'" . web-mode))
   :hook (web-mode . my/cape-capf-setup-web-mode))
 
+(use-package eat)
+
 (electric-pair-mode)
 ;;; end of coding things
 

@@ -49,8 +49,35 @@
 
 (use-package emacs :elpaca nil
   :config
-  (setq use-package-enable-imenu-support t)
   (global-unset-key (kbd "C-<backspace>"))
+  (tab-bar-mode -1)
+  (tool-bar-mode -1)
+  (setq treesit-language-source-alist
+  '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+    (scala "https://github.com/tree-sitter/tree-sitter-scala")
+    (c "https://github.com/tree-sitter/tree-sitter-c")
+    (cmake "https://github.com/uyha/tree-sitter-cmake")
+    (common-lisp "https://github.com/theHamsta/tree-sitter-commonlisp")
+    (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+    (css "https://github.com/tree-sitter/tree-sitter-css")
+    (csharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+    (go "https://github.com/tree-sitter/tree-sitter-go")
+    (go-mod "https://github.com/camdencheek/tree-sitter-go-mod")
+    (html "https://github.com/tree-sitter/tree-sitter-html")
+    (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+    (json "https://github.com/tree-sitter/tree-sitter-json")
+    (lua "https://github.com/Azganoth/tree-sitter-lua")
+    (make "https://github.com/alemuller/tree-sitter-make")
+    (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+    (python "https://github.com/tree-sitter/tree-sitter-python")
+    (r "https://github.com/r-lib/tree-sitter-r")
+    (rust "https://github.com/tree-sitter/tree-sitter-rust")
+    (toml "https://github.com/tree-sitter/tree-sitter-toml")
+    (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+    (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+    (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
   :bind (("C-x C-k" . kill-region)
 	 ("C-x C-k" . kill-region)
 	 ("M-d" . kill-region)
@@ -135,12 +162,6 @@
                  nil
                  (window-parameters (mode-line-format . none)))))
 
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
 (use-package consult
   :config
   (global-set-key (kbd "M-y") #'consult-yank-pop)
@@ -149,8 +170,14 @@
   (global-set-key (kbd "C-x 5 b") #'consult-buffer-other-frame)
   (global-set-key (kbd "C-x t b") #'consult-buffer-other-tab)
   (global-set-key (kbd "M-s d") #'consult-ripgrep)
-  :bind (("C-c j" . #'consult-mark)
-	 ("C-c J" . #'consult-global-mark)))
+  :bind (("C-x j" . #'consult-mark)
+	 ("C-x J" . #'consult-global-mark)))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package helpful
   :config
@@ -190,6 +217,7 @@
 
 ;;; here will be stuff about coding
 
+
 (use-package magit
   :config
   (setq magit-define-global-key-bindings 'recommended))
@@ -203,6 +231,22 @@
   (go-mode . eglot-ensure)
   :bind
   (:map go-mode-map ("C-c C-d" . #'eldoc-doc-buffer)))
+
+(use-package scala-ts-mode
+  :hook
+  (scala-ts-mode . ensime-mode))
+
+(use-package ensime-mode
+  :ensure nil
+  :elpaca nil
+  :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
+  :commands ensime-mode
+  :bind
+  (:map ensime-mode-map
+        ("M-." . ensime-jump-to-definition)
+        ("C-c C-i t" . ensime-type-at-point)
+        ("C-c C-i s" . ensime-symbol-at-point)
+        ("C-c C-r i" . ensime-import-symbol-at-point)))
 
 (use-package yasnippet
   :config

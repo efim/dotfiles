@@ -21,7 +21,7 @@
 
 (set-frame-font "Iosevka 15" nil t)
 
-(load "~/Documents/personal/my-emacs-config/elpaca-init.el")
+(load "~/.config/my-emacs-experiment/elpaca-init.el")
 
 ;; install use-package support
 (elpaca elpaca-use-package
@@ -52,6 +52,7 @@
   (global-unset-key (kbd "C-<backspace>"))
   (tab-bar-mode -1)
   (tool-bar-mode -1)
+  (tab-bar-history-mode 1)
   (setq treesit-language-source-alist
   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
     (scala "https://github.com/tree-sitter/tree-sitter-scala")
@@ -84,11 +85,10 @@
 	 ("C-w" . backward-kill-word)
 	 ("M-o" . other-window)
 	 ("M-i" . consult-imenu)
-	 ("M-Z". zap-up-to-char)))
-
-;(global-set-key (kbd "M-o") #'other-window) 
-;(global-set-key (kbd "M-i") #'consult-imenu)
-;(global-set-key (kbd "M-Z") #'zap-up-to-char) ; similarity to M-z zap-to-char
+	 ("M-Z". zap-up-to-char)
+	 ("C-x C-z" . suspend-frame)
+	 ("C-z" . repeat)
+	 ("C-S-z" . repeat-complex-command)))
 
 (use-package avy
   :config
@@ -200,6 +200,10 @@
 
 (put 'upcase-region 'disabled nil)
 
+(use-package dired :elpaca nil
+      :init
+      (add-hook 'dired-mode-hook #'hl-line-mode))
+
 (use-package org-journal
   :init
   ;; Change default prefix key; needs to be loading org-journal
@@ -281,10 +285,25 @@
   (add-to-list 'auto-mode-alist '("\\.gohtml?\\'" . web-mode))
   :hook (web-mode . my/cape-capf-setup-web-mode))
 
-(use-package eat)
+(use-package eat
+  :bind
+  (("C-c j" . avy-goto-char-timer))
+  (:repeat-map my/eat-repeat-map
+	       ("p" . eat-previous-shell-prompt)
+	       ("n" . eat-next-shell-prompt)))
 
 (electric-pair-mode)
 ;;; end of coding things
+
+;; creation of html files from buffers, with themed styling
+(use-package htmlize)
+
+(use-package writeroom-mode)
+
+;; https://www.masteringemacs.org/article/re-builder-interactive-regexp-builder
+(use-package re-builder :elpaca nil
+  :config
+  (setq reb-re-syntax 'string))
 
 (elpaca-wait)
 (load "~/Documents/personal/my-emacs-config/testing-roam-w-transient.el")

@@ -180,13 +180,11 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package helpful
-  :config
-  (global-set-key (kbd "C-h f") #'helpful-callable)
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key)
-  (global-set-key (kbd "C-h x") #'helpful-command)
-;  (global-set-key (kbd "C-c C-d") #'helpful-at-point)
-  :bind (:map help-map
+  :bind (("C-h f" . #'helpful-callable)
+	 ("C-h v" . #'helpful-variable)
+	 ("C-h k" . #'helpful-key)
+	 ("C-h x" . #'helpful-command)
+	 :map help-map
 	      ("o" . helpful-symbol)
 	 :map emacs-lisp-mode-map
 	      ("C-c C-d" . helpful-at-point)))

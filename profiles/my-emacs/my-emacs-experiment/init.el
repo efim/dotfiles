@@ -285,12 +285,32 @@
   (add-to-list 'auto-mode-alist '("\\.gohtml?\\'" . web-mode))
   :hook (web-mode . my/cape-capf-setup-web-mode))
 
+(defun my/setup-eat-visual ()
+  "Configure minor modes for hooking into eat-mode."
+  (display-line-numbers-mode 0))
+(defun my/new-eat-other-frame ()
+  "Call the `eat` with single universal argument in a new frame."
+  (interactive)
+  (select-frame (make-frame))
+  (let ((current-prefix-arg '(4)))
+    (call-interactively #'eat)))
+(defun my/eat-kill-frame ()
+  "Send stop, kill buffer and frame."
+  (interactive)
+  (call-interactively #'eat-kill-process)
+  (kill-buffer (current-buffer))
+  (call-interactively #'delete-frame))
+
 (use-package eat
   :bind
-  (("C-c j" . avy-goto-char-timer))
+  (("C-c j" . avy-goto-char-timer)
+   ("C-c T" . my/new-eat-other-frame)
+   ("C-c C-q" . my/eat-kill-frame))
   (:repeat-map my/eat-repeat-map
 	       ("p" . eat-previous-shell-prompt)
-	       ("n" . eat-next-shell-prompt)))
+	       ("n" . eat-next-shell-prompt))
+  :hook
+  ((eat-mode . my/setup-eat-visual)))
 
 (electric-pair-mode)
 ;;; end of coding things

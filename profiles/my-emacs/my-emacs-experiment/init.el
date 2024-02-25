@@ -102,7 +102,7 @@
 
   (global-set-key (kbd "M-g M-g") 'avy-goto-line)
   (global-set-key (kbd "M-g e") 'avy-goto-word-0)
-  (load "~/dotfiles/profiles/my-emacs/my-emacs-experiment/karthink-avy-actions.el")
+  (load "~/.config/my-emacs-experiment/karthink-avy-actions.el")
   )
 
 (use-package vertico
@@ -324,7 +324,7 @@
   (setq reb-re-syntax 'string))
 
 (elpaca-wait)
-(load "~/Documents/personal/my-emacs-config/testing-roam-w-transient.el")
+(load "~/.config/my-emacs-experiment/testing-roam-w-transient.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -52,7 +52,10 @@
   (global-unset-key (kbd "C-<backspace>"))
   (tab-bar-mode -1)
   (tool-bar-mode -1)
+  (menu-bar-mode -1)
   (tab-bar-history-mode 1)
+  (setq view-read-only 1)
+  (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
   (setq treesit-language-source-alist
   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
     (scala "https://github.com/tree-sitter/tree-sitter-scala")

@@ -3,3 +3,4 @@
 /nixpkgs/home.nix
 /nixos/result
 /result
+*.el#

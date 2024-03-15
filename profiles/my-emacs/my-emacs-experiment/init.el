@@ -47,17 +47,8 @@
 
 (use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
 
-(use-package emacs :elpaca nil
-  :config
-  (global-unset-key (kbd "C-<backspace>"))
-  (tab-bar-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (tab-bar-history-mode 1)
-  (setq view-read-only 1)
-  (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
-  (setq treesit-language-source-alist
-  '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+(setq recommended-tree-sitter-sources '((bash "https://github.com/tree-sitter/tree-sitter-bash")
     (scala "https://github.com/tree-sitter/tree-sitter-scala")
     (c "https://github.com/tree-sitter/tree-sitter-c")
     (cmake "https://github.com/uyha/tree-sitter-cmake")
@@ -69,7 +60,7 @@
     (go "https://github.com/tree-sitter/tree-sitter-go")
     (go-mod "https://github.com/camdencheek/tree-sitter-go-mod")
     (html "https://github.com/tree-sitter/tree-sitter-html")
-    (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+    ; (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1" "src")
     (json "https://github.com/tree-sitter/tree-sitter-json")
     (lua "https://github.com/Azganoth/tree-sitter-lua")
     (make "https://github.com/alemuller/tree-sitter-make")
@@ -82,6 +73,16 @@
     (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
+(use-package emacs :elpaca nil
+  :config
+  (global-unset-key (kbd "C-<backspace>"))
+  (tab-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (tab-bar-history-mode 1)
+  (setq view-read-only 1)
+  (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
+  (setq treesit-language-source-alist recommended-tree-sitter-sources)
   :bind (("C-x C-k" . kill-region)
 	 ("C-x C-k" . kill-region)
 	 ("M-d" . kill-region)
@@ -203,7 +204,15 @@
 
 (use-package dired :elpaca nil
       :init
-      (add-hook 'dired-mode-hook #'hl-line-mode))
+      (add-hook 'dired-mode-hook #'hl-line-mode)
+		:config
+		(setq dired-dwim-target t) 		 ; auto insert target dir when Copy with two dired buffers opened
+		)
+
+(use-package org
+  :elpaca nil
+  :config
+  (setq org-use-speed-commands 't))
 
 (use-package org-journal
   :init
@@ -236,6 +245,8 @@
   (go-mode . eglot-ensure)
   :bind
   (:map go-mode-map ("C-c C-d" . #'eldoc-doc-buffer)))
+
+(use-package templ-ts-mode)
 
 (use-package scala-ts-mode
   :hook
@@ -343,7 +354,8 @@
  '(display-line-numbers t)
  '(isearch-allow-motion t)
  '(package-selected-packages '(vterm))
- '(savehist-mode t))
+ '(savehist-mode t)
+ '(tab-width 3))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

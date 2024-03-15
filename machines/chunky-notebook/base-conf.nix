@@ -90,6 +90,9 @@
         enableContribAndExtras = true;
       };
     };
+    ollama = {
+      enable = true;
+    };
   };
 
   # Enable CUPS to print documents.

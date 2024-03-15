@@ -326,6 +326,10 @@
   :config
   (setq reb-re-syntax 'string))
 
+(use-package flyspell
+  :elpaca nil
+  :hook (org-mode org-journal-mode))
+
 (elpaca-wait)
 (load "~/.config/my-emacs-experiment/testing-roam-w-transient.el")
 (custom-set-variables

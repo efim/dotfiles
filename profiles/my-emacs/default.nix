@@ -43,6 +43,11 @@ with lib;
       nixfmt
       pandoc
 
+      aspell
+      aspellDicts.ru
+      aspellDicts.en
+      aspellDicts.en-computers
+      
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       # haskellPackages.Cabal_3_6_2_0

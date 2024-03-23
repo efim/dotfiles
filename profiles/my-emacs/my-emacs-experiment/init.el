@@ -19,7 +19,7 @@
 ;;
 ;;; Code:
 
-(set-frame-font "Iosevka 15" nil t)
+(set-frame-font "Iosevka Comfy 14" nil t)
 
 (load "~/.config/my-emacs-experiment/elpaca-init.el")
 

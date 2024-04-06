@@ -51,9 +51,9 @@ with lib;
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       # haskellPackages.Cabal_3_6_2_0
-      cabal-install
-      stack
-      ghc
+      # cabal-install
+      # stack
+      # ghc
 
       ripgrep
       fd

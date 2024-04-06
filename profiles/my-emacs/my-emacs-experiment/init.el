@@ -305,7 +305,9 @@
   (interactive)
   (select-frame (make-frame))
   (let ((current-prefix-arg '(4)))
-    (call-interactively #'eat)))
+    (call-interactively #'eat)
+	 (toggle-frame-tab-bar)
+	  (set-frame-parameter (selected-frame) 'alpha 90)))
 (defun my/eat-kill-frame ()
   "Send stop, kill buffer and frame."
   (interactive)

@@ -343,6 +343,11 @@
   :elpaca nil
   :hook (org-mode org-journal-mode))
 
+(use-package eww
+  :elpaca nil
+  :config
+  (load "~/.config/my-emacs-experiment/eww-mozilla-readability.el"))
+
 (elpaca-wait)
 (load "~/.config/my-emacs-experiment/testing-roam-w-transient.el")
 (custom-set-variables

@@ -57,6 +57,8 @@ with lib;
 
       ripgrep
       fd
+
+      readability-cli
       
       nodePackages.mermaid-cli
 

@@ -212,7 +212,11 @@
 (use-package org
   :elpaca nil
   :config
-  (setq org-use-speed-commands 't))
+  (setq org-use-speed-commands 't)
+  (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((emacs-lisp . t)
+        (shell . t))))
 
 (use-package org-journal
   :init

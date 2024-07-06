@@ -43,7 +43,6 @@ Config { font = "Iosevka Comfy Bold 12"
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
         , Run UnsafeStdinReader
-        , Run Kbd   []
         , Run Com "/home/efim/.config/xmobar/xmobar-tray-autopadding.sh" ["panel"] "traypad" 100
                     ]
        , sepChar = "%"

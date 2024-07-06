@@ -83,6 +83,9 @@
   (setq view-read-only 1)
   (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
   (setq treesit-language-source-alist recommended-tree-sitter-sources)
+  (setq major-mode-remap-alist
+		  '((scala-mode . scala-ts-mode)
+			 (go-mode . go-ts-mode)))
   :bind (("C-x C-k" . kill-region)
 	 ("C-x C-k" . kill-region)
 	 ("M-d" . kill-region)
@@ -249,6 +252,10 @@
   (go-mode . eglot-ensure)
   :bind
   (:map go-mode-map ("C-c C-d" . #'eldoc-doc-buffer)))
+
+(use-package sly
+  :config
+  (setq inferior-lisp-program "/usr/bin/env sbcl"))
 
 (use-package templ-ts-mode)
 

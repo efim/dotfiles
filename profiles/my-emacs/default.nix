@@ -40,7 +40,7 @@ with lib;
       nailgun
       scalafmt
 
-      nixfmt
+      nixfmt-rfc-style
       pandoc
 
       aspell

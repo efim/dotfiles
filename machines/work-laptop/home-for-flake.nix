@@ -60,9 +60,6 @@
       userEmail = "efim.nefedov@nordigy.ru";
     };
     bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
-    bash.profileExtra = ''
-    source ~/.nix-profile/etc/profile.d/nix.sh
-    '';
   };
 
   # after moving to Fedora, and setting nvidia as primary card

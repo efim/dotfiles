@@ -106,12 +106,12 @@
 
     vlc
     # transmission-qt
-    transmission-gtk
+    transmission_4-gtk
     # firefox
     # chromium
     ferdium
 
-    gnome.gnome-calendar
+    gnome-calendar
 
     kubectl
   ];

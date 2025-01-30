@@ -8,8 +8,6 @@ case $- in
       *) return;;
 esac
 
-source /home/efim/.nix-profile/etc/profile.d/nix.sh
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -45,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-force_color_prompt=yes
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -118,24 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
 export VISUAL=vim
 export EDITOR="$VISUAL"
-alias config='/usr/bin/git --git-dir=/home/efim/dotfiles --work-tree=/home/efim'
-
-# In case using not VGA out, check with /xrandr -q/
-# set dual monitors
-dual () {
-    xrandr --output eDP-1-1 --primary --left-of DP-1-3 --output DP-1-3 --auto
-}
-
-# set single monitor
-single () {
-    xrandr --output DP-1-3 --off
-}
-
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash" && __eat_enable_integration
-
-eval "$(direnv hook bash)"
 
 eval "$(ssh-agent)"

@@ -36,7 +36,7 @@ with lib;
       sqlite # for emacs org-roam
       gcc # for emacs org-roam : "emacsql-sqlite" should be able to compile its binary
       libgccjit # for emacs jit compilation
-      metals
+      # metals
       nailgun
       scalafmt
 
@@ -48,8 +48,8 @@ with lib;
       aspellDicts.en
       aspellDicts.en-computers
       
-      haskellPackages.haskell-language-server
-      haskellPackages.hoogle
+      # haskellPackages.haskell-language-server
+      # haskellPackages.hoogle
       # haskellPackages.Cabal_3_6_2_0
       # cabal-install
       # stack

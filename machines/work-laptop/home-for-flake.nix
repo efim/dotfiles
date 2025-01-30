@@ -10,15 +10,10 @@
 
   imports = with inputs.self.myModules; with inputs.self.myProfiles; [
     inputs.self.myRoles.hm-common
-    xmonad # see `chunky-notebook/home.nix` for some reason `roles` recurses infinitely
-    my-autorandr
+    # xmonad # see `chunky-notebook/home.nix` for some reason `roles` recurses infinitely
     my-emacs
-    my-screen-locker
-    personal
-    mu4e-mail-client
     fonts
     with-deploy
-    ./age-for-home-manager.nix
   ];
 
   # for some reason this config stays "allowUnfree = false" =C
@@ -28,20 +23,7 @@
 
   # home.file.".bashrc".source = ../../.bashrc;
 
-  my-screen-locker.isNixManaged = false;
-
-  my-autorandr = {
-    # laptop display
-    display1 = {
-      name = "eDP-1";
-      fp = "00ffffffffffff0006af3d5700000000001c0104a51f1178022285a5544d9a270e505400000001010101010101010101010101010101b43780a070383e401010350035ae100000180000000f0000000000000000000000000020000000fe0041554f0a202020202020202020000000fe004231343048414e30352e37200a0070";
-    };
-    # samsung via DisplayLink dock station
-    display2 = {
-      name = "DP-1";
-      fp = "00ffffffffffff004c2d23053232524c341301030e301b782a3581a656489a241250542308008100814081809500a940b30001010101023a801871382d40582c4500dd0c1100001e000000fd00383c1e5111000a202020202020000000fc0053796e634d61737465720a2020000000ff00484c4a534330333431300a20200082";
-    };
-  };
+#   my-screen-locker.isNixManaged = false;
 
   # I dont' know why, but under Ubuntu these protective measures broke things
   # and i had
@@ -57,22 +39,9 @@
   programs = {
     git = {
       userName = "efim";
-      userEmail = "efim.nefedov@nordigy.ru";
+      userEmail = "efim.nefedov@ringcentral.com";
     };
     bash.bashrcExtra = builtins.readFile ../../.bashrc; # returned old from Ubuntu bashrc things
-  };
-
-  # after moving to Fedora, and setting nvidia as primary card
-  # installing: https://docs.fedoraproject.org/en-US/quick-docs/how-to-set-nvidia-as-primary-gpu-on-optimus-based-laptops/#_step_8_edit_the_x11_configuration
-  # fedoras sessions through gdm work just after that
-  # https://wiki.archlinux.org/title/NVIDIA_Optimus#Display_managers
-  home.packages = [
-    pkgs.xorg.xrandr
-  ];
-
-  xsession = {
-    profileExtra = "xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto";
   };
 
 

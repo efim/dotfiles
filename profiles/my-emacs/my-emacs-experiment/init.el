@@ -47,6 +47,11 @@
 
 (use-package seq :elpaca `(seq :build ,(+elpaca-seq-build-steps)))
 
+(use-package transient)
+
+(use-package magit
+  :after transient)
+
 ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 (setq recommended-tree-sitter-sources '((bash "https://github.com/tree-sitter/tree-sitter-bash")
     (scala "https://github.com/tree-sitter/tree-sitter-scala")
@@ -92,7 +97,8 @@
 	 ("C-w" . backward-kill-word)
 	 ("M-o" . other-window)
 	 ("M-i" . consult-imenu)
-	 ("M-Z". zap-up-to-char)
+	 ("M-z". zap-up-to-char)
+    ("M-Z". zap-to-char)
 	 ("C-x C-z" . suspend-frame)
 	 ("C-z" . repeat)
 	 ("C-S-z" . repeat-complex-command)))
@@ -259,14 +265,24 @@
 
 (use-package templ-ts-mode)
 
+(defun setup-scala-buffer ()
+  (indent-tabs-mode -1)
+  (setq next-error-function #'flymake-goto-next-error)
+  (message "scala buffer is setup"))
+
 (use-package scala-ts-mode
+  :init
+  (push `(scala-ts-mode . ,(alist-get 'scala-mode eglot-server-programs))
+		  eglot-server-programs)
   :hook
-  (scala-ts-mode . ensime-mode))
+  (scala-ts-mode . eglot-ensure)
+  (scala-ts-mode . setup-scala-buffer))
 
 (use-package ensime-mode
   :ensure nil
   :elpaca nil
-  :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
+  :load-path "~/Documents/repos-other/ensime-tng-3.0.15/lisp/"
+  ;; :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
   :commands ensime-mode
   :bind
   (:map ensime-mode-map
@@ -366,8 +382,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("ec8ff5e2c8a9eb38e49a9bea6297c2194bbe0c03982630d66db1570f5ae83d90" default))
+
+ '(custom-safe-themes '("cee5c56dc8b95b345bfe1c88d82d48f89e0f23008b0c2154ef452b2ce348da37" "c038d994d271ebf2d50fa76db7ed0f288f17b9ad01b425efec09519fa873af53" default))
  '(custom-enabled-themes '(ef-light))
  '(display-line-numbers t)
  '(isearch-allow-motion t)

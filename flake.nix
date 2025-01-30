@@ -47,8 +47,8 @@
           modules = [{
             imports = [ ./machines/work-laptop/home-for-flake.nix ];
             home = {
-              homeDirectory = "/home/enefedov";
-              username = "enefedov";
+              homeDirectory = "/home/efim-nefedov";
+              username = "efim-nefedov";
               stateVersion = "21.11";
             };
             nix.registry.nixpkgs.flake = nixpkgs;

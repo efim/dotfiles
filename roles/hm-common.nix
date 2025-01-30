@@ -11,22 +11,22 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.pop-gtk-theme;
-    };
-    # iconTheme = {
-    #   name = "Pop";
-    #   package = pkgs.pop-icon-theme;
-    # };
-    font.name = "Roboto Condenced 12";
-  };
-  # home.sessionVariables.GTK_THEME = "Pop-dark";
-  home.pointerCursor.package = pkgs.quintom-cursor-theme;
-  home.pointerCursor.name = "Quintom_Snow";
-  home.pointerCursor.x11.enable = true;
+#   gtk = {
+#     enable = true;
+#     theme = {
+#       name = "Adwaita-dark";
+#       package = pkgs.pop-gtk-theme;
+#     };
+#     # iconTheme = {
+#     #   name = "Pop";
+#     #   package = pkgs.pop-icon-theme;
+#     # };
+#     font.name = "Roboto Condenced 12";
+#   };
+#   # home.sessionVariables.GTK_THEME = "Pop-dark";
+#   home.pointerCursor.package = pkgs.quintom-cursor-theme;
+#   home.pointerCursor.name = "Quintom_Snow";
+#   home.pointerCursor.x11.enable = true;
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -37,32 +37,32 @@
       nix-direnv.enable = true;
     };
 
-    fish = {
-      enable = true; # combine with emacs (used for eshell completions)
-    };
+#     fish = {
+#       enable = true; # combine with emacs (used for eshell completions)
+#     };
     bash.enable = true;
     git = {
       enable = true;
     };
 
-    rofi = {
-      enable = true;
-      plugins = [
-        pkgs.rofi-emoji
-      ];
-      extraConfig = {
-        modi = "run,drun,window,emoji"; # and emoji for some reason do not work, oh well
-        kb-row-up =                     "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-        kb-row-down =                   "Down,Control+j";
-        kb-accept-entry =               "Control+m,Return,KP_Enter";
-        kb-remove-to-eol =              "Control+Shift+e";
-        kb-mode-next =                  "Shift+Right,Control+Tab";
-        kb-mode-previous =              "Shift+Left,Control+Shift+Tab";
-        kb-remove-char-back =           "BackSpace";
-        font = "Iosevka 16";
-        # Monokai paper-float are official themes I kind of consider
-      };
-    };
+#     rofi = {
+#       enable = true;
+#       plugins = [
+#         pkgs.rofi-emoji
+#       ];
+#       extraConfig = {
+#         modi = "run,drun,window,emoji"; # and emoji for some reason do not work, oh well
+#         kb-row-up =                     "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+#         kb-row-down =                   "Down,Control+j";
+#         kb-accept-entry =               "Control+m,Return,KP_Enter";
+#         kb-remove-to-eol =              "Control+Shift+e";
+#         kb-mode-next =                  "Shift+Right,Control+Tab";
+#         kb-mode-previous =              "Shift+Left,Control+Shift+Tab";
+#         kb-remove-char-back =           "BackSpace";
+#         font = "Iosevka 16";
+#         # Monokai paper-float are official themes I kind of consider
+#       };
+#     };
   };
 
   services = {
@@ -97,23 +97,23 @@
     zip
     unzip
 
-    xmobar
-    dmenu
-    xbrightness
-    safeeyes
+    # xmobar
+    # dmenu
+    # xbrightness
+    # safeeyes
     nitrogen
-    rescuetime
+    # rescuetime
 
     vlc
     # transmission-qt
     transmission_4-gtk
     # firefox
     # chromium
-    ferdium
+    # ferdium
 
-    gnome-calendar
+    # gnome-calendar
 
-    kubectl
+    # kubectl
   ];
 
 }

@@ -58,7 +58,8 @@
              :prefix "a"
              :filter-fn (lambda (node) t)
              :path-to-todo "~/org/gtd/gtd.org"
-             :path-to-journal-dir "~/org/Journal")
+             :path-to-journal-dir "~/org/Journal"
+				 :type-of-journal 'monthly)
        :work (list
               :templates (list :work)
               :prefix "w"

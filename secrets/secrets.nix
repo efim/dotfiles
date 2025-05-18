@@ -1,7 +1,8 @@
 let
   efim-at-work-laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+xChj0qS5VBFtGO3Kg1MhTeqPq/x3DQGDzlm1c6QP8 efim.wool@gmail.com";
+  efim-at-framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDpGmVF5+Yk/zZfxkaMqdZa0O+3XXFzKsdOqV64Q+/M efim.wool@gmail.com";
 
-  users = [ efim-at-work-laptop ];
+  users = [ efim-at-work-laptop efim-at-framework ];
 
   franzk = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/jAjOzXUMarxSkGlXAyoQEQ9xuA7zePT4ZnBQWT4vX";
 

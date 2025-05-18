@@ -3,15 +3,15 @@
 with lib;
 
 {
-    nixpkgs.overlays = [
-      inputs.emacs-community-overlay.overlay
-    ];
+    # nixpkgs.overlays = [
+    #   inputs.emacs-community-overlay.overlay
+    # ];
 
     programs = {
       emacs = {
         enable = true;
         extraPackages = epkgs: [ epkgs.vterm ];
-        package = pkgs.emacs29;
+        package = pkgs.emacs-pgtk;
         # TODO - add declarative cachix, it has repo & modules
         #   for some reason couldn't figure out how to import
         #   and whether I'd need my current ~/.config/nix/conf

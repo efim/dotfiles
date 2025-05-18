@@ -43,7 +43,7 @@ in {
     before = [ "network.target" ];
     wantedBy = [ "network.target" ];
     after = [ "network-pre.target" ];
-    path = [ pkgs.iproute ];
+    path = [ pkgs.iproute2 ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;

@@ -100,7 +100,7 @@
 ;; building menu with infixes for each context
 (defun ef/roam-conext-to-infix (context key)
   (let ((char (plist-get context :prefix)))
-    `(,char "" ,(pp-to-string key))))
+    `(,char "" ,(symbol-name key))))
 
 (defun doom-plist-keys (plist)
   "Return the keys in PLIST."
@@ -115,7 +115,7 @@
   (ef/roam-subjects-keys)))
 
 ;; "incompatible contexts"
-(setq ef/roam-incompatible-contexts-list (-map #'pp-to-string (ef/roam-subjects-keys)))
+(setq ef/roam-incompatible-contexts-list (-map #'symbol-name (ef/roam-subjects-keys)))
 
 (setq ef/roam-contexts-row-group (seq--into-vector (append `(:class transient-row "Contexts") ef/roam-infix-contexts-list)))
 ;; suffix commands that take selected context for call

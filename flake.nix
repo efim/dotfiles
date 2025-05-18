@@ -5,7 +5,7 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/d4899e96eb336485b0f22e60282b999d5493f854";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
-    emacs-community-overlay.url = "github:nix-community/emacs-overlay";
+    # emacs-community-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -35,11 +35,11 @@
 
       myRoles = import ./roles;
 
-      nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./machines/chunky-notebook/base-conf.nix ];
-        specialArgs = { inherit inputs rev; };
-      };
+      # nixosConfigurations.chunky-notebook = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   modules = [ ./machines/chunky-notebook/base-conf.nix ];
+      #   specialArgs = { inherit inputs rev; };
+      # };
 
       homeConfigurations.work-laptop =
         home-manager.lib.homeManagerConfiguration {

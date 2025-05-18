@@ -42,7 +42,6 @@
       my-autorandr
       my-emacs
       my-screen-locker
-      personal
       mu4e-mail-client
       fonts
       with-deploy

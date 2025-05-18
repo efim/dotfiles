@@ -7,10 +7,10 @@
       # "activation" if system doesn't support systemd
       installationType = "systemd";
 
-      file."email-pass" = {
+      # just to not forget how to use this
+      file."example-secret" = {
         # Path to encrypted file tracked by the git repository
-        source = ../../secrets/email-pass.age;
-        symlinks = [ "${config.xdg.configHome}/secrets/email/efim.wool@gmail.com" ];
+        source = ../../secrets/exaple-secret.age;
       };
 
       # from guide on home-manager integration

@@ -10,7 +10,7 @@
       # just to not forget how to use this
       file."example-secret" = {
         # Path to encrypted file tracked by the git repository
-        source = ../../secrets/exaple-secret.age;
+        source = ../../secrets/example-secret.age;
       };
 
       # from guide on home-manager integration

@@ -14,6 +14,7 @@
     my-emacs
     fonts
     with-deploy
+    ./age-for-home-manager.nix
   ];
 
   # for some reason this config stays "allowUnfree = false" =C

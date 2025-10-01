@@ -2,7 +2,7 @@
 
 {
     nixpkgs.overlays = [
-      inputs.deploy-rs.overlay
+      inputs.deploy-rs.overlays.default
     ];
 
     home.packages = with pkgs; [

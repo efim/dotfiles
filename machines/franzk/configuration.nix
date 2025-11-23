@@ -157,9 +157,5 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";
 
-  systemd.extraConfig = ''
-    DefaultTimeoutStartSec=900s
-  '';
-
   system.stateVersion = "22.05";
 }

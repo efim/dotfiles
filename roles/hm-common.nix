@@ -89,7 +89,7 @@
     tldr
     keepassxc
 
-    inputs.nixpkgs-stable.legacyPackages.x86_64-linux.openconnect
+    # inputs.nixpkgs-stable.legacyPackages.x86_64-linux.openconnect
     shutter
     flameshot
     # gnucash

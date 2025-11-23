@@ -4,7 +4,7 @@
   inputs = {
     # nixpkgs.url = "github:NixOS/nixpkgs/d4899e96eb336485b0f22e60282b999d5493f854";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
+    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-21.11";
     # emacs-community-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -47,8 +47,8 @@
           modules = [{
             imports = [ ./machines/work-laptop/home-for-flake.nix ];
             home = {
-              homeDirectory = "/home/efim-nefedov";
-              username = "efim-nefedov";
+              homeDirectory = "/home/efim";
+              username = "efim";
               stateVersion = "21.11";
             };
             nix.registry.nixpkgs.flake = nixpkgs;

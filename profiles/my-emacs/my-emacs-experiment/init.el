@@ -244,6 +244,22 @@
 
 ;;; here will be stuff about coding
 
+(use-package repeat
+  :elpaca nil
+  :config
+  (repeat-mode 1))
+
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode t)
+  :bind (("M-g h n" . 'git-gutter:next-hunk)
+			("M-g h p" . 'git-gutter:previous-hunk)
+			("M-g h r" . 'git-gutter:revert-hunk)
+			("M-g h SPC" . 'git-gutter:mark-hunk)
+			:repeat-map my/git-gutter-repeat-map
+			("n" . 'git-gutter:next-hunk)
+			("p" . 'git-gutter:previous-hunk)
+			("r" . 'git-gutter:revert-hunk)))
 
 (use-package magit
   :config

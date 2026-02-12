@@ -85,21 +85,21 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (tab-bar-history-mode 1)
-  (setq view-read-only 1)
+  (setq view-read-only 1) ; automatically open read-only files in `view' mode
+  (setq next-screen-context-lines 10)
+  (setq isearch-allow-scroll t) ; movements inside isearch
+  (setq isearch-allow-motion t) ; movements inside isearch  
   (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
   (setq treesit-language-source-alist recommended-tree-sitter-sources)
   (setq major-mode-remap-alist
 		  '((scala-mode . scala-ts-mode)
 			 (go-mode . go-ts-mode)))
-  :bind (("M-v" . View-scroll-half-page-backward)
-			("C-v" . View-scroll-half-page-forward)
-			("C-x C-k" . kill-region)
-			("M-d" . kill-region)
+  :bind (("M-d" . kill-region)
 			("C-w" . backward-kill-word)
 			("M-o" . other-window)
 			("M-i" . consult-imenu)
-			("M-z". zap-up-to-char)
-			("M-Z". zap-to-char)
+			("M-z". zap-to-char)				 ; more common that i intend to use to kill arguments (M-b M-z ,)
+			("M-C-z". zap-up-to-char)
 			("C-x C-z" . suspend-frame)
 			("C-z" . repeat)
 			("C-S-z" . repeat-complex-command)))

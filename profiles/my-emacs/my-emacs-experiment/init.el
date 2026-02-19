@@ -52,7 +52,37 @@
 (use-package magit
   :after transient)
 
-;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+
+
+(use-package emacs :elpaca nil
+  :config
+  (global-unset-key (kbd "C-<backspace>"))
+  (tab-bar-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (tab-bar-history-mode 1)
+  (setq view-read-only 1) ; automatically open read-only files in `view' mode
+  (setq next-screen-context-lines 10)
+  (setq isearch-allow-scroll t) ; movements inside isearch
+  (setq isearch-allow-motion t) ; movements inside isearch  
+  (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
+  :bind (("M-d" . kill-region)
+			("C-w" . backward-kill-word)
+			("M-o" . other-window)
+			("M-i" . consult-imenu)
+			("M-z". zap-to-char)				 ; more common that i intend to use to kill arguments (M-b M-z ,)
+			("M-C-z". zap-up-to-char)
+			("C-x C-z" . suspend-frame)
+			("C-z" . repeat)
+			("C-S-z" . repeat-complex-command)))
+
+(use-package treesit
+  :ensure nil
+  :preface
+  ;; You can remap major modes with `major-mode-remap-alist'. Note
+  ;; that this does *not* extend to hooks! Make sure you migrate them
+  ;; also
+  ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 (setq recommended-tree-sitter-sources '((bash "https://github.com/tree-sitter/tree-sitter-bash")
     (scala "https://github.com/tree-sitter/tree-sitter-scala")
     (c "https://github.com/tree-sitter/tree-sitter-c")
@@ -77,32 +107,21 @@
     (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
     (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-(use-package emacs :elpaca nil
-  :config
-  (global-unset-key (kbd "C-<backspace>"))
-  (tab-bar-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (tab-bar-history-mode 1)
-  (setq view-read-only 1) ; automatically open read-only files in `view' mode
-  (setq next-screen-context-lines 10)
-  (setq isearch-allow-scroll t) ; movements inside isearch
-  (setq isearch-allow-motion t) ; movements inside isearch  
-  (add-to-list 'tab-bar-format #'tab-bar-format-menu-bar)
   (setq treesit-language-source-alist recommended-tree-sitter-sources)
-  (setq major-mode-remap-alist
-		  '((scala-mode . scala-ts-mode)
-			 (go-mode . go-ts-mode)))
-  :bind (("M-d" . kill-region)
-			("C-w" . backward-kill-word)
-			("M-o" . other-window)
-			("M-i" . consult-imenu)
-			("M-z". zap-to-char)				 ; more common that i intend to use to kill arguments (M-b M-z ,)
-			("M-C-z". zap-up-to-char)
-			("C-x C-z" . suspend-frame)
-			("C-z" . repeat)
-			("C-S-z" . repeat-complex-command)))
+  (dolist (mapping
+           '((scala-mode . scala-ts-mode)
+             (go-mode . go-ts-mode)
+             (json-mode . json-ts-mode)))
+    (add-to-list 'major-mode-remap-alist mapping)))
+
+(use-package combobulate
+  :ensure (combobulate :host github :repo "mickeynp/combobulate")
+  :after treesit
+    :custom
+    ;; You can customize Combobulate's key prefix here.
+    ;; Note that you may have to restart Emacs for this to take effect!
+    (combobulate-key-prefix "C-c o")
+    :hook ((prog-mode . combobulate-mode)))
 
 (use-package avy
   :config
@@ -391,6 +410,61 @@
   :elpaca nil
   :config
   (load "~/.config/my-emacs-experiment/eww-mozilla-readability.el"))
+
+;;
+;;; --- Tab-Based View Mode Persistence ---
+
+(defun my/get-current-tab-data ()
+  "Get the actual (mutable) alist for the current tab."
+  (let* ((tabs (tab-bar-tabs))
+         (index (tab-bar--current-tab-index tabs)))
+    (nth index tabs)))
+
+(defun my/sync-tab-view-mode ()
+  "Match current buffer's `view-mode` to the current tab's 'tab-view-mode' parameter."
+  (when (and buffer-file-name (not (minibufferp)))
+    (let* ((current-tab (my/get-current-tab-data))
+           (tab-requires-view (alist-get 'tab-view-mode (cdr current-tab))))
+      (if tab-requires-view
+          (unless view-mode (view-mode 1))
+        ;; Only turn off view-mode if it was likely this system that enabled it
+        (when (and view-mode (bound-and-true-p view-mode))
+          (view-mode -1))))))
+
+(defun my/toggle-tab-view-mode ()
+  "Toggle the 'view' state for the current tab and update visibility."
+  (interactive)
+  (let* ((tabs (tab-bar-tabs))
+         (index (tab-bar--current-tab-index tabs))
+         (tab (nth index tabs))
+         (new-state (not (alist-get 'tab-view-mode (cdr tab)))))
+    ;; Correctly update the master tab list
+    (setf (alist-get 'tab-view-mode (cdr tab)) new-state)
+    ;; Apply to current buffer
+    (my/sync-tab-view-mode)
+    ;; Refresh UI
+    (force-mode-line-update t)
+    (message "Tab View State: %s" (if new-state "READ-ONLY (Review)" "EDITABLE"))))
+
+;;; --- UI Enhancements ---
+
+(setq tab-bar-tab-name-format-function
+      (lambda (tab i)
+        (let ((name (tab-bar-tab-name-format-default tab i)))
+          (if (alist-get 'tab-view-mode (cdr tab))
+               (concat "📖 " name)
+            name))))
+
+;;; --- Activation ---
+
+;; Catch window/buffer changes
+(add-hook 'window-configuration-change-hook #'my/sync-tab-view-mode)
+
+;; Explicitly catch tab switching (important!)
+(add-hook 'tab-bar-tab-post-select-functions (lambda (&rest _) (my/sync-tab-view-mode)))
+
+;; Keybinding
+(define-key global-map (kbd "C-x t V") #'my/toggle-tab-view-mode)
 
 (elpaca-wait)
 (load "~/.config/my-emacs-experiment/testing-roam-w-transient.el")

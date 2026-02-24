@@ -49,10 +49,6 @@
 
 (use-package transient)
 
-(use-package magit
-  :after transient)
-
-
 
 (use-package emacs :elpaca nil
   :config
@@ -231,7 +227,7 @@
 
 (put 'upcase-region 'disabled nil)
 
-(use-package dired :elpaca nil
+(use-package dired :ensure nil
       :init
       (add-hook 'dired-mode-hook #'hl-line-mode)
 		:config
@@ -239,7 +235,7 @@
 		)
 
 (use-package org
-  :elpaca nil
+  :ensure nil
   :config
   (setq org-use-speed-commands 't)
   (org-babel-do-load-languages
@@ -265,7 +261,7 @@
 ;;; here will be stuff about coding
 
 (use-package repeat
-  :elpaca nil
+  :ensure nil
   :config
   (repeat-mode 1))
 
@@ -282,6 +278,7 @@
 			("r" . 'git-gutter:revert-hunk)))
 
 (use-package magit
+  :after transient
   :config
   (setq magit-define-global-key-bindings 'recommended))
   ;; sets C-x g for magit status, C-c g for dispatch, and C-c f for file dispatch)
@@ -316,7 +313,6 @@
 
 (use-package ensime-mode
   :ensure nil
-  :elpaca nil
   :load-path "~/Documents/repos-other/ensime-tng-3.0.15/lisp/"
   ;; :load-path "~/Downloads/ensime-tng-3.0.15/lisp/"
   :commands ensime-mode
@@ -398,16 +394,16 @@
 (use-package writeroom-mode)
 
 ;; https://www.masteringemacs.org/article/re-builder-interactive-regexp-builder
-(use-package re-builder :elpaca nil
+(use-package re-builder :ensure nil
   :config
   (setq reb-re-syntax 'string))
 
 (use-package flyspell
-  :elpaca nil
+  :ensure nil
   :hook (org-mode org-journal-mode))
 
 (use-package eww
-  :elpaca nil
+  :ensure nil
   :config
   (load "~/.config/my-emacs-experiment/eww-mozilla-readability.el"))
 
@@ -487,6 +483,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(use-package ox-moderncv
+    :load-path "~/Documents/org-cv/"
+    :init (require 'ox-moderncv))
 
 (provide 'init)
 ;;; init.el ends here

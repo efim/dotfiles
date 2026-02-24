@@ -43,10 +43,7 @@ with lib;
       nixfmt-rfc-style
       pandoc
 
-      aspell
-      aspellDicts.ru
-      aspellDicts.en
-      aspellDicts.en-computers
+      (aspellWithDicts (d: [ d.en d.ru d.es d.eo d.en-computers ]))
       
       # haskellPackages.haskell-language-server
       # haskellPackages.hoogle
